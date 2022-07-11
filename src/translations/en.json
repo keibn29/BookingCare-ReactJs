@@ -1,0 +1,65 @@
+{
+    "home-header": {
+        "specialty": "Medical specialty",
+        "searchdoctor": "Find a doctor by specialty",
+        "heath-facility": "Heal Facility",
+        "select-room": "Choose hospital clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Choose a good doctor",
+        "fee": "Checkup package",
+        "check-heal": "General health check",
+        "support": "Support",
+        "welcome": "Welcome"
+    },
+    "banner": {
+        "title1": "MEDICAL BACKGROUND",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "option1": "Specialized examination",
+        "option2": "Remote examination",
+        "option3": "General examination",
+        "option4": "Medical test",
+        "option5": "Mental health",
+        "option6": "Dental examination",
+        "option7": "Surgery pack",
+        "option8": "Medical products"
+    },
+    "menu": {
+        "admin": {
+            "user": {
+                "user": "Users System",
+                "manage-admin": "Manage Admins",
+                "manage-doctor": "Manage Doctors",
+                "crud-react": "CRUD React",
+                "crud-redux": "CRUD Redux"
+            },
+            "clinic": {
+                "clinic": "Clinics",
+                "manage-clinic": "Manage Clinics"
+            },
+            "specialty": {
+                "specialty": "Specialties",
+                "manage-specialty": "Manage Specialties"
+            },
+            "handbook": {
+                "handbook": "Handbook",
+                "manage-handbook": "Manage Handbook"
+            }
+        }
+    },
+    "manage-user-redux": {
+        "add-new-user": "Add a new user",
+        "email": "Email",
+        "password": "Password",
+        "first-name": "First Name",
+        "last-name": "Last Name",
+        "phonenumber": "Phone number",
+        "address": "Address",
+        "gender": "Gender",
+        "position": "Position",
+        "role": "Role",
+        "image": "Avatar",
+        "add": "Add",
+        "edit": "Save",
+        "upload-img": "Upload image"
+    }
+}

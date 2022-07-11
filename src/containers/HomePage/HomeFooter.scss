@@ -1,0 +1,16 @@
+.home-footer-container {
+    padding: 10px;
+
+    .home-footer-content {
+        border    : 1px solid red;
+        text-align: center;
+
+        p {
+            margin: auto;
+
+            a {
+                text-decoration: unset;
+            }
+        }
+    }
+}
