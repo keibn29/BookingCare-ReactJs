@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManageRedux.scss'
-import { LANGUAGES, CRUD_ACTIONS } from '../../../utils';
+import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import * as actions from '../../../store/actions';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -90,20 +90,23 @@ class UserManageRedux extends Component {
                 position: positionsArr && positionsArr.length > 0 ? positionsArr[0].key : '',
                 role: rolesArr && rolesArr.length > 0 ? rolesArr[0].key : '',
                 avatar: '',
+                previewImgURL: '',
                 action: CRUD_ACTIONS.CREATE
             })
         }
     }
 
-    handleChangeImage = (event) => {
+    handleChangeImage = async (event) => {
         let data = event.target.files;
         let image = data[0];
 
         if (image) {
+            let base64 = await CommonUtils.getBase64(image);
+            console.log('check base64 img: ', base64)
             let objectUrl = URL.createObjectURL(image);
             this.setState({
                 previewImgURL: objectUrl,
-                avatar: image
+                avatar: base64
             })
         }
     }
@@ -117,7 +120,7 @@ class UserManageRedux extends Component {
         })
     }
 
-    onChaneInput = (event, id) => {
+    onChangeInput = (event, id) => {
         //good code
         let copyState = { ...this.state }
         copyState[id] = event.target.value
@@ -156,7 +159,8 @@ class UserManageRedux extends Component {
                     phonenumber: this.state.phonenumber,
                     gender: this.state.gender,
                     role: this.state.role,
-                    position: this.state.position
+                    position: this.state.position,
+                    avatar: this.state.avatar
                 });
             } else if (action === CRUD_ACTIONS.EDIT) {
                 //fire redux edit user
@@ -171,13 +175,18 @@ class UserManageRedux extends Component {
                     role: this.state.role,
                     position: this.state.position,
                     gender: this.state.gender,
-                    // avatar: this.state.avatar
+                    avatar: this.state.avatar
                 })
             }
         }
     }
 
     handleEditUserFromParent = (user) => {
+        let imageBase64 = '';
+        if (user.image) {
+            imageBase64 = new Buffer(user.image, 'base64').toString('binary');
+        }
+
         this.setState({
             email: user.email,
             password: 'hardcode',
@@ -189,6 +198,7 @@ class UserManageRedux extends Component {
             position: user.positionId,
             role: user.roleId,
             avatar: '',
+            previewImgURL: imageBase64,
             action: CRUD_ACTIONS.EDIT,
             userEditId: user.id
         })
@@ -216,7 +226,7 @@ class UserManageRedux extends Component {
                                     className='form-control' type='email'
                                     value={email}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'email');
+                                        this.onChangeInput(event, 'email');
                                     }}
                                     disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                 />
@@ -227,7 +237,7 @@ class UserManageRedux extends Component {
                                     className='form-control' type='password'
                                     value={password}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'password');
+                                        this.onChangeInput(event, 'password');
                                     }}
                                     disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
                                 />
@@ -238,7 +248,7 @@ class UserManageRedux extends Component {
                                     className='form-control' type='text'
                                     value={firstName}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'firstName');
+                                        this.onChangeInput(event, 'firstName');
                                     }}
                                 />
                             </div>
@@ -248,7 +258,7 @@ class UserManageRedux extends Component {
                                     className='form-control' type='text'
                                     value={lastName}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'lastName');
+                                        this.onChangeInput(event, 'lastName');
                                     }}
                                 />
                             </div>
@@ -258,7 +268,7 @@ class UserManageRedux extends Component {
                                     className='form-control' type='text'
                                     value={phonenumber}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'phonenumber');
+                                        this.onChangeInput(event, 'phonenumber');
                                     }}
                                 />
                             </div>
@@ -268,7 +278,7 @@ class UserManageRedux extends Component {
                                     className='form-control' type='text'
                                     value={address}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'address');
+                                        this.onChangeInput(event, 'address');
                                     }}
                                 />
                             </div>
@@ -278,7 +288,7 @@ class UserManageRedux extends Component {
                                     className="form-control"
                                     value={gender}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'gender');
+                                        this.onChangeInput(event, 'gender');
                                     }}
                                 >
                                     {
@@ -298,7 +308,7 @@ class UserManageRedux extends Component {
                                     className="form-control"
                                     value={position}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'position');
+                                        this.onChangeInput(event, 'position');
                                     }}
                                 >
                                     {
@@ -318,7 +328,7 @@ class UserManageRedux extends Component {
                                     className="form-control"
                                     value={role}
                                     onChange={(event) => {
-                                        this.onChaneInput(event, 'role');
+                                        this.onChangeInput(event, 'role');
                                     }}
                                 >
                                     {
