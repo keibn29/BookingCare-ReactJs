@@ -1,5 +1,9 @@
 import actionTypes from './actionTypes';
-import { getAllCodeService, createNewUserService, getAllUsers, deleteUserService, editUserService } from '../../services/userService';
+import {
+    getAllCodeService, createNewUserService,
+    getAllUsers, deleteUserService, editUserService,
+    GetTopDoctorsHomepageService
+} from '../../services/userService';
 import { toast } from 'react-toastify';
 
 // export const fetchGenderStart = () => ({
@@ -123,6 +127,8 @@ export const fetchAllUsersStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUsers('All');
+            let res1 = await GetTopDoctorsHomepageService(3);
+            console.log('kei check res doctor: ', res1)
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUsersSuccess(res.users.reverse()));
             } else {
