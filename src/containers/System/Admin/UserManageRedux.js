@@ -57,21 +57,21 @@ class UserManageRedux extends Component {
             let gendersArr = this.props.genderRedux;
             this.setState({
                 genders: gendersArr,
-                gender: gendersArr && gendersArr.length > 0 ? gendersArr[0].key : ''
+                gender: gendersArr && gendersArr.length > 0 ? gendersArr[0].keyMap : ''
             })
         }
         if (prevProps.positionRedux !== this.props.positionRedux) {
             let positionsArr = this.props.positionRedux;
             this.setState({
                 positions: positionsArr,
-                position: positionsArr && positionsArr.length > 0 ? positionsArr[0].key : ''
+                position: positionsArr && positionsArr.length > 0 ? positionsArr[0].keyMap : ''
             })
         }
         if (prevProps.roleRedux !== this.props.roleRedux) {
             let rolesArr = this.props.roleRedux;
             this.setState({
                 roles: rolesArr,
-                role: rolesArr && rolesArr.length > 0 ? rolesArr[0].key : ''
+                role: rolesArr && rolesArr.length > 0 ? rolesArr[0].keyMap : ''
             })
         }
         if (prevProps.AllUsersRedux !== this.props.AllUsersRedux) {
@@ -86,9 +86,9 @@ class UserManageRedux extends Component {
                 lastName: '',
                 phonenumber: '',
                 address: '',
-                gender: gendersArr && gendersArr.length > 0 ? gendersArr[0].key : '',
-                position: positionsArr && positionsArr.length > 0 ? positionsArr[0].key : '',
-                role: rolesArr && rolesArr.length > 0 ? rolesArr[0].key : '',
+                gender: gendersArr && gendersArr.length > 0 ? gendersArr[0].keyMap : '',
+                position: positionsArr && positionsArr.length > 0 ? positionsArr[0].keyMap : '',
+                role: rolesArr && rolesArr.length > 0 ? rolesArr[0].keyMap : '',
                 avatar: '',
                 previewImgURL: '',
                 action: CRUD_ACTIONS.CREATE
@@ -100,6 +100,7 @@ class UserManageRedux extends Component {
         let data = event.target.files;
         let image = data[0];
 
+        //encode
         if (image) {
             let base64 = await CommonUtils.getBase64(image);
             console.log('check base64 img: ', base64)
@@ -182,6 +183,7 @@ class UserManageRedux extends Component {
     }
 
     handleEditUserFromParent = (user) => {
+        //decode
         let imageBase64 = '';
         if (user.image) {
             imageBase64 = new Buffer(user.image, 'base64').toString('binary');
@@ -294,7 +296,7 @@ class UserManageRedux extends Component {
                                     {
                                         genders && genders.length > 0 && genders.map((item, index) => {
                                             return (
-                                                <option key={index} value={item.key}>
+                                                <option key={index} value={item.keyMap}>
                                                     {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                                                 </option>
                                             )
@@ -314,7 +316,7 @@ class UserManageRedux extends Component {
                                     {
                                         positions && positions.length > 0 && positions.map((item, index) => {
                                             return (
-                                                <option key={index} value={item.key}>
+                                                <option key={index} value={item.keyMap}>
                                                     {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                                                 </option>
                                             )
@@ -334,7 +336,7 @@ class UserManageRedux extends Component {
                                     {
                                         roles && roles.length > 0 && roles.map((item, index) => {
                                             return (
-                                                <option key={index} value={item.key}>
+                                                <option key={index} value={item.keyMap}>
                                                     {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
                                                 </option>
                                             )

@@ -37,6 +37,10 @@
     // content: "\e258" !important;
 }
 
+.slick-disabled {
+    display: none !important;
+}
+
 .section-share {
     &.section-medical-facility {
         background: #f5f5f5;
@@ -103,10 +107,10 @@
                         margin-bottom  : 10px;
 
                         .bg-img {
-                            background-image: url(../../assets/outstanding-doctor/anh-dai-dien-bs.jpg);
-                            width           : 120px;
-                            height          : 120px;
-                            border-radius   : 50%;
+                            // background-image: url(../../assets/outstanding-doctor/anh-dai-dien-bs.jpg);
+                            width        : 120px;
+                            height       : 120px;
+                            border-radius: 50%;
                         }
                     }
                 }

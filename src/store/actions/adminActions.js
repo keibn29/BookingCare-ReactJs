@@ -127,8 +127,6 @@ export const fetchAllUsersStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllUsers('All');
-            let res1 = await GetTopDoctorsHomepageService(3);
-            console.log('kei check res doctor: ', res1)
             if (res && res.errCode === 0) {
                 dispatch(fetchAllUsersSuccess(res.users.reverse()));
             } else {
@@ -143,9 +141,9 @@ export const fetchAllUsersStart = () => {
     }
 }
 
-export const fetchAllUsersSuccess = (inputId) => ({
+export const fetchAllUsersSuccess = (users) => ({
     type: actionTypes.FETCH_ALL_USERS_SUCCESS,
-    data: inputId
+    data: users
 })
 
 export const fetchAllUsersFailed = () => ({
@@ -209,4 +207,33 @@ export const editUserSuccess = (inputData) => ({
 
 export const editUserFailed = () => ({
     type: actionTypes.EDIT_USER_FAILED
+})
+
+//
+export const fetchTopDoctorsStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await GetTopDoctorsHomepageService(5);
+            console.log('kei check res doctor: ', res)
+            if (res && res.errCode === 0) {
+                dispatch(fetchTopDoctorsSuccess(res.users));
+            } else {
+                dispatch(fetchTopDoctorsFailed());
+                toast.error('fetch Top Doctors failed!');
+            }
+        } catch (e) {
+            dispatch(fetchTopDoctorsFailed());
+            toast.error('fetch Top Doctors failed!');
+            console.log('fetch Top Doctors Error: ', e)
+        }
+    }
+}
+
+export const fetchTopDoctorsSuccess = (users) => ({
+    type: actionTypes.FETCH_TOP_DOCTORS_SUCCESS,
+    data: users
+})
+
+export const fetchTopDoctorsFailed = () => ({
+    type: actionTypes.FETCH_TOP_DOCTORS_FAILED
 })

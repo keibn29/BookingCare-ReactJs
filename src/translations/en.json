@@ -12,7 +12,7 @@
         "welcome": "Welcome"
     },
     "banner": {
-        "title1": "MEDICAL BACKGROUND",
+        "title1": "MEDICAL PLATFORM",
         "title2": "COMPREHENSIVE HEALTH CARE",
         "option1": "Specialized examination",
         "option2": "Remote examination",
@@ -22,6 +22,10 @@
         "option6": "Dental examination",
         "option7": "Surgery pack",
         "option8": "Medical products"
+    },
+    "homepage": {
+        "outstanding-doctor": "Last week's featured doctor",
+        "more": "More info"
     },
     "menu": {
         "admin": {

@@ -23,6 +23,10 @@
         "option7": "Gói phẫu thuật",
         "option8": "Sản phẩm y tế"
     },
+    "homepage": {
+        "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+        "more": "Xem thêm"
+    },
     "menu": {
         "admin": {
             "user": {
