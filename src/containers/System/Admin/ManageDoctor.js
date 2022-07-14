@@ -7,12 +7,7 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
-
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-];
+import { LANGUAGES } from '../../../utils';
 
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -26,16 +21,46 @@ class ManageDoctor extends Component {
             contentMarkdown: '',
             contentHTML: '',
             selectedOption: '',
-            description: ''
+            description: '',
+            AllDoctors: []
         }
     }
 
-    componentDidMount() {
+    buildDataInputSelect = (inputData) => {
+        let result = [];
+        let { language } = this.props
+        if (inputData && inputData.length > 0) {
 
+            inputData.map((item, index) => {
+                let obj = {};
+                let labelVi = `${item.lastName} ${item.firstName}`;
+                let labelEn = `${item.firstName} ${item.lastName} `;
+
+                obj.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                obj.value = item.id;
+                result.push(obj);
+            })
+        }
+        return result;
+    }
+
+    componentDidMount() {
+        this.props.fetchAllDoctorsStart();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        if (prevProps.AllDoctorsRedux !== this.props.AllDoctorsRedux) {
+            let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
+            this.setState({
+                AllDoctors: dataSelect
+            })
+        }
+        if (prevProps.language !== this.props.language) {
+            let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
+            this.setState({
+                AllDoctors: dataSelect
+            })
+        }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -43,7 +68,6 @@ class ManageDoctor extends Component {
             contentHTML: html,
             contentMarkdown: text
         })
-        console.log('handleEditorChange', html, text);
     }
 
     handleSaveContentMardown = () => {
@@ -64,6 +88,7 @@ class ManageDoctor extends Component {
 
 
     render() {
+        let AllDoctors = this.state.AllDoctors;
 
         return (
             <div className='manage-doctor-container px-3'>
@@ -74,7 +99,7 @@ class ManageDoctor extends Component {
                         <Select
                             value={this.state.selectedOption}
                             onChange={this.handleChange}
-                            options={options}
+                            options={AllDoctors}
                         />
                     </div>
                     <div className='content-right'>
@@ -113,14 +138,14 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
-        AllUsersRedux: state.admin.arrUsers
+        language: state.app.language,
+        AllDoctorsRedux: state.admin.allDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllUsersStart: () => dispatch(actions.fetchAllUsersStart()),
-        deleteUserStart: (userId) => dispatch(actions.deleteUserStart(userId))
+        fetchAllDoctorsStart: () => dispatch(actions.fetchAllDoctorsStart())
     };
 };
 

@@ -2,7 +2,7 @@ import actionTypes from './actionTypes';
 import {
     getAllCodeService, createNewUserService,
     getAllUsers, deleteUserService, editUserService,
-    GetTopDoctorsHomepageService
+    GetTopDoctorsHomepageService, getAllDoctorsService
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -214,7 +214,6 @@ export const fetchTopDoctorsStart = () => {
     return async (dispatch, getState) => {
         try {
             let res = await GetTopDoctorsHomepageService(5);
-            console.log('kei check res doctor: ', res)
             if (res && res.errCode === 0) {
                 dispatch(fetchTopDoctorsSuccess(res.users));
             } else {
@@ -236,4 +235,32 @@ export const fetchTopDoctorsSuccess = (users) => ({
 
 export const fetchTopDoctorsFailed = () => ({
     type: actionTypes.FETCH_TOP_DOCTORS_FAILED
+})
+
+//
+export const fetchAllDoctorsStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllDoctorsService();
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllDoctorsSuccess(res.doctors));
+            } else {
+                dispatch(fetchAllDoctorsFailed());
+                toast.error('fetch All Doctors failed!');
+            }
+        } catch (e) {
+            dispatch(fetchAllDoctorsFailed());
+            toast.error('fetch All Doctors failed!');
+            console.log('fetch All Doctors Error: ', e)
+        }
+    }
+}
+
+export const fetchAllDoctorsSuccess = (doctors) => ({
+    type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+    data: doctors
+})
+
+export const fetchAllDoctorsFailed = () => ({
+    type: actionTypes.FETCH_ALL_DOCTORS_FAILED
 })
