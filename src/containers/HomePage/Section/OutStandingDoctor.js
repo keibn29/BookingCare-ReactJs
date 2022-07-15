@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { LANGUAGES } from '../../../utils';
 import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
-import * as actions from '../../../store/actions'
+import * as actions from '../../../store/actions';
+import { withRouter } from 'react-router';
 
 class OutStandingDoctor extends Component {
 
@@ -31,6 +32,10 @@ class OutStandingDoctor extends Component {
         }
     }
 
+    handleViewDoctorInfo = (doctor) => {
+        this.props.history.push(`/doctor-info/${doctor.id}`)
+    }
+
     render() {
         console.log('kei check props doctors: ', this.props.topDoctorsRedux)
         let topDoctors = this.state.topDoctors;
@@ -56,7 +61,13 @@ class OutStandingDoctor extends Component {
                                     let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`
 
                                     return (
-                                        <div className='section-custom section-outstanding-doctor' key={index}>
+                                        <div
+                                            className='section-custom section-outstanding-doctor'
+                                            key={index}
+                                            onClick={() => {
+                                                this.handleViewDoctorInfo(item)
+                                            }}
+                                        >
                                             <div className='outer-border'>
                                                 <div className='outer-bg'>
                                                     <div
@@ -101,4 +112,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor));

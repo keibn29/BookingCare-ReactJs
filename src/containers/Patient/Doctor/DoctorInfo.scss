@@ -1,0 +1,33 @@
+.doctor-info-container {
+    border: 1px solid red;
+    height: 500px;
+    margin: 0 150px;
+
+    .doctor-description {
+        display: flex;
+        height : 100px;
+
+        .content-left {
+            width : 20%;
+            border: 1px solid blue;
+        }
+
+        .content-right {
+            width         : 80%;
+            border        : 1px solid rgb(38, 251, 0);
+            display       : flex;
+            flex-direction: column;
+            padding-left  : 10px;
+
+            .up {
+                font-size  : 22px;
+                font-weight: 600;
+            }
+
+            .down {
+                border    : 1px solid black;
+                margin-top: 10px;
+            }
+        }
+    }
+}

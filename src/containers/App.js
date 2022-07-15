@@ -46,7 +46,7 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
-                                    <Route path="/users/:id" component={DoctorInfo} />
+                                    <Route path={path.DOCTOR_INFO} component={DoctorInfo} />
 
                                 </Switch>
                             </CustomScrollbars>

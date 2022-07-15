@@ -3,7 +3,7 @@ import {
     getAllCodeService, createNewUserService,
     getAllUsers, deleteUserService, editUserService,
     GetTopDoctorsHomepageService, getAllDoctorsService,
-    createDoctorInfoService
+    createDoctorInfoService, getDoctorInfoService
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -293,3 +293,33 @@ export const createDoctorInfoSuccess = () => ({
 export const createDoctorInfoFailed = () => ({
     type: actionTypes.CREATE_DOCTOR_INFO_FAILED
 })
+
+//fetch-doctor-info
+export const fetchDoctorInfoStart = (doctorId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getDoctorInfoService(doctorId);
+            console.log('check res: ', res)
+            if (res && res.errCode === 0) {
+                dispatch(fetchDoctorInfoSuccess(res.doctors));
+            } else {
+                dispatch(fetchDoctorInfoFailed());
+                toast.error('fetch Doctor Info failed!');
+            }
+        } catch (e) {
+            dispatch(fetchDoctorInfoFailed());
+            toast.error('fetch Doctor Info failed!');
+            console.log('fetch Doctor Info Error: ', e)
+        }
+    }
+}
+
+export const fetchDoctorInfoSuccess = (doctors) => ({
+    type: actionTypes.FETCH_DOCTOR_INFO_SUCCESS,
+    data: doctors
+})
+
+export const fetchDoctorInfoFailed = () => ({
+    type: actionTypes.FETCH_DOCTOR_INFO_FAILED
+})
+
