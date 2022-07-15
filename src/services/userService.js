@@ -36,6 +36,10 @@ const getAllDoctorsService = () => {
     return axios.get(`/api/get-all-doctors`)
 }
 
+const createDoctorInfoService = (inputData) => {
+    return axios.post(`/api/create-doctor-info`, inputData)
+}
+
 
 export {
     handleLoginApi,
@@ -45,5 +49,6 @@ export {
     editUserService,
     getAllCodeService,
     GetTopDoctorsHomepageService,
-    getAllDoctorsService
+    getAllDoctorsService,
+    createDoctorInfoService
 };

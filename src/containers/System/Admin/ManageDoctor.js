@@ -61,6 +61,14 @@ class ManageDoctor extends Component {
                 AllDoctors: dataSelect
             })
         }
+        // if (prevProps.selectedOption !== this.state.selectedOption) {
+        //     this.setState({
+        //         contentMarkdown: '',
+        //         contentHTML: '',
+        //         selectedOption: '',
+        //         description: ''
+        //     })
+        // }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -70,8 +78,31 @@ class ManageDoctor extends Component {
         })
     }
 
+    checkValidateInput = () => {
+        let isValid = true;
+        let arrInput = ['selectedOption', 'description', 'contentMarkdown', 'contentHTML'];
+        for (let i = 0; i < arrInput.length; i++) {
+            if (!this.state[arrInput[i]]) {
+                isValid = false;
+                alert('Missing parameter: ' + arrInput[i]);
+                break;
+            }
+        }
+        return isValid;
+    }
+
     handleSaveContentMardown = () => {
-        console.log('check state: ', this.state)
+        let isValid = this.checkValidateInput();
+        if (isValid === false) {
+            return;
+        } else {
+            this.props.createDoctorInfoStart({
+                contentHTML: this.state.contentHTML,
+                contentMarkdown: this.state.contentMarkdown,
+                description: this.state.description,
+                doctorId: this.state.selectedOption.value
+            })
+        }
     }
 
     handleChange = (selectedOption) => {
@@ -145,7 +176,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllDoctorsStart: () => dispatch(actions.fetchAllDoctorsStart())
+        fetchAllDoctorsStart: () => dispatch(actions.fetchAllDoctorsStart()),
+        createDoctorInfoStart: (inputData) => dispatch(actions.createDoctorInfoStart(inputData))
     };
 };
 

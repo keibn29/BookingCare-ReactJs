@@ -12,6 +12,7 @@ import System from '../routes/System';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from './HomePage/HomePage'
 import CustomScrollbars from '../components/CustomScrollbars';
+import DoctorInfo from './Patient/Doctor/DoctorInfo';
 
 class App extends Component {
 
@@ -45,6 +46,8 @@ class App extends Component {
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path="/users/:id" component={DoctorInfo} />
+
                                 </Switch>
                             </CustomScrollbars>
                         </div>
