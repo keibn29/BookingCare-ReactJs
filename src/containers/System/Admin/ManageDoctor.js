@@ -22,7 +22,8 @@ class ManageDoctor extends Component {
             contentHTML: '',
             selectedOption: '',
             description: '',
-            AllDoctors: []
+            AllDoctors: [],
+            arrdoctorInfo: []
         }
     }
 
@@ -59,6 +60,11 @@ class ManageDoctor extends Component {
             let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
             this.setState({
                 AllDoctors: dataSelect
+            })
+        }
+        if (prevProps.arrdoctorInfoRedux !== this.props.arrdoctorInfoRedux) {
+            this.setState({
+                arrdoctorInfo: this.props.arrdoctorInfoRedux
             })
         }
         // if (prevProps.selectedOption !== this.state.selectedOption) {
@@ -105,10 +111,22 @@ class ManageDoctor extends Component {
         }
     }
 
-    handleChange = (selectedOption) => {
+    handleChangeSelect = async (selectedOption) => {
         this.setState({
             selectedOption
         })
+        let res = await this.props.fetchDoctorInfoStart(selectedOption.value) //react-select-is-special
+        if (res && res.Markdown) {
+            let markdown = res.Markdown;
+            this.setState({
+                description: markdown.description,
+                contentHTML: markdown.contentHTML,
+                contentMarkdown: markdown.contentMarkdown
+            })
+        }
+
+        // console.log('check markdown: ', markdown)
+
     }
 
     handleOnChangeDescription = (event) => {
@@ -119,6 +137,7 @@ class ManageDoctor extends Component {
 
 
     render() {
+        console.log('check arrdoctorinfo: ', this.state.arrdoctorInfo)
         let AllDoctors = this.state.AllDoctors;
 
         return (
@@ -129,7 +148,7 @@ class ManageDoctor extends Component {
                         <label>Chọn bác sĩ</label>
                         <Select
                             value={this.state.selectedOption}
-                            onChange={this.handleChange}
+                            onChange={this.handleChangeSelect}
                             options={AllDoctors}
                         />
                     </div>
@@ -170,14 +189,16 @@ class ManageDoctor extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        AllDoctorsRedux: state.admin.allDoctors
+        AllDoctorsRedux: state.admin.allDoctors,
+        arrdoctorInfoRedux: state.admin.arrdoctorInfo
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctorsStart: () => dispatch(actions.fetchAllDoctorsStart()),
-        createDoctorInfoStart: (inputData) => dispatch(actions.createDoctorInfoStart(inputData))
+        createDoctorInfoStart: (inputData) => dispatch(actions.createDoctorInfoStart(inputData)),
+        fetchDoctorInfoStart: (doctorId) => dispatch(actions.fetchDoctorInfoStart(doctorId))
     };
 };
 

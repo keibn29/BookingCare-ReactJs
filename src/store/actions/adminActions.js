@@ -301,7 +301,7 @@ export const fetchDoctorInfoStart = (doctorId) => {
             let res = await getDoctorInfoService(doctorId);
             console.log('check res: ', res)
             if (res && res.errCode === 0) {
-                dispatch(fetchDoctorInfoSuccess(res.doctors));
+                dispatch(fetchDoctorInfoSuccess(res.doctorInfo));
             } else {
                 dispatch(fetchDoctorInfoFailed());
                 toast.error('fetch Doctor Info failed!');
@@ -314,9 +314,9 @@ export const fetchDoctorInfoStart = (doctorId) => {
     }
 }
 
-export const fetchDoctorInfoSuccess = (doctors) => ({
+export const fetchDoctorInfoSuccess = (doctorInfo) => ({
     type: actionTypes.FETCH_DOCTOR_INFO_SUCCESS,
-    data: doctors
+    data: doctorInfo
 })
 
 export const fetchDoctorInfoFailed = () => ({

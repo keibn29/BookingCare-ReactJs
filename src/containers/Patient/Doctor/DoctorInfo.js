@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DoctorInfo.scss';
 import * as actions from '../../../store/actions';
+import { LANGUAGES } from '../../../utils';
 
 class DoctorInfo extends Component {
 
@@ -29,7 +30,14 @@ class DoctorInfo extends Component {
     }
 
     render() {
-        console.log('check state: ', this.state)
+        let { language } = this.props;
+        let { arrdoctorInfo } = this.state;
+        let nameVi = '';
+        let nameEn = '';
+        if (arrdoctorInfo && arrdoctorInfo.positionData) {
+            nameVi = `${arrdoctorInfo.positionData.valueVi}, ${arrdoctorInfo.lastName} ${arrdoctorInfo.firstName}`;
+            nameEn = `${arrdoctorInfo.positionData.valueEn}, ${arrdoctorInfo.firstName} ${arrdoctorInfo.lastName}`
+        }
         return (
             <>
                 <HomeHeader
@@ -37,18 +45,22 @@ class DoctorInfo extends Component {
                 />
                 <div className='doctor-info-container'>
                     <div className='doctor-description'>
-                        <div className='content-left'>
-
+                        <div
+                            className='content-left'
+                            style={{ backgroundImage: `url(${arrdoctorInfo && arrdoctorInfo.image ? arrdoctorInfo.image : ''})` }}
+                        >
                         </div>
                         <div className='content-right'>
                             <div className='up'>
-                                Bác sĩ Chuyên khoa II Trần Minh Khuyên
+                                {language === LANGUAGES.VI ? nameVi : nameEn}
                             </div>
                             <div className='down'>
-                                Bác sĩ Chuyên khoa II Trần Minh Khuyên
-                                Nguyên Trưởng khoa lâm sàng, Bệnh tâm thần Thành phố Hồ Chí Minh
-                                Tốt nghiệp Tâm lý trị liệu, trường Tâm lý Thực hành Paris (Psychology practique de Paris)
-                                Bác sĩ nhận khám từ 16 tuổi trở lên
+                                {
+                                    arrdoctorInfo && arrdoctorInfo.Markdown && arrdoctorInfo.Markdown.description &&
+                                    <span>
+                                        {arrdoctorInfo.Markdown.description}
+                                    </span>
+                                }
                             </div>
                         </div>
                     </div>
@@ -56,7 +68,10 @@ class DoctorInfo extends Component {
 
                     </div>
                     <div className='doctor-detail-info'>
-
+                        {
+                            arrdoctorInfo && arrdoctorInfo.Markdown && arrdoctorInfo.Markdown.contentHTML &&
+                            <div dangerouslySetInnerHTML={{ __html: arrdoctorInfo.Markdown.contentHTML }}></div>
+                        }
                     </div>
                     <div className='doctor-comment'>
 
@@ -69,6 +84,7 @@ class DoctorInfo extends Component {
 
 const mapStateToProps = state => {
     return {
+        language: state.app.language,
         arrdoctorInfoRedux: state.admin.arrdoctorInfo
     };
 };
