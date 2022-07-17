@@ -32,7 +32,7 @@
             "user": {
                 "user": "Users System",
                 "manage-admin": "Manage Admins",
-                "manage-doctor": "Manage Doctors",
+                "manage-doctor": "Manage Doctor's informations",
                 "crud-react": "CRUD React",
                 "crud-redux": "CRUD Redux"
             },
@@ -48,6 +48,9 @@
                 "handbook": "Handbook",
                 "manage-handbook": "Manage Handbook"
             }
+        },
+        "doctor": {
+            "manage-schedule": "Manage Doctor's schedule"
         }
     },
     "manage-user-redux": {
@@ -65,5 +68,8 @@
         "add": "Add",
         "edit": "Save",
         "upload-img": "Upload image"
+    },
+    "manage-schedule": {
+        "title": "Manage Doctor's schedule"
     }
 }

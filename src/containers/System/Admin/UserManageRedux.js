@@ -373,10 +373,11 @@ class UserManageRedux extends Component {
                                         this.handleSaveUser();
                                     }}
                                 >
-                                    {this.state.action === CRUD_ACTIONS.EDIT ?
-                                        <FormattedMessage id='manage-user-redux.edit' />
-                                        :
-                                        <FormattedMessage id='manage-user-redux.add' />
+                                    {
+                                        this.state.action === CRUD_ACTIONS.EDIT ?
+                                            <FormattedMessage id='manage-user-redux.edit' />
+                                            :
+                                            <FormattedMessage id='manage-user-redux.add' />
                                     }
                                 </button>
                             </div>

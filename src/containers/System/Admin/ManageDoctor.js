@@ -7,7 +7,8 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
-import { LANGUAGES } from '../../../utils';
+import { LANGUAGES, CRUD_ACTIONS } from '../../../utils';
+import { getMarkdownService } from '../../../services/userService'
 
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -23,7 +24,8 @@ class ManageDoctor extends Component {
             selectedOption: '',
             description: '',
             AllDoctors: [],
-            arrdoctorInfo: []
+            action: '', // có thể khai báo 1 state hasOldData: false (có dũ liệu cũ hay không)
+            // infoMarkdown: []
         }
     }
 
@@ -62,12 +64,14 @@ class ManageDoctor extends Component {
                 AllDoctors: dataSelect
             })
         }
-        if (prevProps.arrdoctorInfoRedux !== this.props.arrdoctorInfoRedux) {
-            this.setState({
-                arrdoctorInfo: this.props.arrdoctorInfoRedux
-            })
-        }
+        // if (prevProps.infoMarkdownRedux !== this.props.infoMarkdownRedux) {
+        //     this.setState({
+        //         infoMarkdown: this.props.infoMarkdownRedux
+        //     })
+        // }
+
         // if (prevProps.selectedOption !== this.state.selectedOption) {
+        //     let {infoMarkdown} = this.state.infoMarkdown
         //     this.setState({
         //         contentMarkdown: '',
         //         contentHTML: '',
@@ -102,12 +106,23 @@ class ManageDoctor extends Component {
         if (isValid === false) {
             return;
         } else {
-            this.props.createDoctorInfoStart({
-                contentHTML: this.state.contentHTML,
-                contentMarkdown: this.state.contentMarkdown,
-                description: this.state.description,
-                doctorId: this.state.selectedOption.value
-            })
+            let { action } = this.state;
+            // có thể truyền action trực tiếp về backend rồi if-edit else-create?
+            if (action === CRUD_ACTIONS.CREATE) {
+                this.props.createDoctorInfoStart({
+                    contentHTML: this.state.contentHTML,
+                    contentMarkdown: this.state.contentMarkdown,
+                    description: this.state.description,
+                    doctorId: this.state.selectedOption.value
+                })
+            } else if (action === CRUD_ACTIONS.EDIT) {
+                this.props.editDoctorInfoStart({
+                    contentHTML: this.state.contentHTML,
+                    contentMarkdown: this.state.contentMarkdown,
+                    description: this.state.description,
+                    doctorId: this.state.selectedOption.value
+                })
+            }
         }
     }
 
@@ -115,17 +130,26 @@ class ManageDoctor extends Component {
         this.setState({
             selectedOption
         })
-        let res = await this.props.fetchDoctorInfoStart(selectedOption.value) //react-select-is-special
-        if (res && res.Markdown) {
-            let markdown = res.Markdown;
+        // this.props.fetchMarkdownStart(selectedOption.value) 
+
+        //react-select-is-special
+        let res = await getMarkdownService(selectedOption.value)
+        if (res && res.errCode === 0 && res.infoMarkdown) {
+            let markdown = res.infoMarkdown;
             this.setState({
-                description: markdown.description,
                 contentHTML: markdown.contentHTML,
-                contentMarkdown: markdown.contentMarkdown
+                contentMarkdown: markdown.contentMarkdown,
+                description: markdown.description,
+                action: CRUD_ACTIONS.EDIT
+            })
+        } else {
+            this.setState({
+                contentHTML: '',
+                contentMarkdown: '',
+                description: '',
+                action: CRUD_ACTIONS.CREATE
             })
         }
-
-        // console.log('check markdown: ', markdown)
 
     }
 
@@ -137,8 +161,7 @@ class ManageDoctor extends Component {
 
 
     render() {
-        console.log('check arrdoctorinfo: ', this.state.arrdoctorInfo)
-        let AllDoctors = this.state.AllDoctors;
+        let { AllDoctors, hasOldData } = this.state;
 
         return (
             <div className='manage-doctor-container px-3'>
@@ -170,15 +193,21 @@ class ManageDoctor extends Component {
                         style={{ height: '500px' }}
                         renderHTML={text => mdParser.render(text)}
                         onChange={this.handleEditorChange}
+                        value={this.state.contentMarkdown}
                     />
                 </div>
                 <button
-                    className='btn btn-primary mt-2'
+                    className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning mt-2' : 'btn btn-primary mt-2'}
                     onClick={() => {
                         this.handleSaveContentMardown();
                     }}
                 >
-                    Save
+                    {
+                        this.state.action === CRUD_ACTIONS.EDIT ?
+                            <FormattedMessage id='manage-user-redux.edit' />
+                            :
+                            <FormattedMessage id='manage-user-redux.add' />
+                    }
                 </button>
             </div>
         );
@@ -190,7 +219,7 @@ const mapStateToProps = state => {
     return {
         language: state.app.language,
         AllDoctorsRedux: state.admin.allDoctors,
-        arrdoctorInfoRedux: state.admin.arrdoctorInfo
+        infoMarkdownRedux: state.admin.infoMarkdown
     };
 };
 
@@ -198,7 +227,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctorsStart: () => dispatch(actions.fetchAllDoctorsStart()),
         createDoctorInfoStart: (inputData) => dispatch(actions.createDoctorInfoStart(inputData)),
-        fetchDoctorInfoStart: (doctorId) => dispatch(actions.fetchDoctorInfoStart(doctorId))
+        editDoctorInfoStart: (inputData) => dispatch(actions.editDoctorInfoStart(inputData)),
+        // fetchMarkdownStart: (doctorId) => dispatch(actions.fetchMarkdownStart(doctorId))
     };
 };
 

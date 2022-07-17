@@ -32,7 +32,7 @@
             "user": {
                 "user": "Người dùng",
                 "manage-admin": "Quản lí Admin",
-                "manage-doctor": "Quản lí bác sĩ",
+                "manage-doctor": "Quản lí thông tin bác sĩ",
                 "crud-react": "CRUD React",
                 "crud-redux": "CRUD Redux"
             },
@@ -48,6 +48,9 @@
                 "handbook": "Cẩm nang",
                 "manage-handbook": "Quản lí cẩm nang"
             }
+        },
+        "doctor": {
+            "manage-schedule": "Quản lí kế hoạch khám bệnh"
         }
     },
     "manage-user-redux": {
@@ -65,5 +68,8 @@
         "add": "Thêm",
         "edit": "Lưu",
         "upload-img": "Tải ảnh lên"
+    },
+    "manage-schedule": {
+        "title": "Quản lí kế hoạch khám bệnh"
     }
 }

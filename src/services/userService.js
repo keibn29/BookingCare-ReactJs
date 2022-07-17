@@ -44,6 +44,14 @@ const getDoctorInfoService = (doctorId) => {
     return axios.get(`/api/get-doctor-info?id=${doctorId}`)
 }
 
+const getMarkdownService = (doctorId) => {
+    return axios.get(`/api/get-markdown?id=${doctorId}`)
+}
+
+const editDoctorInfoService = (inputData) => {
+    return axios.put(`/api/edit-doctor-info`, inputData)
+}
+
 
 export {
     handleLoginApi,
@@ -55,5 +63,7 @@ export {
     GetTopDoctorsHomepageService,
     getAllDoctorsService,
     createDoctorInfoService,
-    getDoctorInfoService
+    getDoctorInfoService,
+    getMarkdownService,
+    editDoctorInfoService
 };

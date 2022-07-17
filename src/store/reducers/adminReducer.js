@@ -141,6 +141,36 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
 
+        //edit-doctor-info
+        case actionTypes.EDIT_DOCTOR_INFO_SUCCESS:
+            state.arrdoctorInfo = action.data;
+
+            return {
+                ...state
+            }
+
+        case actionTypes.EDIT_DOCTOR_INFO_FAILED:
+            state.arrdoctorInfo = [];
+
+            return {
+                ...state
+            }
+
+        //fetch-markdown
+        // case actionTypes.FETCH_MARKDOWN_SUCCESS:
+        //     state.infoMarkdown = action.data;
+
+        //     return {
+        //         ...state
+        //     }
+
+        // case actionTypes.FETCH_MARKDOWN_FAILED:
+        //     state.infoMarkdown = [];
+
+        //     return {
+        //         ...state
+        //     }
+
         default:
             return state;
     }

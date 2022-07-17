@@ -3,7 +3,8 @@ import {
     getAllCodeService, createNewUserService,
     getAllUsers, deleteUserService, editUserService,
     GetTopDoctorsHomepageService, getAllDoctorsService,
-    createDoctorInfoService, getDoctorInfoService
+    createDoctorInfoService, getDoctorInfoService,
+    getMarkdownService, editDoctorInfoService
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -322,4 +323,64 @@ export const fetchDoctorInfoSuccess = (doctorInfo) => ({
 export const fetchDoctorInfoFailed = () => ({
     type: actionTypes.FETCH_DOCTOR_INFO_FAILED
 })
+
+//edit-doctor-info
+export const editDoctorInfoStart = (inputData) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await editDoctorInfoService(inputData);
+            if (res && res.errCode === 0) {
+                dispatch(editDoctorInfoSuccess());
+                toast.success('Update Doctor Info succeed!');
+                dispatch(fetchAllUsersStart());
+            } else {
+                dispatch(editDoctorInfoFailed());
+                toast.error('Update Doctor Info failed!');
+            }
+        } catch (e) {
+            dispatch(editDoctorInfoFailed());
+            toast.error('Update Doctor Info failed!');
+            console.log('Update Doctor Info Error: ', e)
+        }
+    }
+}
+
+export const editDoctorInfoSuccess = (inputData) => ({
+    type: actionTypes.EDIT_DOCTOR_INFO_SUCCESS,
+    data: inputData
+})
+
+export const editDoctorInfoFailed = () => ({
+    type: actionTypes.EDIT_DOCTOR_INFO_FAILED
+})
+
+//fetch-markdown
+// export const fetchMarkdownStart = (doctorId) => {
+//     return async (dispatch, getState) => {
+//         try {
+//             let res = await getMarkdownService(doctorId);
+//             console.log('check res: ', res)
+//             if (res && res.errCode === 0) {
+//                 dispatch(fetchMarkdownSuccess(res.infoMarkdown));
+//             } else {
+//                 dispatch(fetchMarkdownFailed());
+//                 toast.error('fetch Markdown failed!');
+//             }
+//         } catch (e) {
+//             dispatch(fetchMarkdownFailed());
+//             toast.error('fetch Markdown failed!');
+//             console.log('fetch Markdown Error: ', e)
+//         }
+//     }
+// }
+
+// export const fetchMarkdownSuccess = (infoMarkdown) => ({
+//     type: actionTypes.FETCH_MARKDOWN_SUCCESS,
+//     data: infoMarkdown
+// })
+
+// export const fetchMarkdownFailed = () => ({
+//     type: actionTypes.FETCH_MARKDOWN_FAILED
+// })
+
 
