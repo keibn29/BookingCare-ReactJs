@@ -8,6 +8,10 @@
 
         .btn-schedule {
             border: 1px solid #ccc;
+
+            &.active {
+                background-color: rgb(255, 248, 174);
+            }
         }
     }
 
