@@ -70,6 +70,9 @@
         "upload-img": "Tải ảnh lên"
     },
     "manage-schedule": {
-        "title": "Quản lí kế hoạch khám bệnh"
+        "title": "Quản lí kế hoạch khám bệnh",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
+        "save": "Lưu"
     }
 }

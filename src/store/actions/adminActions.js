@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 //start-doing-end
 
 //quy trình chuẩn
+//fetch-allcode-gender
 export const fetchGenderStart = () => {
     return async (dispatch, getState) => {
         try {
@@ -43,7 +44,7 @@ export const fetchGenderFailed = () => ({
     type: actionTypes.FETCH_GENDER_FAILED
 })
 
-//
+//fetch-allcode-position
 export const fetchPositionStart = () => {
     return async (dispatch, getState) => {
         try {
@@ -69,7 +70,7 @@ export const fetchPositonFailed = () => ({
     type: actionTypes.FETCH_POSITION_FAILED
 })
 
-//
+//fetch-allcode-role
 export const fetchRoleStart = () => {
     return async (dispatch, getState) => {
         try {
@@ -300,7 +301,6 @@ export const fetchDoctorInfoStart = (doctorId) => {
     return async (dispatch, getState) => {
         try {
             let res = await getDoctorInfoService(doctorId);
-            console.log('check res: ', res)
             if (res && res.errCode === 0) {
                 dispatch(fetchDoctorInfoSuccess(res.doctorInfo));
             } else {
@@ -332,7 +332,6 @@ export const editDoctorInfoStart = (inputData) => {
             if (res && res.errCode === 0) {
                 dispatch(editDoctorInfoSuccess());
                 toast.success('Update Doctor Info succeed!');
-                dispatch(fetchAllUsersStart());
             } else {
                 dispatch(editDoctorInfoFailed());
                 toast.error('Update Doctor Info failed!');
@@ -354,33 +353,30 @@ export const editDoctorInfoFailed = () => ({
     type: actionTypes.EDIT_DOCTOR_INFO_FAILED
 })
 
-//fetch-markdown
-// export const fetchMarkdownStart = (doctorId) => {
-//     return async (dispatch, getState) => {
-//         try {
-//             let res = await getMarkdownService(doctorId);
-//             console.log('check res: ', res)
-//             if (res && res.errCode === 0) {
-//                 dispatch(fetchMarkdownSuccess(res.infoMarkdown));
-//             } else {
-//                 dispatch(fetchMarkdownFailed());
-//                 toast.error('fetch Markdown failed!');
-//             }
-//         } catch (e) {
-//             dispatch(fetchMarkdownFailed());
-//             toast.error('fetch Markdown failed!');
-//             console.log('fetch Markdown Error: ', e)
-//         }
-//     }
-// }
+//fetch-allcode-time
+export const fetchTimeStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('TIME');
+            if (res && res.errCode === 0) {
+                dispatch(fetchTimeSuccess(res.allcode));
+            } else {
+                dispatch(fetchTimeFailed());
+                toast.error('fetch Time failed!');
+            }
+        } catch (e) {
+            dispatch(fetchTimeFailed());
+            toast.error('fetch Time failed!');
+            console.log('fetch Time Error: ', e)
+        }
+    }
+}
 
-// export const fetchMarkdownSuccess = (infoMarkdown) => ({
-//     type: actionTypes.FETCH_MARKDOWN_SUCCESS,
-//     data: infoMarkdown
-// })
+export const fetchTimeSuccess = (timeData) => ({
+    type: actionTypes.FETCH_TIME_SUCCESS,
+    data: timeData
+})
 
-// export const fetchMarkdownFailed = () => ({
-//     type: actionTypes.FETCH_MARKDOWN_FAILED
-// })
-
-
+export const fetchTimeFailed = () => ({
+    type: actionTypes.FETCH_TIME_FAILED
+})

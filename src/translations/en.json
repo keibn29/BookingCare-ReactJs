@@ -70,6 +70,9 @@
         "upload-img": "Upload image"
     },
     "manage-schedule": {
-        "title": "Manage Doctor's schedule"
+        "title": "Manage Doctor's schedule",
+        "choose-doctor": "Choose Doctor",
+        "choose-date": "Choose Date",
+        "save": "Save"
     }
 }

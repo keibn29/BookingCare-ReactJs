@@ -8,7 +8,8 @@ const initialState = {
     arrUsers: [],
     topDoctors: [],
     allDoctors: [],
-    arrdoctorInfo: []
+    arrdoctorInfo: [],
+    arrTime: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -156,20 +157,20 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
 
-        //fetch-markdown
-        // case actionTypes.FETCH_MARKDOWN_SUCCESS:
-        //     state.infoMarkdown = action.data;
+        //fetch-allcode-time
+        case actionTypes.FETCH_TIME_SUCCESS:
+            state.arrTime = action.data;
 
-        //     return {
-        //         ...state
-        //     }
+            return {
+                ...state
+            }
 
-        // case actionTypes.FETCH_MARKDOWN_FAILED:
-        //     state.infoMarkdown = [];
+        case actionTypes.FETCH_TIME_FAILED:
+            state.arrTime = [];
 
-        //     return {
-        //         ...state
-        //     }
+            return {
+                ...state
+            }
 
         default:
             return state;

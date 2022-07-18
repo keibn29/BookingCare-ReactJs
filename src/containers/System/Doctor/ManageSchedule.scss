@@ -1,1 +1,18 @@
-.manage-schedule-container {}
+.manage-schedule-container {
+    .pick-hour-container {
+        display       : flex;
+        gap           : 25px;
+        flex-wrap     : wrap;
+        padding-top   : 20px;
+        padding-bottom: 20px;
+
+        .btn-schedule {
+            border: 1px solid #ccc;
+        }
+    }
+
+    .save-schedule {
+        margin-top: 15px;
+    }
+
+}

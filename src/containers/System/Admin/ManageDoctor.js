@@ -21,10 +21,10 @@ class ManageDoctor extends Component {
         this.state = {
             contentMarkdown: '',
             contentHTML: '',
-            selectedOption: '',
+            selectedDoctor: '',
             description: '',
-            AllDoctors: [],
-            action: '', // có thể khai báo 1 state hasOldData: false (có dũ liệu cũ hay không)
+            allDoctors: [],
+            action: '', // có thể khai báo 1 state hasOldData: false (có dữ liệu cũ hay không)
             // infoMarkdown: []
         }
     }
@@ -55,30 +55,15 @@ class ManageDoctor extends Component {
         if (prevProps.AllDoctorsRedux !== this.props.AllDoctorsRedux) {
             let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
             this.setState({
-                AllDoctors: dataSelect
+                allDoctors: dataSelect
             })
         }
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
             this.setState({
-                AllDoctors: dataSelect
+                allDoctors: dataSelect
             })
         }
-        // if (prevProps.infoMarkdownRedux !== this.props.infoMarkdownRedux) {
-        //     this.setState({
-        //         infoMarkdown: this.props.infoMarkdownRedux
-        //     })
-        // }
-
-        // if (prevProps.selectedOption !== this.state.selectedOption) {
-        //     let {infoMarkdown} = this.state.infoMarkdown
-        //     this.setState({
-        //         contentMarkdown: '',
-        //         contentHTML: '',
-        //         selectedOption: '',
-        //         description: ''
-        //     })
-        // }
     }
 
     handleEditorChange = ({ html, text }) => {
@@ -90,7 +75,7 @@ class ManageDoctor extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrInput = ['selectedOption', 'description', 'contentMarkdown', 'contentHTML'];
+        let arrInput = ['selectedDoctor', 'description', 'contentMarkdown', 'contentHTML'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -113,27 +98,27 @@ class ManageDoctor extends Component {
                     contentHTML: this.state.contentHTML,
                     contentMarkdown: this.state.contentMarkdown,
                     description: this.state.description,
-                    doctorId: this.state.selectedOption.value
+                    doctorId: this.state.selectedDoctor.value
                 })
             } else if (action === CRUD_ACTIONS.EDIT) {
                 this.props.editDoctorInfoStart({
                     contentHTML: this.state.contentHTML,
                     contentMarkdown: this.state.contentMarkdown,
                     description: this.state.description,
-                    doctorId: this.state.selectedOption.value
+                    doctorId: this.state.selectedDoctor.value
                 })
             }
         }
     }
 
-    handleChangeSelect = async (selectedOption) => {
+    handleChangeSelect = async (selectedDoctor) => {
         this.setState({
-            selectedOption
+            selectedDoctor
         })
-        // this.props.fetchMarkdownStart(selectedOption.value) 
+        // this.props.fetchMarkdownStart(selectedDoctor.value) 
 
         //react-select-is-special
-        let res = await getMarkdownService(selectedOption.value)
+        let res = await getMarkdownService(selectedDoctor.value)
         if (res && res.errCode === 0 && res.infoMarkdown) {
             let markdown = res.infoMarkdown;
             this.setState({
@@ -161,7 +146,7 @@ class ManageDoctor extends Component {
 
 
     render() {
-        let { AllDoctors, hasOldData } = this.state;
+        let { allDoctors, selectedDoctor } = this.state;
 
         return (
             <div className='manage-doctor-container px-3'>
@@ -170,9 +155,9 @@ class ManageDoctor extends Component {
                     <div className='content-left'>
                         <label>Chọn bác sĩ</label>
                         <Select
-                            value={this.state.selectedOption}
+                            value={selectedDoctor}
                             onChange={this.handleChangeSelect}
-                            options={AllDoctors}
+                            options={allDoctors}
                         />
                     </div>
                     <div className='content-right'>
