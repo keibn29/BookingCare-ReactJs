@@ -4,7 +4,8 @@ import {
     getAllUsers, deleteUserService, editUserService,
     GetTopDoctorsHomepageService, getAllDoctorsService,
     createDoctorInfoService, getDoctorInfoService,
-    getMarkdownService, editDoctorInfoService
+    getMarkdownService, editDoctorInfoService,
+    bulkCreateSchedule
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -379,4 +380,32 @@ export const fetchTimeSuccess = (timeData) => ({
 
 export const fetchTimeFailed = () => ({
     type: actionTypes.FETCH_TIME_FAILED
+})
+
+//bulk-create-schedule
+export const bulkCreateScheduleStart = (scheduleInput) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await bulkCreateSchedule(scheduleInput);
+            if (res && res.errCode === 0) {
+                dispatch(bulkCreateScheduleSuccess());
+                toast.success('Save Schedule succeed!');
+            } else {
+                dispatch(bulkCreateScheduleFailed());
+                toast.error('Save Schedule failed!');
+            }
+        } catch (e) {
+            dispatch(bulkCreateScheduleFailed());
+            toast.error('Save Schedule failed!');
+            console.log('Save Schedule Error: ', e)
+        }
+    }
+}
+
+export const bulkCreateScheduleSuccess = () => ({
+    type: actionTypes.BULK_CREATE_SCHEDULE_SUCCESS
+})
+
+export const bulkCreateScheduleFailed = () => ({
+    type: actionTypes.BULK_CREATE_SCHEDULE_FAILED
 })

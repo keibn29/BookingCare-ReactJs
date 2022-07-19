@@ -117,7 +117,8 @@ class ManageSchedule extends Component {
             return;
         }
 
-        let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+        // let formatedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER) //covert to DD/MM/YYYY(string)
+        let formatedDate = new Date(currentDate).getTime(); //convert to timestamp
         if (arrTime && arrTime.length > 0) {
             let selectedTime = arrTime.filter((item) => item.isSelected === true)
             if (selectedTime && selectedTime.length > 0) {
@@ -125,7 +126,7 @@ class ManageSchedule extends Component {
                     let obj = {};
                     obj.doctorId = selectedDoctor.value;
                     obj.date = formatedDate;
-                    obj.time = time.keyMap;
+                    obj.timeType = time.keyMap;
                     result.push(obj)
                 })
             } else {
@@ -133,7 +134,11 @@ class ManageSchedule extends Component {
                 return;
             }
         }
-
+        this.props.bulkCreateScheduleStart({
+            result,
+            doctorId: selectedDoctor.value, //compare vs DB
+            date: formatedDate  //compare vs DB
+        });
         console.log('check result: ', result)
     }
 
@@ -211,6 +216,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctorsStart: () => dispatch(actions.fetchAllDoctorsStart()),
         fetchTimeStart: () => dispatch(actions.fetchTimeStart()),
+        bulkCreateScheduleStart: (scheduleInput) => dispatch(actions.bulkCreateScheduleStart(scheduleInput))
     };
 };
 

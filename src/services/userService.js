@@ -52,6 +52,10 @@ const editDoctorInfoService = (inputData) => {
     return axios.put(`/api/edit-doctor-info`, inputData)
 }
 
+const bulkCreateSchedule = (scheduleInput) => {
+    return axios.post(`/api/bulk-create-schedule`, scheduleInput)
+}
+
 
 export {
     handleLoginApi,
@@ -65,5 +69,6 @@ export {
     createDoctorInfoService,
     getDoctorInfoService,
     getMarkdownService,
-    editDoctorInfoService
+    editDoctorInfoService,
+    bulkCreateSchedule
 };
