@@ -1,9 +1,11 @@
 .doctor-info-container {
     .content-top {
         padding: 0 150px;
+        border : 1px solid green;
 
         .doctor-description {
             display: flex;
+            border : 1px solid blue;
 
             .content-left {
                 width              : 20%;
@@ -30,6 +32,22 @@
                 .down {
                     margin-top: 10px;
                 }
+            }
+        }
+
+        .doctor-schedule {
+            border        : 1px solid red;
+            display       : flex;
+            height        : 200px;
+            padding-top   : 20px;
+            padding-bottom: 20px;
+
+            .content-left {
+                width: 50%;
+            }
+
+            .content-right {
+                width: 50%;
             }
         }
     }
