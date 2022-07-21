@@ -5,7 +5,7 @@ import {
     GetTopDoctorsHomepageService, getAllDoctorsService,
     createDoctorInfoService, getDoctorInfoService,
     getMarkdownService, editDoctorInfoService,
-    bulkCreateSchedule
+    bulkCreateSchedule, getScheduleByDate
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -408,4 +408,32 @@ export const bulkCreateScheduleSuccess = () => ({
 
 export const bulkCreateScheduleFailed = () => ({
     type: actionTypes.BULK_CREATE_SCHEDULE_FAILED
+})
+
+//fetch-allcode-time
+export const fetchDoctorScheduleStart = (doctorId, date) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getScheduleByDate(doctorId, date);
+            if (res && res.errCode === 0) {
+                dispatch(fetchDoctorScheduleSuccess(res.schedule));
+            } else {
+                dispatch(fetchDoctorScheduleFailed());
+                toast.error('fetch Doctor Schedule failed!');
+            }
+        } catch (e) {
+            dispatch(fetchDoctorScheduleFailed());
+            toast.error('fetch Doctor Schedule failed!');
+            console.log('fetch Doctor Schedule Error: ', e)
+        }
+    }
+}
+
+export const fetchDoctorScheduleSuccess = (scheduleData) => ({
+    type: actionTypes.FETCH_DOCTOR_SCHEDULE_SUCCESS,
+    data: scheduleData
+})
+
+export const fetchDoctorScheduleFailed = () => ({
+    type: actionTypes.FETCH_DOCTOR_SCHEDULE_FAILED
 })
