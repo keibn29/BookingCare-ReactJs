@@ -44,6 +44,10 @@ class DoctorSchedule extends Component {
         }
     }
 
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     buildDataInputSelect = () => {
         let result = [];
         let { language } = this.props;
@@ -53,7 +57,7 @@ class DoctorSchedule extends Component {
             let labelVi = moment(new Date()).add(i, 'days').format('dddd - DD/MM'); //hiện thứ bằng tiếng việt
             let labelEn = moment(new Date()).add(i, 'days').locale('en').format('ddd - DD/MM');
 
-            obj.label = language === LANGUAGES.VI ? labelVi : labelEn;
+            obj.label = language === LANGUAGES.VI ? this.capitalizeFirstLetter(labelVi) : labelEn;
             obj.value = moment(new Date()).add(i, 'days').startOf('day').valueOf(); //startOf('day): 00:00:00
             result.push(obj);
         }
@@ -84,6 +88,7 @@ class DoctorSchedule extends Component {
     }
 
     render() {
+        let { language } = this.props;
         let { allDays, arrDoctorSchedule } = this.state;
         console.log('check arrDoctorSchedule: ', arrDoctorSchedule)
 
@@ -92,6 +97,7 @@ class DoctorSchedule extends Component {
                 <div className='doctor-schedule-container'>
                     <div className='all-schedule'>
                         <select
+                            className='select-date'
                             onChange={(event) => {
                                 this.handleOnChangeDate(event);
                             }}
@@ -111,7 +117,30 @@ class DoctorSchedule extends Component {
                         </select>
                     </div>
                     <div className='all-time'>
+                        <div className='calendar-text'>
+                            <span><i className='fas fa-calendar-alt'></i>Lịch khám</span>
+                        </div>
+                        <div className='time-content'>
+                            {
+                                arrDoctorSchedule && arrDoctorSchedule.length > 0
+                                    ?
+                                    arrDoctorSchedule.map((item, index) => {
 
+                                        return (
+                                            < button
+                                                key={index}
+                                                className='btn'
+                                            >
+                                                {language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn}
+                                            </button>
+                                        )
+                                    })
+                                    :
+                                    <div className='no-time'>
+                                        Bác sĩ không có lịch hẹn trong ngày này, vui lòng chọn ngày khác!
+                                    </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </>
