@@ -11,7 +11,8 @@ class DoctorInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrdoctorInfo: []
+            arrdoctorInfo: [],
+            currentDoctorId: -1
         }
     }
 
@@ -19,6 +20,9 @@ class DoctorInfo extends Component {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let doctorId = this.props.match.params.id
             this.props.fetchDoctorInfoStart(doctorId);
+            this.setState({
+                currentDoctorId: doctorId
+            })
         }
     }
 
@@ -32,7 +36,7 @@ class DoctorInfo extends Component {
 
     render() {
         let { language } = this.props;
-        let { arrdoctorInfo } = this.state;
+        let { arrdoctorInfo, currentDoctorId } = this.state;
         let nameVi = '';
         let nameEn = '';
         if (arrdoctorInfo && arrdoctorInfo.positionData) {
@@ -70,7 +74,7 @@ class DoctorInfo extends Component {
                         <div className='doctor-schedule'>
                             <div className='content-left'>
                                 <DoctorSchedule
-                                    doctorId={arrdoctorInfo && arrdoctorInfo.id ? arrdoctorInfo.id : -1}
+                                    doctorId={currentDoctorId}
                                 />
                             </div>
                             <div className='content-right'>

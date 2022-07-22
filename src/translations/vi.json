@@ -27,6 +27,12 @@
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
         "more": "Xem thêm"
     },
+    "patient": {
+        "doctor": {
+            "schedule-calendar": "Lịch khám",
+            "no-schedule": "Bác sĩ không có lịch hẹn trong ngày, vui lòng chọn ngày khác!"
+        }
+    },
     "menu": {
         "admin": {
             "user": {

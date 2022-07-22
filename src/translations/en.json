@@ -27,6 +27,12 @@
         "outstanding-doctor": "Last week's featured doctor",
         "more": "More info"
     },
+    "patient": {
+        "doctor": {
+            "schedule-calendar": "schedule Calendar",
+            "no-schedule": "The doctor doesn't have an appointment for this day, please choose another day!"
+        }
+    },
     "menu": {
         "admin": {
             "user": {

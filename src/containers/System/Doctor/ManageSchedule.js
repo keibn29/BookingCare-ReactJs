@@ -143,6 +143,7 @@ class ManageSchedule extends Component {
     }
 
     render() {
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         const { isLoggedIn, language } = this.props;
         let { allDoctors, selectedDoctor, currentDate, arrTime } = this.state;
         console.log('check arrTime: ', arrTime)
@@ -167,7 +168,7 @@ class ManageSchedule extends Component {
                                     className='form-control'
                                     onChange={this.handleChangeDatePicker}
                                     value={currentDate}
-                                    minDate={new Date}
+                                    minDate={yesterday}
                                 />
                             </div>
                             <div className='pick-hour-container col-12'>
