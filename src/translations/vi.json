@@ -33,6 +33,13 @@
             "no-schedule": "Bác sĩ không có lịch hẹn trong ngày, vui lòng chọn ngày khác!"
         }
     },
+    "system": {
+        "admin": {
+            "doctor-details": "Chi tiết bác sĩ",
+            "choose-doctor": "Chọn bác sĩ",
+            "introduction": "Giới thiệu"
+        }
+    },
     "menu": {
         "admin": {
             "user": {

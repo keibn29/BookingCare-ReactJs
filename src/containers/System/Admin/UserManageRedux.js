@@ -122,7 +122,8 @@ class UserManageRedux extends Component {
     }
 
     onChangeInput = (event, id) => {
-        //good code
+        //xử lí nhiều state cùng lúc (gộp chung nhiều function onChange)
+        //good code (không gán trực tiếp this.state.abcxyz = 1 cái gì đó)
         let copyState = { ...this.state }
         copyState[id] = event.target.value
         this.setState({

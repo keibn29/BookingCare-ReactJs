@@ -437,3 +437,81 @@ export const fetchDoctorScheduleSuccess = (scheduleData) => ({
 export const fetchDoctorScheduleFailed = () => ({
     type: actionTypes.FETCH_DOCTOR_SCHEDULE_FAILED
 })
+
+//fetch-allcode-price
+export const fetchPriceStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('PRICE');
+            if (res && res.errCode === 0) {
+                dispatch(fetchPriceSuccess(res.allcode));
+            } else {
+                dispatch(fetchPriceFailed());
+            }
+        } catch (e) {
+            dispatch(fetchPriceFailed());
+            console.log('fetch Price Error: ', e)
+        }
+    }
+}
+
+export const fetchPriceSuccess = (priceData) => ({
+    type: actionTypes.FETCH_PRICE_SUCCESS,
+    data: priceData
+})
+
+export const fetchPriceFailed = () => ({
+    type: actionTypes.FETCH_PRICE_FAILED
+})
+
+//fetch-allcode-province
+export const fetchProvinceStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('PROVINCE');
+            if (res && res.errCode === 0) {
+                dispatch(fetchProvinceSuccess(res.allcode));
+            } else {
+                dispatch(fetchProvinceFailed());
+            }
+        } catch (e) {
+            dispatch(fetchProvinceFailed());
+            console.log('fetch Province Error: ', e)
+        }
+    }
+}
+
+export const fetchProvinceSuccess = (provinceData) => ({
+    type: actionTypes.FETCH_PROVINCE_SUCCESS,
+    data: provinceData
+})
+
+export const fetchProvinceFailed = () => ({
+    type: actionTypes.FETCH_PROVINCE_FAILED
+})
+
+//fetch-allcode-payment
+export const fetchPaymentStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService('PAYMENT');
+            if (res && res.errCode === 0) {
+                dispatch(fetchPaymentSuccess(res.allcode));
+            } else {
+                dispatch(fetchPaymentFailed());
+            }
+        } catch (e) {
+            dispatch(fetchPaymentFailed());
+            console.log('fetch Payment Error: ', e)
+        }
+    }
+}
+
+export const fetchPaymentSuccess = (paymentData) => ({
+    type: actionTypes.FETCH_PAYMENT_SUCCESS,
+    data: paymentData
+})
+
+export const fetchPaymentFailed = () => ({
+    type: actionTypes.FETCH_PAYMENT_FAILED
+})

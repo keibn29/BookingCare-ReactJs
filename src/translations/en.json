@@ -33,6 +33,13 @@
             "no-schedule": "The doctor doesn't have an appointment for this day, please choose another day!"
         }
     },
+    "system": {
+        "admin": {
+            "doctor-details": "Doctor Details",
+            "choose-doctor": "Choose Doctor",
+            "introduction": "Introduction"
+        }
+    },
     "menu": {
         "admin": {
             "user": {
