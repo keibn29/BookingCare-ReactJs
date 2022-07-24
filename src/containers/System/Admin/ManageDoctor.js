@@ -8,7 +8,7 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
 import { LANGUAGES, CRUD_ACTIONS } from '../../../utils';
-import { getMarkdownService } from '../../../services/userService';
+import { getDoctorInfoService } from '../../../services/userService';
 import { toast } from 'react-toastify';
 
 
@@ -162,29 +162,69 @@ class ManageDoctor extends Component {
         }
     }
 
-    handleChangeSelect = async (selectedDoctor) => {
+    handleChangeSelectDoctor = async (selectedDoctor) => {
         //selectedDoctor được truyền sang từ thư viện react-select
         this.setState({
             selectedDoctor
         })
-        // this.props.fetchMarkdownStart(selectedDoctor.value)
 
+        let { allPrice, allProvince, allPayment } = this.state;
         //react-select-is-special
-        let res = await getMarkdownService(selectedDoctor.value)
-        if (res && res.errCode === 0 && res.infoMarkdown) {
-            let markdown = res.infoMarkdown;
+        let res = await getDoctorInfoService(selectedDoctor.value)
+        if (res && res.errCode === 0 && res.doctorInfo && res.doctorInfo.Markdown) {
+            let markdown = res.doctorInfo.Markdown;
+            if (res.doctorInfo.Doctor) {
+                let detail = res.doctorInfo.Doctor;
+
+                let selectedPrice = allPrice.find((item) => {
+                    return item && item.value === detail.priceId
+                })
+                let selectedProvince = allProvince.find((item) => {
+                    return item && item.value === detail.provinceId
+                })
+                let selectedPayment = allPayment.find((item) => {
+                    return item && item.value === detail.paymentId
+                })
+                console.log('check selected: ', selectedPrice)
+
+                this.setState({
+                    //có cả Markdown && Doctor -> EDIT
+                    //không có 1 trong 2 -> CREATE
+                    action: CRUD_ACTIONS.EDIT,
+
+                    selectedPrice: selectedPrice,
+                    selectedProvince: selectedProvince,
+                    selectedPayment: selectedPayment,
+                    nameClinic: detail.nameClinic,
+                    addressClinic: detail.addressClinic,
+                    note: detail.note
+
+                })
+            } else {
+                this.setState({
+                    action: CRUD_ACTIONS.CREATE,
+
+                    selectedPrice: '',
+                    selectedProvince: '',
+                    selectedPayment: '',
+                    nameClinic: '',
+                    addressClinic: '',
+                    note: ''
+                })
+            }
+
             this.setState({
                 contentHTML: markdown.contentHTML,
                 contentMarkdown: markdown.contentMarkdown,
                 description: markdown.description,
-                action: CRUD_ACTIONS.EDIT
             })
         } else {
             this.setState({
+                action: CRUD_ACTIONS.CREATE,
+
                 contentHTML: '',
                 contentMarkdown: '',
                 description: '',
-                action: CRUD_ACTIONS.CREATE
             })
         }
 
@@ -224,7 +264,7 @@ class ManageDoctor extends Component {
                         <label><FormattedMessage id='system.admin.choose-doctor' /></label>
                         <Select
                             value={selectedDoctor}
-                            onChange={this.handleChangeSelect}
+                            onChange={this.handleChangeSelectDoctor}
                             options={allDoctors}
                         />
                     </div>
@@ -277,6 +317,7 @@ class ManageDoctor extends Component {
                             onChange={(event) => {
                                 this.handleOnChangeInput(event, 'nameClinic')
                             }}
+                            value={this.state.nameClinic}
                         />
                     </div>
                     <div className='form-group col-4'>
@@ -286,6 +327,7 @@ class ManageDoctor extends Component {
                             onChange={(event) => {
                                 this.handleOnChangeInput(event, 'addressClinic')
                             }}
+                            value={this.state.addressClinic}
                         />
                     </div>
                     <div className='form-group col-4'>
@@ -295,6 +337,7 @@ class ManageDoctor extends Component {
                             onChange={(event) => {
                                 this.handleOnChangeInput(event, 'note')
                             }}
+                            value={this.state.note}
                         />
                     </div>
                 </div>
