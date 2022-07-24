@@ -1,9 +1,9 @@
 .doctor-schedule-container {
-    border-right: 1px solid #ddd;
-    padding     : 15px 20px 0px 20px;
-    height      : 100%;
+    padding: 15px 20px 0 20px;
+    height : 100%;
 
     .all-schedule {
+
         .select-date {
             border       : none;
             border-bottom: 1px solid black !important;
@@ -19,6 +19,7 @@
     }
 
     .all-time {
+
         .calendar-text {
             text-transform: uppercase;
             font-weight   : 600;
@@ -38,7 +39,6 @@
                 button {
                     padding         : 7px 10px;
                     background-color: rgb(254, 249, 174);
-                    font-weight     : 600;
 
                     &.btn-timeVi {
                         width: 22%;

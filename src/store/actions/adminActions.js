@@ -5,7 +5,8 @@ import {
     GetTopDoctorsHomepageService, getAllDoctorsService,
     createDoctorInfoService, getDoctorInfoService,
     getMarkdownService, editDoctorInfoService,
-    bulkCreateSchedule, getScheduleByDate
+    bulkCreateSchedule, getScheduleByDate,
+    getDoctorInfoExtra
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -514,4 +515,32 @@ export const fetchPaymentSuccess = (paymentData) => ({
 
 export const fetchPaymentFailed = () => ({
     type: actionTypes.FETCH_PAYMENT_FAILED
+})
+
+//fetch-doctor-info-extra
+export const fetchDoctorInfoExtraStart = (doctorId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getDoctorInfoExtra(doctorId);
+            if (res && res.errCode === 0) {
+                dispatch(fetchDoctorInfoExtraSuccess(res.infoExtra));
+            } else {
+                dispatch(fetchDoctorInfoExtraFailed());
+                toast.error('fetch Doctor Info failed!');
+            }
+        } catch (e) {
+            dispatch(fetchDoctorInfoExtraFailed());
+            toast.error('fetch Doctor Info failed!');
+            console.log('fetch Doctor Info Error: ', e)
+        }
+    }
+}
+
+export const fetchDoctorInfoExtraSuccess = (infoExtra) => ({
+    type: actionTypes.FETCH_DOCTOR_INFO_EXTRA_SUCCESS,
+    data: infoExtra
+})
+
+export const fetchDoctorInfoExtraFailed = () => ({
+    type: actionTypes.FETCH_DOCTOR_INFO_EXTRA_FAILED
 })

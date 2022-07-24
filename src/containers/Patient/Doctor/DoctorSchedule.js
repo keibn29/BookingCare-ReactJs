@@ -104,7 +104,7 @@ class DoctorSchedule extends Component {
     render() {
         let { language } = this.props;
         let { allDays, arrDoctorSchedule } = this.state;
-        console.log('check arrDoctorSchedule: ', arrDoctorSchedule)
+        // console.log('check arrDoctorSchedule: ', arrDoctorSchedule)
 
         return (
             <>

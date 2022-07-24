@@ -5,6 +5,7 @@ import './DoctorInfo.scss';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorInfoExtra from './DoctorInfoExtra';
 
 class DoctorInfo extends Component {
 
@@ -78,7 +79,9 @@ class DoctorInfo extends Component {
                                 />
                             </div>
                             <div className='content-right'>
-
+                                <DoctorInfoExtra
+                                    doctorId={currentDoctorId}
+                                />
                             </div>
                         </div>
                     </div>
