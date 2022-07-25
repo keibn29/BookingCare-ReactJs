@@ -6,6 +6,7 @@ import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import moment from 'moment';
 import localization from 'moment/locale/vi' //sử dụng moment tiếng việt 
+import BookingModal from './Modal/BookingModal';
 
 class DoctorSchedule extends Component {
 
@@ -13,7 +14,8 @@ class DoctorSchedule extends Component {
         super(props);
         this.state = {
             allDays: [],
-            arrDoctorSchedule: []
+            arrDoctorSchedule: [],
+            isOpenBookingModal: false,
         }
     }
 
@@ -100,6 +102,18 @@ class DoctorSchedule extends Component {
         // }
     }
 
+    toggleBookingModal = () => {
+        this.setState({
+            isOpenBookingModal: !this.state.isOpenBookingModal
+        })
+    }
+
+    handleBookingSchedule = () => {
+        this.setState({
+            isOpenBookingModal: true
+        })
+    }
+
     render() {
         let { language } = this.props;
         let { allDays, arrDoctorSchedule } = this.state;
@@ -147,6 +161,9 @@ class DoctorSchedule extends Component {
                                                         < button
                                                             key={index}
                                                             className={language === LANGUAGES.VI ? 'btn btn-timeVi' : 'btn btn-timeEn'}
+                                                            onClick={() => {
+                                                                this.handleBookingSchedule()
+                                                            }}
                                                         >
                                                             {language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn}
                                                         </button>
@@ -165,6 +182,12 @@ class DoctorSchedule extends Component {
                             }
                         </div>
                     </div>
+                </div>
+                <div>
+                    <BookingModal
+                        isOpen={this.state.isOpenBookingModal}
+                        toggle={this.toggleBookingModal}
+                    />
                 </div>
             </>
         );
