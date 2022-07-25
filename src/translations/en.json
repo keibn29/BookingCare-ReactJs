@@ -30,7 +30,12 @@
     "patient": {
         "doctor": {
             "schedule-calendar": "schedule Calendar",
-            "no-schedule": "The doctor doesn't have an appointment for this day, please choose another day!"
+            "no-schedule": "The doctor doesn't have an appointment for this day, please choose another day!",
+            "address-clinic": "Clinic address",
+            "price": "Examination price",
+            "method-payment-title": "The clinic has payment in the form of",
+            "hide-detail-price": "Hide price list",
+            "show-detail-price": "See details"
         }
     },
     "system": {

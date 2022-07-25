@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import HomeHeader from '../../HomePage/HomeHeader';
 import { FormattedMessage } from 'react-intl';
 import './DoctorSchedule.scss';
 import * as actions from '../../../store/actions';

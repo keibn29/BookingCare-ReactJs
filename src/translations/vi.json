@@ -30,7 +30,12 @@
     "patient": {
         "doctor": {
             "schedule-calendar": "Lịch khám",
-            "no-schedule": "Bác sĩ không có lịch hẹn trong ngày, vui lòng chọn ngày khác!"
+            "no-schedule": "Bác sĩ không có lịch hẹn trong ngày, vui lòng chọn ngày khác!",
+            "address-clinic": "Địa chỉ khám",
+            "price": "Giá khám",
+            "method-payment-title": "Phòng khám có thanh toán bằng hình thức",
+            "hide-detail-price": "Ẩn bảng giá",
+            "show-detail-price": "Xem chi tiết"
         }
     },
     "system": {
