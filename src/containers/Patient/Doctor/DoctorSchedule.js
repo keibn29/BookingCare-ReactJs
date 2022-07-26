@@ -16,14 +16,12 @@ class DoctorSchedule extends Component {
             allDays: [],
             arrDoctorSchedule: [],
             isOpenBookingModal: false,
+            scheduleTimeModal: {}
         }
     }
 
     componentDidMount() {
         let dataSelect = this.buildDataInputSelect();
-        if (!dataSelect) {
-            return;
-        }
         //dữ liệu tạo ra ngay trong component setState ở DidMount
         this.setState({
             allDays: dataSelect
@@ -108,9 +106,10 @@ class DoctorSchedule extends Component {
         })
     }
 
-    handleBookingSchedule = () => {
+    handleBookingSchedule = (time) => {
         this.setState({
-            isOpenBookingModal: true
+            isOpenBookingModal: true,
+            scheduleTimeModal: time
         })
     }
 
@@ -162,7 +161,7 @@ class DoctorSchedule extends Component {
                                                             key={index}
                                                             className={language === LANGUAGES.VI ? 'btn btn-timeVi' : 'btn btn-timeEn'}
                                                             onClick={() => {
-                                                                this.handleBookingSchedule()
+                                                                this.handleBookingSchedule(item)
                                                             }}
                                                         >
                                                             {language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn}
@@ -186,6 +185,7 @@ class DoctorSchedule extends Component {
                 <div>
                     <BookingModal
                         isOpen={this.state.isOpenBookingModal}
+                        dataTime={this.state.scheduleTimeModal}
                         toggle={this.toggleBookingModal}
                     />
                 </div>

@@ -45,7 +45,6 @@ class DoctorInfoExtra extends Component {
         let { isShowDetailPrice, arrDoctorInfoExtra } = this.state;
 
         console.log('check arrDoctorInfoExtra: ', arrDoctorInfoExtra)
-
         return (
             <>
                 <div className='doctor-info-extra-container'>

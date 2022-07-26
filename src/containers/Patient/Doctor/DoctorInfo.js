@@ -42,7 +42,7 @@ class DoctorInfo extends Component {
         let nameEn = '';
         if (arrdoctorInfo && arrdoctorInfo.positionData) {
             nameVi = `${arrdoctorInfo.positionData.valueVi}, ${arrdoctorInfo.lastName} ${arrdoctorInfo.firstName}`;
-            nameEn = `${arrdoctorInfo.positionData.valueEn}, ${arrdoctorInfo.firstName} ${arrdoctorInfo.lastName}`
+            nameEn = `${arrdoctorInfo.positionData.valueEn}, ${arrdoctorInfo.firstName} ${arrdoctorInfo.lastName}`;
         }
         return (
             <>

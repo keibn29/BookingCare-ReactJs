@@ -1,13 +1,12 @@
 .doctor-info-container {
     .content-top {
         padding: 0 150px;
-        border : 1px solid green;
 
         .doctor-description {
             display: flex;
 
             .content-left {
-                width              : 20%;
+                background-size    : cover;
                 background-position: center;
                 background-repeat  : no-repeat;
                 width              : 120px;
@@ -30,6 +29,7 @@
 
                 .down {
                     margin-top: 10px;
+                    text-align: justify;
                 }
             }
         }
