@@ -10,6 +10,7 @@ import _ from 'lodash';
 import { createBookAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import CustomScrollbars from '../../../../components/CustomScrollbars';
+import moment, { lang } from 'moment';
 
 class BookingModal extends Component {
 
@@ -65,6 +66,9 @@ class BookingModal extends Component {
     }
 
     handleConfirmBooking = async () => {
+        let timeString = this.buildTimeBooking();
+        let doctorName = this.buildDoctorName();
+
         let res = await createBookAppointment({
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
@@ -76,6 +80,10 @@ class BookingModal extends Component {
             address: this.state.address,
             reason: this.state.reason,
             selectedGender: this.state.selectedGender,
+
+            language: this.props.language,
+            timeString: timeString,
+            doctorName: doctorName
         })
         if (res && res.errCode === 0) {
             toast.success('Booking a new appointment succeed!')
@@ -92,6 +100,37 @@ class BookingModal extends Component {
         } else {
             toast.error('Booking error!')
         }
+    }
+
+    buildDoctorName = () => {
+        let { language, dataTime } = this.props;
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let nameVi = `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
+            let nameEn = `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`;
+            let doctorName = language === LANGUAGES.VI ? nameVi : nameEn;
+
+            return `${doctorName}`; //truyền về BE 1 string
+        }
+        return '';
+    }
+
+    //viết hoa chữ cái đầu
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    buildTimeBooking = () => {
+        let { language, dataTime } = this.props;
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let dateVi = moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY'); //convert to date //convert ms -> s
+            let dateEn = moment.unix(+dataTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
+            let date = language === LANGUAGES.VI ? this.capitalizeFirstLetter(dateVi) : dateEn
+
+            let time = language === LANGUAGES.VI ? dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn
+
+            return `${time} - ${date}`;
+        }
+        return ''
     }
 
 
