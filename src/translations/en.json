@@ -35,7 +35,21 @@
             "price": "Examination price",
             "method-payment-title": "The clinic has payment in the form of",
             "hide-detail-price": "Hide price list",
-            "show-detail-price": "See details"
+            "show-detail-price": "See details",
+            "modal": {
+                "modal-header": "Information to schedule a medical appointment",
+                "who-check": "Book an examination for",
+                "patient-option": "Patient",
+                "fullname": "Full Name",
+                "gender": "Gender",
+                "email": "Email",
+                "phonenumber": "Phonenumber",
+                "address": "Address",
+                "reason": "Reason for examination",
+                "confirm": "Confirm",
+                "cancel": "Cancel"
+            },
+            "free-booking": "Free Booking"
         }
     },
     "system": {

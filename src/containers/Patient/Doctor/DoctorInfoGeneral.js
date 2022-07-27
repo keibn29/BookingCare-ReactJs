@@ -6,6 +6,8 @@ import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import { getDoctorInfoGeneral } from '../../../services/userService';
 import NumberFormat from 'react-number-format';
+import _ from 'lodash';
+import moment from 'moment';
 
 class DoctorInfoGeneral extends Component {
 
@@ -44,10 +46,36 @@ class DoctorInfoGeneral extends Component {
         return result;
     }
 
+    //viết hoa chữ cái đầu
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    renderTimeBooking = () => {
+        let { language, dataTime } = this.props;
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let dateVi = moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY'); //convert to date //convert ms -> s
+            let dateEn = moment.unix(+dataTime.date / 1000).locale('en').format('ddd - MM/DD/YYYY');
+            let date = language === LANGUAGES.VI ? this.capitalizeFirstLetter(dateVi) : dateEn
+
+            let time = language === LANGUAGES.VI ? dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn
+
+            return (
+                <>
+                    <div>
+                        {time} - {date}
+                    </div>
+                    <div><FormattedMessage id='patient.doctor.free-booking' /></div>
+                </>
+            )
+        }
+        return <></>
+    }
+
 
     render() {
         let { generalInfo } = this.state;
-        let { language, isShowDescription, dataTime } = this.props;
+        let { language, isShowDescription } = this.props;
         let nameVi = '', nameEn = '';
         if (generalInfo && generalInfo.positionData) {
             nameVi = `${generalInfo.positionData.valueVi}, ${generalInfo.lastName} ${generalInfo.firstName}`;
@@ -82,16 +110,14 @@ class DoctorInfoGeneral extends Component {
                                         </>
                                         :
                                         <>
-                                            {/* {
-                                                dataTime && dataTime
-                                            } */}
+                                            {this.renderTimeBooking()}
                                         </>
                                 }
                             </div>
                         </div>
                     </div>
                     <div className='price'>
-                        <span>Giá khám:</span>
+                        <span><FormattedMessage id='patient.doctor.price' />:</span>
                         {
                             generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.VI
                             &&

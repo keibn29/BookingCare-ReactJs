@@ -68,6 +68,10 @@ const getDoctorInfoGeneral = (doctorId) => {
     return axios.get(`/api/get-doctor-info-general?doctorId=${doctorId}`)
 }
 
+const createBookAppointment = (dataBooking) => {
+    return axios.post(`/api/patient-book-appointment`, dataBooking)
+}
+
 
 export {
     handleLoginApi,
@@ -85,5 +89,6 @@ export {
     bulkCreateSchedule,
     getScheduleByDate,
     getDoctorInfoExtra,
-    getDoctorInfoGeneral
+    getDoctorInfoGeneral,
+    createBookAppointment
 };
