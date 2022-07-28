@@ -72,6 +72,9 @@ const createBookAppointment = (dataBooking) => {
     return axios.post(`/api/patient-book-appointment`, dataBooking)
 }
 
+const verifyBookAppointment = (doctorId, token) => {
+    return axios.put(`/api/verify-book-appointment?doctorId=${doctorId}&token=${token}`)
+}
 
 export {
     handleLoginApi,
@@ -90,5 +93,6 @@ export {
     getScheduleByDate,
     getDoctorInfoExtra,
     getDoctorInfoGeneral,
-    createBookAppointment
+    createBookAppointment,
+    verifyBookAppointment
 };

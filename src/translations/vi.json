@@ -50,7 +50,10 @@
                 "cancel": "Quay lại"
             },
             "free-booking": "Miễn phí đặt lịch"
-        }
+        },
+        "loading": "Đang tải...",
+        "success": "Xác nhận lịch hẹn thành công!",
+        "failed": "Lịch hẹn đã được xác nhận hoặc không tồn tại!"
     },
     "system": {
         "admin": {

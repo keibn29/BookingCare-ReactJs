@@ -1,0 +1,36 @@
+.status-verify-container {
+    padding-top: 50px;
+
+    .status-verify-false {
+        margin-top: 10px;
+        font-size : 17px;
+    }
+
+    .status-verify-true {
+        display       : flex;
+        flex-direction: column;
+        text-align    : center;
+
+        .icon {
+            width              : 50px;
+            height             : 50px;
+            background-position: center;
+            background-repeat  : no-repeat;
+            background-size    : contain;
+            margin             : 0 auto;
+
+            &.icon-success {
+                background-image: url(../../../src/assets/success.svg);
+            }
+
+            &.icon-failed {
+                background-image: url(../../../src/assets/failed.svg);
+            }
+        }
+
+        .text {
+            margin-top: 10px;
+            font-size : 17px;
+        }
+    }
+}

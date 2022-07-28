@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import './DefaultClass.scss';
-import * as actions from '../../../store/actions';
-import { LANGUAGES } from '../../../utils';
+import * as actions from '../../store/actions';
+import { LANGUAGES } from '../../utils';
 
 class DefaultClass extends Component {
 

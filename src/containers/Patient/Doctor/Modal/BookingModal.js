@@ -105,8 +105,8 @@ class BookingModal extends Component {
     buildDoctorName = () => {
         let { language, dataTime } = this.props;
         if (dataTime && !_.isEmpty(dataTime)) {
-            let nameVi = `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
-            let nameEn = `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`;
+            let nameVi = `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`;
+            let nameEn = `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
             let doctorName = language === LANGUAGES.VI ? nameVi : nameEn;
 
             return `${doctorName}`; //truyền về BE 1 string
@@ -139,7 +139,7 @@ class BookingModal extends Component {
         let { allGender } = this.state;
         let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
 
-        console.log('check state: ', this.state)
+        console.log('check dataTime: ', this.dataTime)
 
         return (
             <>
