@@ -257,7 +257,7 @@ class ManageDoctor extends Component {
         console.log('check input state: ', this.state.nameClinic, this.state.addressClinic, this.state.note)
 
         return (
-            <div className='manage-doctor-container px-3'>
+            <div className='manage-doctor-container container px-3'>
                 <div className='manage-doctor-title title'><FormattedMessage id='system.admin.doctor-details' /></div>
                 <div className='doctor-general-info mt-2'>
                     <div className='content-left'>
@@ -350,7 +350,7 @@ class ManageDoctor extends Component {
                     />
                 </div>
                 <button
-                    className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning mt-2' : 'btn btn-primary mt-2'}
+                    className={this.state.action === CRUD_ACTIONS.EDIT ? 'btn btn-warning my-2' : 'btn btn-primary my-2'}
                     onClick={() => {
                         this.handleSaveDetailDoctor();
                     }}
