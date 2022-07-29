@@ -9,6 +9,8 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import { createSpecialty } from '../../../services/userService';
+import { toast } from 'react-toastify';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -22,7 +24,8 @@ class ManageSpecialty extends Component {
             previewImgURL: '',
             isOpenLightbox: false,
             image: '',
-            specialName: ''
+            nameVi: '',
+            nameEn: ''
         }
     }
 
@@ -34,9 +37,12 @@ class ManageSpecialty extends Component {
 
     }
 
-    handleOnChangeSpecialtyName = (event) => {
+    handleOnChangeSpecialtyName = (event, id) => {
+        //good code
+        let copyState = { ...this.state }
+        copyState[id] = event.target.value
         this.setState({
-            specialName: event.target.value
+            ...copyState
         })
     }
 
@@ -71,8 +77,29 @@ class ManageSpecialty extends Component {
         })
     }
 
-    handleSaveSpecialty = () => {
-        alert('click me?')
+    handleSaveSpecialty = async () => {
+        let res = await createSpecialty({
+            contentMarkdown: this.state.contentMarkdown,
+            contentHTML: this.state.contentHTML,
+            image: this.state.image,
+            nameVi: this.state.nameVi,
+            nameEn: this.state.nameEn
+        })
+        if (res && res.errCode === 0) {
+            toast.success('Add new specialty succeed!')
+            this.setState({
+                contentMarkdown: '',
+                contentHTML: '',
+                previewImgURL: '',
+                isOpenLightbox: false,
+                image: '',
+                nameVi: '',
+                nameEn: ''
+            })
+        } else {
+            toast.error('Add new specialty failed!')
+            console.log('check res failed: ', res)
+        }
     }
 
     render() {
@@ -83,16 +110,29 @@ class ManageSpecialty extends Component {
                 <div className='manage-specialty-container container'>
                     <div className='title'>Manage Specialty</div>
                     <div className='add-new-specialty row mt-2'>
-                        <div className='form-group col-6'>
-                            <label>Specialty Name</label>
-                            <input
-                                className='form-control'
-                                type='text'
-                                value={this.state.specialName}
-                                onChange={(event) => {
-                                    this.handleOnChangeSpecialtyName(event)
-                                }}
-                            />
+                        <div className='col-6'>
+                            <div className='form-group col-12'>
+                                <label>Specialty Vietnamese Name</label>
+                                <input
+                                    className='form-control'
+                                    type='text'
+                                    value={this.state.nameVi}
+                                    onChange={(event) => {
+                                        this.handleOnChangeSpecialtyName(event, 'nameVi')
+                                    }}
+                                />
+                            </div>
+                            <div className='form-group col-12'>
+                                <label>Specialty English Name</label>
+                                <input
+                                    className='form-control'
+                                    type='text'
+                                    value={this.state.nameEn}
+                                    onChange={(event) => {
+                                        this.handleOnChangeSpecialtyName(event, 'nameEn')
+                                    }}
+                                />
+                            </div>
                         </div>
                         <div className='form-group col-6'>
                             <label>Specialty Image</label>

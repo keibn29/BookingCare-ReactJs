@@ -19,11 +19,6 @@ class OutStandingDoctor extends Component {
         this.props.fetchTopDoctorsStart();
     }
 
-    changeLanguage = (language) => {
-        //fire redux event: actions
-        this.props.changeLanguageAppRedux(language)
-    }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
             this.setState({
@@ -39,7 +34,6 @@ class OutStandingDoctor extends Component {
     }
 
     render() {
-        console.log('kei check props doctors: ', this.props.topDoctorsRedux)
         let topDoctors = this.state.topDoctors;
         let { language } = this.props;
 

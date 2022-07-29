@@ -25,7 +25,8 @@
     },
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
-        "more": "Xem thêm"
+        "more": "Xem thêm",
+        "specialty-popular": "Chuyên khoa phổ biến"
     },
     "patient": {
         "doctor": {

@@ -5,10 +5,7 @@ import Slider from 'react-slick';
 
 class MedicalFacility extends Component {
 
-    changeLanguage = (language) => {
-        //fire redux event: actions
-        this.props.changeLanguageAppRedux(language)
-    }
+
 
     render() {
 
@@ -23,31 +20,31 @@ class MedicalFacility extends Component {
                         <Slider {...this.props.settings}>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                             <div className='section-custom'>
                                 <div className='bg-img section-medical-facility'></div>
-                                <div>Bệnh viện Hữu nghị Việt Đức</div>
+                                <div className='name'>Bệnh viện Hữu nghị Việt Đức</div>
                             </div>
                         </Slider>
                     </div>

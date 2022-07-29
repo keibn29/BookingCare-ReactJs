@@ -4,10 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 class About extends Component {
 
-    changeLanguage = (language) => {
-        //fire redux event: actions
-        this.props.changeLanguageAppRedux(language)
-    }
+
 
     render() {
 

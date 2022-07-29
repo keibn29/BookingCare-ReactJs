@@ -76,6 +76,14 @@ const verifyBookAppointment = (doctorId, token) => {
     return axios.put(`/api/verify-book-appointment?doctorId=${doctorId}&token=${token}`)
 }
 
+const createSpecialty = (specialtyData) => {
+    return axios.post(`/api/create-new-specialty`, specialtyData)
+}
+
+const getTopSpecialty = (limit) => {
+    return axios.get(`/api/top-specialty-homepage?limit=${limit}`)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -94,5 +102,7 @@ export {
     getDoctorInfoExtra,
     getDoctorInfoGeneral,
     createBookAppointment,
-    verifyBookAppointment
+    verifyBookAppointment,
+    createSpecialty,
+    getTopSpecialty
 };

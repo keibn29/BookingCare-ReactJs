@@ -5,10 +5,7 @@ import Slider from 'react-slick';
 
 class HandBook extends Component {
 
-    changeLanguage = (language) => {
-        //fire redux event: actions
-        this.props.changeLanguageAppRedux(language)
-    }
+
 
     render() {
         let settings = {

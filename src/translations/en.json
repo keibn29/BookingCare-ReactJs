@@ -25,7 +25,8 @@
     },
     "homepage": {
         "outstanding-doctor": "Last week's featured doctor",
-        "more": "More info"
+        "more": "More info",
+        "specialty-popular": "Popular specialties"
     },
     "patient": {
         "doctor": {

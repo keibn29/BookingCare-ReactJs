@@ -218,7 +218,7 @@ export const editUserFailed = () => ({
 export const fetchTopDoctorsStart = () => {
     return async (dispatch, getState) => {
         try {
-            let res = await GetTopDoctorsHomepageService(5);
+            let res = await GetTopDoctorsHomepageService(10);
             if (res && res.errCode === 0) {
                 dispatch(fetchTopDoctorsSuccess(res.users));
             } else {

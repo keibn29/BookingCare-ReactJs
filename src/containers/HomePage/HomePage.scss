@@ -1,7 +1,7 @@
 .slick-prev {
     // position        : relative !important;
     left      : -15px !important;
-    z-index   : 1000 !important;
+    z-index   : 100 !important;
     height    : 48px !important;
     width     : 44px !important;
     background: white !important;
@@ -20,7 +20,7 @@
 
 .slick-next {
     right     : -15px !important;
-    z-index   : 1000 !important;
+    z-index   : 100 !important;
     height    : 48px !important;
     width     : 44px !important;
     background: white !important;
@@ -85,9 +85,9 @@
         .section-custom {
 
             .bg-img {
-                &.section-specialty {
-                    background-image: url(../../assets/specialty/co-xuong-khop.jpg);
-                }
+                // &.section-specialty {
+                //     background-image: url(../../assets/specialty/co-xuong-khop.jpg);
+                // }
 
                 &.section-medical-facility {
                     background-image: url(../../assets/medical-facility/bv-viet-duc.jpg);
@@ -185,7 +185,7 @@
                 .bg-img {
                     width              : 278px;
                     height             : 150px;
-                    background-position: center center;
+                    background-position: center;
                     background-size    : cover;
                     background-repeat  : no-repeat;
                     background-color   : #eee;
@@ -193,6 +193,11 @@
 
                 &:hover {
                     color: #49bce2;
+                }
+
+                .name {
+                    margin-top: 10px;
+                    font-size : 15px;
                 }
             }
         }
