@@ -14,7 +14,8 @@ const initialState = {
     allPrice: [],
     allProvince: [],
     allPayment: [],
-    arrDoctorInfoExtra: []
+    arrDoctorInfoExtra: [],
+    allSpecialty: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -117,7 +118,7 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
 
-        //All-Doctors--doctor-manage
+        //fetch-all-doctors
         case actionTypes.FETCH_ALL_DOCTORS_SUCCESS:
             state.allDoctors = action.data;
 
@@ -247,6 +248,21 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_DOCTOR_INFO_EXTRA_FAILED:
             state.arrDoctorInfoExtra = [];
+
+            return {
+                ...state
+            }
+
+        //fetch-all-specialty
+        case actionTypes.FETCH_ALL_SPECIALTY_SUCCESS:
+            state.allSpecialty = action.data;
+
+            return {
+                ...state
+            }
+
+        case actionTypes.FETCH_ALL_SPECIALTY_FAILED:
+            state.allSpecialty = [];
 
             return {
                 ...state

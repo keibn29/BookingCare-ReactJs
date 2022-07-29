@@ -6,7 +6,7 @@ import {
     createDoctorInfoService, getDoctorInfoService,
     getMarkdownService, editDoctorInfoService,
     bulkCreateSchedule, getScheduleByDate,
-    getDoctorInfoExtra
+    getDoctorInfoExtra, getAllSpecialty
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -543,4 +543,32 @@ export const fetchDoctorInfoExtraSuccess = (infoExtra) => ({
 
 export const fetchDoctorInfoExtraFailed = () => ({
     type: actionTypes.FETCH_DOCTOR_INFO_EXTRA_FAILED
+})
+
+//fetch-all-specialty
+export const fetchAllSpecialtyStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllSpecialty();
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllSpecialtySuccess(res.allSpecialty));
+            } else {
+                dispatch(fetchAllSpecialtyFailed());
+                toast.error('fetch All Specialty failed!');
+            }
+        } catch (e) {
+            dispatch(fetchAllSpecialtyFailed());
+            toast.error('fetch All Specialty failed!');
+            console.log('fetch All Specialty Error: ', e)
+        }
+    }
+}
+
+export const fetchAllSpecialtySuccess = (allSpecialty) => ({
+    type: actionTypes.FETCH_ALL_SPECIALTY_SUCCESS,
+    data: allSpecialty
+})
+
+export const fetchAllSpecialtyFailed = () => ({
+    type: actionTypes.FETCH_ALL_SPECIALTY_FAILED
 })

@@ -84,6 +84,14 @@ const getTopSpecialty = (limit) => {
     return axios.get(`/api/top-specialty-homepage?limit=${limit}`)
 }
 
+const getAllSpecialty = () => {
+    return axios.get(`/api/get-all-specialty`)
+}
+
+const editSpecialty = (specialtyData) => {
+    return axios.put(`/api/edit-special`, specialtyData)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -104,5 +112,7 @@ export {
     createBookAppointment,
     verifyBookAppointment,
     createSpecialty,
-    getTopSpecialty
+    getTopSpecialty,
+    getAllSpecialty,
+    editSpecialty
 };
