@@ -6,7 +6,8 @@ import {
     createDoctorInfoService, getDoctorInfoService,
     getMarkdownService, editDoctorInfoService,
     bulkCreateSchedule, getScheduleByDate,
-    getDoctorInfoExtra, getAllSpecialty
+    getDoctorInfoExtra, getAllSpecialty,
+    getAllClinic
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -571,4 +572,32 @@ export const fetchAllSpecialtySuccess = (allSpecialty) => ({
 
 export const fetchAllSpecialtyFailed = () => ({
     type: actionTypes.FETCH_ALL_SPECIALTY_FAILED
+})
+
+//fetch-all-clinic
+export const fetchAllClinicStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllClinic();
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllClinicSuccess(res.allClinic));
+            } else {
+                dispatch(fetchAllClinicFailed());
+                toast.error('fetch All Clinic failed!');
+            }
+        } catch (e) {
+            dispatch(fetchAllClinicFailed());
+            toast.error('fetch All Clinic failed!');
+            console.log('fetch All Clinic Error: ', e)
+        }
+    }
+}
+
+export const fetchAllClinicSuccess = (allClinic) => ({
+    type: actionTypes.FETCH_ALL_CLINIC_SUCCESS,
+    data: allClinic
+})
+
+export const fetchAllClinicFailed = () => ({
+    type: actionTypes.FETCH_ALL_CLINIC_FAILED
 })

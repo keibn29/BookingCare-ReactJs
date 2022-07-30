@@ -51,10 +51,25 @@ class DoctorInfoExtra extends Component {
                     <div className='content-up'>
                         <div className='content-up-title'><FormattedMessage id='patient.doctor.address-clinic' /></div>
                         <div>
-                            {arrDoctorInfoExtra && arrDoctorInfoExtra.nameClinic ? arrDoctorInfoExtra.nameClinic : ''}
+                            {
+                                arrDoctorInfoExtra && arrDoctorInfoExtra.clinicData && language === LANGUAGES.VI
+                                &&
+                                arrDoctorInfoExtra.clinicData.nameVi
+                            }
+                            {
+                                arrDoctorInfoExtra && arrDoctorInfoExtra.clinicData && language === LANGUAGES.EN
+                                &&
+                                arrDoctorInfoExtra.clinicData.nameEn
+                            }
                         </div>
                         <div>
-                            {arrDoctorInfoExtra && arrDoctorInfoExtra.addressClinic ? arrDoctorInfoExtra.addressClinic : ''}
+                            {
+                                arrDoctorInfoExtra && arrDoctorInfoExtra.clinicData && arrDoctorInfoExtra.clinicData.address
+                                    ?
+                                    arrDoctorInfoExtra.clinicData.address
+                                    :
+                                    ''
+                            }
                         </div>
                     </div>
                     <div className='content-down'>

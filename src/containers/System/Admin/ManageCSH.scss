@@ -1,6 +1,6 @@
-.manage-specialty-container {
+.manage-CSH-container {
 
-    .add-new-specialty {
+    .add-new-CSH {
 
         .upload-image-container {
             display        : flex;
@@ -33,33 +33,33 @@
         }
     }
 
-    .all-specialty {
+    .all-CSH {
 
-        .list-specialty-title {
+        .list-CSH-title {
             font-size: 17px;
         }
 
-        #table-manage-specialty {
+        #table-manage-CSH {
             font-family    : Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width          : 100%;
         }
 
-        #table-manage-specialty td,
-        #table-manage-specialty th {
+        #table-manage-CSH td,
+        #table-manage-CSH th {
             border : 1px solid #ddd;
             padding: 8px;
         }
 
-        #table-manage-specialty tr:nth-child(even) {
+        #table-manage-CSH tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #table-manage-specialty tr:hover {
+        #table-manage-CSH tr:hover {
             background-color: #ddd;
         }
 
-        #table-manage-specialty th {
+        #table-manage-CSH th {
             padding-top     : 12px;
             padding-bottom  : 12px;
             text-align      : left;

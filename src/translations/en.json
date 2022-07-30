@@ -50,7 +50,9 @@
                 "confirm": "Confirm",
                 "cancel": "Cancel"
             },
-            "free-booking": "Free Booking"
+            "free-booking": "Free Booking",
+            "choose": "Choose",
+            "and-book-free": "and book (free)"
         },
         "loading": "Loading...",
         "success": "Appointment confirmed successfully!",

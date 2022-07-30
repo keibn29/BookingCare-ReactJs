@@ -92,6 +92,10 @@ const editSpecialty = (specialtyData) => {
     return axios.put(`/api/edit-special`, specialtyData)
 }
 
+const getAllClinic = () => {
+    return axios.get(`/api/get-all-clinic`)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -114,5 +118,6 @@ export {
     createSpecialty,
     getTopSpecialty,
     getAllSpecialty,
-    editSpecialty
+    editSpecialty,
+    getAllClinic
 };

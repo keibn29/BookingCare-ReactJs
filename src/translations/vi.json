@@ -50,7 +50,9 @@
                 "confirm": "Xác nhận",
                 "cancel": "Quay lại"
             },
-            "free-booking": "Miễn phí đặt lịch"
+            "free-booking": "Miễn phí đặt lịch",
+            "choose": "Chọn",
+            "and-book-free": "và đặt lịch (miễn phí)"
         },
         "loading": "Đang tải...",
         "success": "Xác nhận lịch hẹn thành công!",

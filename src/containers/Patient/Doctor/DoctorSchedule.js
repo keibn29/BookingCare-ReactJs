@@ -171,7 +171,7 @@ class DoctorSchedule extends Component {
                                             }
                                         </div>
                                         <div className='book-free'>
-                                            <span>Chọn <i className='far fa-hand-point-up'></i> và đặt lịch (miễn phí)</span>
+                                            <span><FormattedMessage id='patient.doctor.choose' /> <i className='far fa-hand-point-up'></i> <FormattedMessage id='patient.doctor.and-book-free' /></span>
                                         </div>
                                     </>
                                     :
