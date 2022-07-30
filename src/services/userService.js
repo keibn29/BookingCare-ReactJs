@@ -92,8 +92,20 @@ const editSpecialty = (specialtyData) => {
     return axios.put(`/api/edit-special`, specialtyData)
 }
 
-const getAllClinic = () => {
-    return axios.get(`/api/get-all-clinic`)
+const getAllClinic = (limit) => {
+    return axios.get(`/api/get-all-clinic?limit=${limit}`)
+}
+
+const createClinic = (clinicData) => {
+    return axios.post(`/api/create-new-clinic`, clinicData)
+}
+
+const editClinic = (clinicData) => {
+    return axios.put(`/api/edit-clinic`, clinicData)
+}
+
+const getTopClinicHomepage = (limit) => {
+    return axios.get(`/api/top-clinic-homepage?limit=${limit}`)
 }
 
 export {
@@ -119,5 +131,8 @@ export {
     getTopSpecialty,
     getAllSpecialty,
     editSpecialty,
-    getAllClinic
+    getAllClinic,
+    createClinic,
+    editClinic,
+    getTopClinicHomepage
 };

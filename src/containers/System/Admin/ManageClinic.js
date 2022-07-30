@@ -10,6 +10,7 @@ import 'react-markdown-editor-lite/lib/index.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { toast } from 'react-toastify';
+import { createClinic, editClinic } from '../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -40,7 +41,14 @@ class ManageClinic extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allClinicRedux !== this.props.allClinicRedux) {
             this.setState({
-                allClinic: this.props.allClinicRedux
+                allClinic: this.props.allClinicRedux,
+                contentMarkdown: '',
+                previewImgURL: '',
+                image: '',
+                nameVi: '',
+                nameEn: '',
+                address: '',
+                action: CRUD_ACTIONS.CREATE
             })
         }
     }
@@ -87,14 +95,55 @@ class ManageClinic extends Component {
 
     handleSaveClinic = async () => {
         let { action } = this.state;
+        if (action === CRUD_ACTIONS.CREATE) {
+            let res = await createClinic({
+                contentMarkdown: this.state.contentMarkdown,
+                contentHTML: this.state.contentHTML,
+                image: this.state.image,
+                nameVi: this.state.nameVi,
+                nameEn: this.state.nameEn,
+                address: this.state.address
+            })
+            if (res && res.errCode === 0) {
+                toast.success('Add new clinic succeed!')
+                await this.props.fetchAllClinicStart();
+            } else {
+                toast.error('Add new clinic failed!')
+                console.log('check res failed: ', res)
+            }
+        }
+        if (action === CRUD_ACTIONS.EDIT) {
+            let res = await editClinic({
+                clinicId: this.state.clinicEditId,
+                contentMarkdown: this.state.contentMarkdown,
+                contentHTML: this.state.contentHTML,
+                image: this.state.image,
+                nameVi: this.state.nameVi,
+                nameEn: this.state.nameEn,
+                address: this.state.address
+            })
+            if (res && res.errCode === 0) {
+                toast.success('Edit clinic succeed!')
+                await this.props.fetchAllClinicStart();
+            } else {
+                toast.error('Edit clinic failed!')
+                console.log('check res failed: ', res)
+            }
+        }
     }
 
     handleEditClinic = (clinic) => {
-        console.log('check clinicData: ', clinic)
-        alert('click me?')
 
         this.setState({
-
+            nameVi: clinic.nameVi,
+            nameEn: clinic.nameEn,
+            address: clinic.address,
+            contentMarkdown: clinic.descriptionMarkdown,
+            contentHTML: clinic.descriptionHTML,
+            image: '',
+            previewImgURL: clinic.image,
+            action: CRUD_ACTIONS.EDIT,
+            clinicEditId: clinic.id
         })
     }
 

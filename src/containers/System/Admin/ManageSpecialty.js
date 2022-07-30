@@ -135,7 +135,6 @@ class ManageSpecialty extends Component {
         // if (data) {
         //     base64 = await CommonUtils.getBase64(data);
         // }
-        console.log('check specialtyData: ', specialty)
 
         this.setState({
             nameVi: specialty.nameVi,
