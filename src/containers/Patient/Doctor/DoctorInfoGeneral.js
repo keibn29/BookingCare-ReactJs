@@ -116,29 +116,35 @@ class DoctorInfoGeneral extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='price'>
-                        <span><FormattedMessage id='patient.doctor.price' />:</span>
-                        {
-                            generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.VI
-                            &&
-                            <NumberFormat
-                                value={generalInfo.Doctor.priceData.valueVi}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                suffix={'đ'}
-                            />
-                        }
-                        {
-                            generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.EN
-                            &&
-                            <NumberFormat
-                                value={generalInfo.Doctor.priceData.valueEn}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                suffix={'$'}
-                            />
-                        }
-                    </div>
+                    {
+                        isShowDescription === true
+                            ?
+                            <></>
+                            :
+                            <div className='price'>
+                                <span><FormattedMessage id='patient.doctor.price' />:</span>
+                                {
+                                    generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.VI
+                                    &&
+                                    <NumberFormat
+                                        value={generalInfo.Doctor.priceData.valueVi}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        suffix={'đ'}
+                                    />
+                                }
+                                {
+                                    generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.EN
+                                    &&
+                                    <NumberFormat
+                                        value={generalInfo.Doctor.priceData.valueEn}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        suffix={'$'}
+                                    />
+                                }
+                            </div>
+                    }
                 </div>
             </>
         );

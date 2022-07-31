@@ -54,7 +54,11 @@ class ManageDoctor extends Component {
                     obj.label = language === LANGUAGES.VI ? `${item.lastName} ${item.firstName}` : `${item.firstName} ${item.lastName}`;
                     obj.value = item.id;
                 }
-                if (type === 'ALLCODES') {
+                if (type === 'PRICE') {
+                    obj.label = language === LANGUAGES.VI ? `${item.valueVi}đ` : `${item.valueEn}$`;
+                    obj.value = item.keyMap;
+                }
+                if (type === 'PROVINCE' || type === 'PAYMENT') {
                     obj.label = language === LANGUAGES.VI ? item.valueVi : item.valueEn;
                     obj.value = item.keyMap;
                 }
@@ -63,12 +67,6 @@ class ManageDoctor extends Component {
                     obj.value = item.id;
                 }
                 result.push(obj);
-                // let labelVi = type === 'USERS' ? `${item.lastName} ${item.firstName}` : item.valueVi;
-                // let labelEn = type === 'USERS' ? `${item.firstName} ${item.lastName} ` : item.valueEn;
-
-                // obj.label = language === LANGUAGES.VI ? labelVi : labelEn;
-                // obj.value = type === 'USERS' ? item.id : item.keyMap;
-                // result.push(obj);
             })
         }
         return result;
@@ -94,24 +92,34 @@ class ManageDoctor extends Component {
         }
         if (prevProps.language !== this.props.language) {
             let dataSelectDoctor = this.buildDataInputSelect(this.props.AllDoctorsRedux, 'USERS');
+            let dataSelectPrice = this.buildDataInputSelect(this.props.allPriceRedux, 'PRICE');
+            let dataSelectProvince = this.buildDataInputSelect(this.props.allProvinceRedux, 'PROVINCE');
+            let dataSelectPayment = this.buildDataInputSelect(this.props.allPaymentRedux, 'PAYMENT');
+            let dataSelectClinic = this.buildDataInputSelect(this.props.allClinicRedux, 'CLINIC');
+            let dataSelectSpecialty = this.buildDataInputSelect(this.props.allSpecialtyRedux, 'SPECIALTY');
             this.setState({
-                allDoctors: dataSelectDoctor
+                allDoctors: dataSelectDoctor,
+                allPrice: dataSelectPrice,
+                allProvince: dataSelectProvince,
+                allPayment: dataSelectPayment,
+                allClinic: dataSelectClinic,
+                allSpecialty: dataSelectSpecialty
             })
         }
         if (prevProps.allPriceRedux !== this.props.allPriceRedux) {
-            let dataSelectPrice = this.buildDataInputSelect(this.props.allPriceRedux, 'ALLCODES');
+            let dataSelectPrice = this.buildDataInputSelect(this.props.allPriceRedux, 'PRICE');
             this.setState({
                 allPrice: dataSelectPrice
             })
         }
         if (prevProps.allProvinceRedux !== this.props.allProvinceRedux) {
-            let dataSelectProvince = this.buildDataInputSelect(this.props.allProvinceRedux, 'ALLCODES');
+            let dataSelectProvince = this.buildDataInputSelect(this.props.allProvinceRedux, 'PROVINCE');
             this.setState({
                 allProvince: dataSelectProvince
             })
         }
         if (prevProps.allPaymentRedux !== this.props.allPaymentRedux) {
-            let dataSelectPayment = this.buildDataInputSelect(this.props.allPaymentRedux, 'ALLCODES');
+            let dataSelectPayment = this.buildDataInputSelect(this.props.allPaymentRedux, 'PAYMENT');
             this.setState({
                 allPayment: dataSelectPayment
             })

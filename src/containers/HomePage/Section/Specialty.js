@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import { getTopSpecialty } from '../../../services/userService';
 import { LANGUAGES } from '../../../utils';
+import { withRouter } from 'react-router';
 
 class Specialty extends Component {
 
@@ -27,6 +28,12 @@ class Specialty extends Component {
         }
     }
 
+    handleViewDetailSpecialty = (specialty) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-specialty/${specialty.id}`)
+        }
+    }
+
     render() {
         let { topSpecialty } = this.state;
         let { language } = this.props;
@@ -47,6 +54,9 @@ class Specialty extends Component {
                                         <div
                                             className='section-custom'
                                             key={index}
+                                            onClick={() => {
+                                                this.handleViewDetailSpecialty(item)
+                                            }}
                                         >
                                             <div
                                                 className='bg-img section-specialty'
@@ -82,4 +92,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Specialty));

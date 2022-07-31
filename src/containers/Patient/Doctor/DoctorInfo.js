@@ -13,7 +13,7 @@ class DoctorInfo extends Component {
         super(props);
         this.state = {
             arrdoctorInfo: [],
-            currentDoctorId: -1
+            currentDoctorId: ''
         }
     }
 

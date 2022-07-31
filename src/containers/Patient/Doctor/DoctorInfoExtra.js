@@ -16,7 +16,14 @@ class DoctorInfoExtra extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        let { doctorId } = this.props;
+        if (doctorId) {
+            this.props.fetchDoctorInfoExtraStart(doctorId)
+            this.setState({
+                arrDoctorInfoExtra: this.props.arrDoctorInfoExtraRedux
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -27,9 +34,12 @@ class DoctorInfoExtra extends Component {
         }
         if (prevProps.doctorId !== this.props.doctorId) {
             let { doctorId } = this.props;
-            this.setState({
-                arrDoctorInfoExtra: this.props.fetchDoctorInfoExtraStart(doctorId)
-            })
+            if (doctorId) {
+                this.props.fetchDoctorInfoExtraStart(doctorId)
+                this.setState({
+                    arrDoctorInfoExtra: this.props.arrDoctorInfoExtraRedux
+                })
+            }
         }
     }
 
@@ -44,7 +54,6 @@ class DoctorInfoExtra extends Component {
         let { language } = this.props;
         let { isShowDetailPrice, arrDoctorInfoExtra } = this.state;
 
-        console.log('check arrDoctorInfoExtra: ', arrDoctorInfoExtra)
         return (
             <>
                 <div className='doctor-info-extra-container'>

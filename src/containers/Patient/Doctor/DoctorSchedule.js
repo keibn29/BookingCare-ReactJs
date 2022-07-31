@@ -26,7 +26,13 @@ class DoctorSchedule extends Component {
         this.setState({
             allDays: dataSelect
         })
-
+        let { doctorId } = this.props;
+        if (doctorId) {
+            this.props.fetchDoctorScheduleStart(doctorId, dataSelect[0].value)
+            this.setState({
+                arrDoctorSchedule: this.props.arrDoctorScheduleRedux
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -40,9 +46,13 @@ class DoctorSchedule extends Component {
         //dữ liệu lấy từ component cha (DoctorInfo)
         if (prevProps.doctorId !== this.props.doctorId) {
             let dataSelect = this.buildDataInputSelect();
-            this.setState({
-                arrDoctorSchedule: this.props.fetchDoctorScheduleStart(this.props.doctorId, dataSelect[0].value)
-            })
+            let { doctorId } = this.props;
+            if (doctorId) {
+                this.props.fetchDoctorScheduleStart(doctorId, dataSelect[0].value)
+                this.setState({
+                    arrDoctorSchedule: this.props.arrDoctorScheduleRedux
+                })
+            }
         }
         if (prevProps.arrDoctorScheduleRedux !== this.props.arrDoctorScheduleRedux) {
             this.setState({
@@ -116,7 +126,6 @@ class DoctorSchedule extends Component {
     render() {
         let { language } = this.props;
         let { allDays, arrDoctorSchedule } = this.state;
-        // console.log('check arrDoctorSchedule: ', arrDoctorSchedule)
 
         return (
             <>

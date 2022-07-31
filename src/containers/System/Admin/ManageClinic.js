@@ -106,7 +106,7 @@ class ManageClinic extends Component {
             })
             if (res && res.errCode === 0) {
                 toast.success('Add new clinic succeed!')
-                await this.props.fetchAllClinicStart();
+                this.props.fetchAllClinicStart();
             } else {
                 toast.error('Add new clinic failed!')
                 console.log('check res failed: ', res)
@@ -124,7 +124,7 @@ class ManageClinic extends Component {
             })
             if (res && res.errCode === 0) {
                 toast.success('Edit clinic succeed!')
-                await this.props.fetchAllClinicStart();
+                this.props.fetchAllClinicStart();
             } else {
                 toast.error('Edit clinic failed!')
                 console.log('check res failed: ', res)

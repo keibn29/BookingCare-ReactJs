@@ -103,7 +103,7 @@ class ManageSpecialty extends Component {
             })
             if (res && res.errCode === 0) {
                 toast.success('Add new specialty succeed!')
-                await this.props.fetchAllSpecialtyStart();
+                this.props.fetchAllSpecialtyStart();
             } else {
                 toast.error('Add new specialty failed!')
                 console.log('check res failed: ', res)
@@ -120,7 +120,7 @@ class ManageSpecialty extends Component {
             })
             if (res && res.errCode === 0) {
                 toast.success('Edit specialty succeed!')
-                await this.props.fetchAllSpecialtyStart();
+                this.props.fetchAllSpecialtyStart();
             } else {
                 toast.error('Edit specialty failed!')
                 console.log('check res failed: ', res)

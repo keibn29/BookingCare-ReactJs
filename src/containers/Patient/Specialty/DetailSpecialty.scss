@@ -1,0 +1,35 @@
+.detail-specialty-container {
+    background-color: #EEEEEE;
+
+    .specialty-description {
+        height          : 300px;
+        border          : 1px solid red;
+        background-color: #fff;
+    }
+
+    .list-doctor {
+
+        .each-doctor {
+            display         : flex;
+            margin          : 15px 0;
+            background-color: #fff;
+            box-shadow      : 0 1px 6px #20212447;
+            border-radius   : 8px;
+
+            .doctor-content-left {
+                width     : 50%;
+                // padding: 15px 20px 15px 15px;
+
+                .profile-doctor-container {
+                    border-right: 1px solid #ddd !important;
+                    padding     : 15px 20px 15px 15px !important;
+
+                }
+            }
+
+            .doctor-content-right {
+                width: 50%;
+            }
+        }
+    }
+}

@@ -9,7 +9,6 @@ import DoctorInfoGeneral from '../DoctorInfoGeneral';
 import _ from 'lodash';
 import { createBookAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
-import CustomScrollbars from '../../../../components/CustomScrollbars';
 import moment, { lang } from 'moment';
 
 class BookingModal extends Component {
