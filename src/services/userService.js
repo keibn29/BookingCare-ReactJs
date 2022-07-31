@@ -108,6 +108,10 @@ const getTopClinicHomepage = (limit) => {
     return axios.get(`/api/top-clinic-homepage?limit=${limit}`)
 }
 
+const getSpecialtyById = (specialtyId, location) => {
+    return axios.get(`/api/get-detail-specialty-by-id?specialtyId=${specialtyId}&location=${location}`)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -134,5 +138,6 @@ export {
     getAllClinic,
     createClinic,
     editClinic,
-    getTopClinicHomepage
+    getTopClinicHomepage,
+    getSpecialtyById
 };

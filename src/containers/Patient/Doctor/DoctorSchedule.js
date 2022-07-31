@@ -27,6 +27,7 @@ class DoctorSchedule extends Component {
             allDays: dataSelect
         })
         let { doctorId } = this.props;
+        console.log('doctorId: ', doctorId)
         if (doctorId) {
             this.props.fetchDoctorScheduleStart(doctorId, dataSelect[0].value)
             this.setState({
@@ -126,6 +127,8 @@ class DoctorSchedule extends Component {
     render() {
         let { language } = this.props;
         let { allDays, arrDoctorSchedule } = this.state;
+
+        console.log('check arrDoctorSchedule: ', arrDoctorSchedule)
 
         return (
             <>

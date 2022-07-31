@@ -8,6 +8,8 @@ import HomeHeader from '../../HomePage/HomeHeader';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorInfoExtra from '../Doctor/DoctorInfoExtra';
 import DoctorInfoGeneral from '../Doctor/DoctorInfoGeneral';
+import { getSpecialtyById } from '../../../services/userService';
+import { toast } from 'react-toastify';
 
 class DetailSpecialty extends Component {
 
@@ -15,23 +17,42 @@ class DetailSpecialty extends Component {
         super(props);
         this.state = {
             detailSpecialty: [],
-            arrDoctorId: [10]
+            allProvince: [],
+            // arrDoctorId: []
         }
     }
 
-    componentDidMount() {
-        // if (this.props.match && this.props.match.params && this.props.match.params.id) {
-        //     let specialtyId = this.props.match.params.id
-        //     this.props.fetchDoctorInfoStart(specialtyId);
-        // }
+    async componentDidMount() {
+        this.props.fetchProvinceStart();
+        await this.fetchDatailSpecialty();
+    }
+
+    fetchDatailSpecialty = async () => {
+        if (this.props.match && this.props.match.params && this.props.match.params.id) {
+            let specialtyId = this.props.match.params.id
+            let res = await getSpecialtyById(specialtyId, 'ALL')
+            if (res && res.errCode === 0) {
+                this.setState({
+                    detailSpecialty: res.specialty
+                })
+            } else {
+                toast.error('fetch specialty error!')
+            }
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        if (prevProps.allProvinceRedux !== this.props.allProvinceRedux) {
+            this.setState({
+                allProvince: this.props.allProvinceRedux
+            })
+        }
     }
 
     render() {
-        let { arrDoctorId } = this.state;
+        let { detailSpecialty, allProvince } = this.state;
+        let { language } = this.props;
+        console.log('check allProvince: ', allProvince)
 
         return (
             <>
@@ -39,39 +60,68 @@ class DetailSpecialty extends Component {
                     <HomeHeader
                         isShowBanner={false}
                     />
-                    <div className='detail-specialty-body container'>
-                        <div className='specialty-description row'>
-
+                    <div className='detail-specialty-body'>
+                        <div className='specialty-content-top'>
+                            <div className='specialty-description container'>
+                                <div className='row'>
+                                    {
+                                        detailSpecialty && detailSpecialty.descriptionHTML &&
+                                        <div dangerouslySetInnerHTML={{ __html: detailSpecialty.descriptionHTML }}></div>
+                                    }
+                                </div>
+                            </div>
                         </div>
-                        <div className='list-doctor row'>
-                            {
-                                arrDoctorId && arrDoctorId.length > 0 && arrDoctorId.map((item, index) => {
-                                    return (
-                                        <div className='each-doctor' key={index}>
-                                            <div className='doctor-content-left'>
-                                                <div className='doctor-info'>
-                                                    <DoctorInfoGeneral
-                                                        doctorId={item}
-                                                        isShowDescription={true}
-                                                    />
+                        <div className='specialty-content-bottom container'>
+                            <div className='location row'>
+                                <select
+                                    className='form-control col-1'
+                                    value={allProvince}
+                                >
+                                    {
+                                        allProvince && allProvince.length > 0 && allProvince.map((item, index) => {
+                                            return (
+                                                <option
+                                                    key={index}
+                                                    value={item.keyMap}
+                                                >
+                                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div className='list-doctor row'>
+                                {
+                                    detailSpecialty && detailSpecialty.specialtyData && detailSpecialty.specialtyData.length > 0
+                                    && detailSpecialty.specialtyData.map((item, index) => {
+                                        return (
+                                            <div className='each-doctor' key={index}>
+                                                <div className='doctor-content-left'>
+                                                    <div className='doctor-info'>
+                                                        <DoctorInfoGeneral
+                                                            doctorId={item.doctorId}
+                                                            isShowDescription={true}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className='doctor-content-right'>
+                                                    <div className='doctor-schedule'>
+                                                        <DoctorSchedule
+                                                            doctorId={item.doctorId}
+                                                        />
+                                                    </div>
+                                                    <div className='doctor-info-extra'>
+                                                        <DoctorInfoExtra
+                                                            doctorId={item.doctorId}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className='doctor-content-right'>
-                                                <div className='doctor-schedule'>
-                                                    <DoctorSchedule
-                                                        doctorId={item}
-                                                    />
-                                                </div>
-                                                <div className='doctor-info-extra'>
-                                                    <DoctorInfoExtra
-                                                        doctorId={item}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,11 +133,13 @@ class DetailSpecialty extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
+        allProvinceRedux: state.admin.allProvince
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchProvinceStart: () => dispatch(actions.fetchProvinceStart())
     };
 };
 

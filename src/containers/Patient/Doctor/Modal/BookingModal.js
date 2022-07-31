@@ -44,7 +44,6 @@ class BookingModal extends Component {
         }
         if (prevProps.dataTime !== this.props.dataTime) {
             let { dataTime } = this.props;
-            console.log('check dataTime: ', dataTime)
             if (dataTime && !_.isEmpty(dataTime)) {
                 this.setState({
                     doctorId: dataTime.doctorId,
@@ -138,7 +137,6 @@ class BookingModal extends Component {
         let { allGender } = this.state;
         let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
 
-        console.log('check dataTime: ', this.dataTime)
 
         return (
             <>
