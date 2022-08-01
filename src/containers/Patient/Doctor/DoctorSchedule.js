@@ -7,6 +7,8 @@ import { LANGUAGES } from '../../../utils';
 import moment from 'moment';
 import localization from 'moment/locale/vi' //sử dụng moment tiếng việt 
 import BookingModal from './Modal/BookingModal';
+import { getScheduleByDate } from '../../../services/userService';
+import { toast } from 'react-toastify';
 
 class DoctorSchedule extends Component {
 
@@ -20,7 +22,7 @@ class DoctorSchedule extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let dataSelect = this.buildDataInputSelect();
         //dữ liệu tạo ra ngay trong component setState ở DidMount
         this.setState({
@@ -29,14 +31,14 @@ class DoctorSchedule extends Component {
         let { doctorId } = this.props;
         console.log('doctorId: ', doctorId)
         if (doctorId) {
-            this.props.fetchDoctorScheduleStart(doctorId, dataSelect[0].value)
+            let res = await getScheduleByDate(doctorId, dataSelect[0].value)
             this.setState({
-                arrDoctorSchedule: this.props.arrDoctorScheduleRedux
+                arrDoctorSchedule: res && res.errCode === 0 ? res.schedule : []
             })
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
         //dữ liệu lấy từ Redux setState ở DidUpdate (language)
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect();
@@ -49,16 +51,11 @@ class DoctorSchedule extends Component {
             let dataSelect = this.buildDataInputSelect();
             let { doctorId } = this.props;
             if (doctorId) {
-                this.props.fetchDoctorScheduleStart(doctorId, dataSelect[0].value)
+                let res = await getScheduleByDate(doctorId, dataSelect[0].value)
                 this.setState({
-                    arrDoctorSchedule: this.props.arrDoctorScheduleRedux
+                    arrDoctorSchedule: res && res.errCode === 0 ? res.schedule : []
                 })
             }
-        }
-        if (prevProps.arrDoctorScheduleRedux !== this.props.arrDoctorScheduleRedux) {
-            this.setState({
-                arrDoctorSchedule: this.props.arrDoctorScheduleRedux
-            })
         }
     }
 
@@ -90,25 +87,18 @@ class DoctorSchedule extends Component {
 
     handleOnChangeDate = async (event) => {
         //api
-        if (this.props.doctorId && this.props.doctorId !== -1) {
+        if (this.props.doctorId) {
             let doctorId = this.props.doctorId
             let date = event.target.value
-            this.props.fetchDoctorScheduleStart(doctorId, date)
+            let res = await getScheduleByDate(doctorId, date)
+            if (res && res.errCode === 0) {
+                this.setState({
+                    arrDoctorSchedule: res.schedule
+                })
+            } else {
+                toast.error('fetch schedule failed!')
+            }
         }
-
-        //setState
-        // let { arrDoctorSchedule } = this.state;
-        // if (arrDoctorSchedule && arrDoctorSchedule.length > 0) {
-        //     arrDoctorSchedule = arrDoctorSchedule.map((item) => {
-        //         if (item.id === this.props.doctorId && item.date === event.target.value) {
-        //             item.id = !item.isSelected;
-        //         }
-        //         return item
-        //     })
-        //     this.setState({
-        //         arrDoctorSchedule: arrDoctorSchedule
-        //     })
-        // }
     }
 
     toggleBookingModal = () => {
@@ -209,13 +199,11 @@ class DoctorSchedule extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        arrDoctorScheduleRedux: state.admin.arrDoctorSchedule
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchDoctorScheduleStart: (doctorId, date) => dispatch(actions.fetchDoctorScheduleStart(doctorId, date))
     };
 };
 
