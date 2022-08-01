@@ -8,6 +8,7 @@ import { getDoctorInfoGeneral } from '../../../services/userService';
 import NumberFormat from 'react-number-format';
 import _ from 'lodash';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 class DoctorInfoGeneral extends Component {
 
@@ -75,7 +76,7 @@ class DoctorInfoGeneral extends Component {
 
     render() {
         let { generalInfo } = this.state;
-        let { language, isShowDescription } = this.props;
+        let { language, isShowDescription, doctorId } = this.props;
         let nameVi = '', nameEn = '';
         if (generalInfo && generalInfo.positionData) {
             nameVi = `${generalInfo.positionData.valueVi}, ${generalInfo.lastName} ${generalInfo.firstName}`;
@@ -119,7 +120,9 @@ class DoctorInfoGeneral extends Component {
                     {
                         isShowDescription === true
                             ?
-                            <></>
+                            <div className='more-info-doctor'>
+                                <Link to={`/doctor-info/${doctorId}`} ><span>Xem thêm</span></Link>
+                            </div>
                             :
                             <div className='price'>
                                 <span><FormattedMessage id='patient.doctor.price' />:</span>

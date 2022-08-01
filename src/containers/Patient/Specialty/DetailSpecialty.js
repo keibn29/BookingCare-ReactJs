@@ -18,19 +18,18 @@ class DetailSpecialty extends Component {
         this.state = {
             detailSpecialty: [],
             allProvince: [],
-            // arrDoctorId: []
         }
     }
 
     async componentDidMount() {
         this.props.fetchProvinceStart();
-        await this.fetchDatailSpecialty();
+        await this.fetchDatailSpecialty('ALL');
     }
 
-    fetchDatailSpecialty = async () => {
+    fetchDatailSpecialty = async (location) => {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
             let specialtyId = this.props.match.params.id
-            let res = await getSpecialtyById(specialtyId, 'ALL')
+            let res = await getSpecialtyById(specialtyId, location)
             if (res && res.errCode === 0) {
                 this.setState({
                     detailSpecialty: res.specialty
@@ -43,10 +42,25 @@ class DetailSpecialty extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.allProvinceRedux !== this.props.allProvinceRedux) {
-            this.setState({
-                allProvince: this.props.allProvinceRedux
-            })
+            let { allProvinceRedux } = this.props;
+            if (allProvinceRedux && allProvinceRedux.length > 0) {
+                allProvinceRedux.unshift({
+                    createdAt: null,
+                    keyMap: 'ALL',
+                    type: 'PROVINCE',
+                    valueEn: 'Nationwide',
+                    valueVi: 'Toàn quốc'
+                })
+                this.setState({
+                    allProvince: this.props.allProvinceRedux
+                })
+            }
         }
+    }
+
+    handleChangeSelectedProvince = async (event) => {
+        await this.fetchDatailSpecialty(event.target.value);
+        console.log('check selectedProvince: ', event.target.value)
     }
 
     render() {
@@ -74,8 +88,10 @@ class DetailSpecialty extends Component {
                         <div className='specialty-content-bottom container'>
                             <div className='location row'>
                                 <select
-                                    className='form-control col-1'
-                                    value={allProvince}
+                                    className='form-control select-province'
+                                    onChange={(event) => {
+                                        this.handleChangeSelectedProvince(event);
+                                    }}
                                 >
                                     {
                                         allProvince && allProvince.length > 0 && allProvince.map((item, index) => {

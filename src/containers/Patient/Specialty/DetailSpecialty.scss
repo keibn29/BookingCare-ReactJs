@@ -2,6 +2,7 @@
     background-color: #EEEEEE;
 
     .specialty-content-top {
+        padding-top     : 20px;
         background-color: #fff;
     }
 
@@ -9,6 +10,10 @@
         .location {
             margin-top   : 10px;
             margin-bottom: 10px;
+
+            .select-province {
+                width: 120px;
+            }
         }
 
         .list-doctor {
