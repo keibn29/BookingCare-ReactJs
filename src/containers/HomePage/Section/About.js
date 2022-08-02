@@ -12,7 +12,7 @@ class About extends Component {
             <div className='section-share section-about'>
                 <div className='section-container'>
                     <div className='section-about-header'>
-                        Truyền thông nói về BookingCare
+                        <FormattedMessage id='homepage.media' />
                     </div>
                     <div className='section-about-content'>
                         <div className='content-left'>

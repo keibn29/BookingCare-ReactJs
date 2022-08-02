@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import { getTopClinicHomepage } from '../../../services/userService';
+import { withRouter } from 'react-router';
 
 class MedicalFacility extends Component {
 
@@ -32,6 +33,12 @@ class MedicalFacility extends Component {
         }
     }
 
+    handleViewDetailClinic = (clinic) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-clinic/${clinic.id}`)
+        }
+    }
+
 
     render() {
         let { topClinic } = this.state;
@@ -41,8 +48,8 @@ class MedicalFacility extends Component {
             <div className='section-share section-medical-facility'>
                 <div className='section-container'>
                     <div className='section-header'>
-                        <span className='title-header'>Cơ sở y tế nổi bật</span>
-                        <button className='btn-header'>Xem thêm</button>
+                        <span className='title-header'><FormattedMessage id='homepage.medical-facility' /></span>
+                        <button className='btn-header'><FormattedMessage id='homepage.more' /></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>
@@ -52,6 +59,9 @@ class MedicalFacility extends Component {
                                         <div
                                             className='section-custom'
                                             key={index}
+                                            onClick={() => {
+                                                this.handleViewDetailClinic(item)
+                                            }}
                                         >
                                             <div
                                                 className='bg-img section-specialty'
@@ -87,4 +97,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MedicalFacility));

@@ -121,7 +121,9 @@ class DoctorInfoGeneral extends Component {
                         isShowDescription === true
                             ?
                             <div className='more-info-doctor'>
-                                <Link to={`/doctor-info/${doctorId}`} ><span>Xem thêm</span></Link>
+                                <Link to={`/doctor-info/${doctorId}`} >
+                                    <span><FormattedMessage id='patient.doctor.see-more' /></span>
+                                </Link>
                             </div>
                             :
                             <div className='price'>

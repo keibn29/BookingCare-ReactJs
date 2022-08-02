@@ -24,9 +24,12 @@
         "option8": "Medical products"
     },
     "homepage": {
-        "outstanding-doctor": "Last week's featured doctor",
+        "outstanding-doctor": "Last week's outstanding doctor",
         "more": "More info",
-        "specialty-popular": "Popular specialties"
+        "specialty-popular": "Popular specialties",
+        "medical-facility": "Outstanding medical facility",
+        "handbook": "Handbook",
+        "media": "Media talk about BookingCare"
     },
     "patient": {
         "doctor": {
@@ -52,7 +55,8 @@
             },
             "free-booking": "Free Booking",
             "choose": "Choose",
-            "and-book-free": "and book (free)"
+            "and-book-free": "and book (free)",
+            "see-more": "See more"
         },
         "loading": "Loading...",
         "success": "Appointment confirmed successfully!",

@@ -26,7 +26,10 @@
     "homepage": {
         "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
         "more": "Xem thêm",
-        "specialty-popular": "Chuyên khoa phổ biến"
+        "specialty-popular": "Chuyên khoa phổ biến",
+        "medical-facility": "Cơ sở y tế nổi bật",
+        "handbook": "Cẩm nang",
+        "media": "Truyền thông nói về BookingCare"
     },
     "patient": {
         "doctor": {
@@ -52,7 +55,8 @@
             },
             "free-booking": "Miễn phí đặt lịch",
             "choose": "Chọn",
-            "and-book-free": "và đặt lịch (miễn phí)"
+            "and-book-free": "và đặt lịch (miễn phí)",
+            "see-more": "Xem thêm"
         },
         "loading": "Đang tải...",
         "success": "Xác nhận lịch hẹn thành công!",

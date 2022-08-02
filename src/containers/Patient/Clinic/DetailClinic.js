@@ -1,41 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
-import './DetailSpecialty.scss';
+import './DetailClinic.scss';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import HomeHeader from '../../HomePage/HomeHeader';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorInfoExtra from '../Doctor/DoctorInfoExtra';
 import DoctorInfoGeneral from '../Doctor/DoctorInfoGeneral';
-import { getSpecialtyById } from '../../../services/userService';
+import { getClinicById } from '../../../services/userService';
 import { toast } from 'react-toastify';
 
-class DetailSpecialty extends Component {
+class DetailClinic extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            detailSpecialty: [],
+            detailClinic: [],
             allProvince: [],
         }
     }
 
     async componentDidMount() {
         this.props.fetchProvinceStart();
-        await this.fetchDetailSpecialty('ALL');
+        await this.fetchDetailClinic('ALL');
     }
 
-    fetchDetailSpecialty = async (location) => {
+    fetchDetailClinic = async (location) => {
         if (this.props.match && this.props.match.params && this.props.match.params.id) {
-            let specialtyId = this.props.match.params.id
-            let res = await getSpecialtyById(specialtyId, location)
+            let clinicId = this.props.match.params.id
+            let res = await getClinicById(clinicId, location)
             if (res && res.errCode === 0) {
                 this.setState({
-                    detailSpecialty: res.specialty
+                    detailClinic: res.clinic
                 })
             } else {
-                toast.error('fetch specialty error!')
+                toast.error('fetch clinic error!')
             }
         }
     }
@@ -59,33 +59,40 @@ class DetailSpecialty extends Component {
     }
 
     handleChangeSelectedProvince = async (event) => {
-        await this.fetchDetailSpecialty(event.target.value);
+        await this.fetchDetailClinic(event.target.value);
         console.log('check selectedProvince: ', event.target.value)
     }
 
     render() {
-        let { detailSpecialty, allProvince } = this.state;
+        let { detailClinic, allProvince } = this.state;
         let { language } = this.props;
-        console.log('check allProvince: ', allProvince)
+
+        console.log('check detailClinic: ', detailClinic)
 
         return (
             <>
-                <div className='detail-specialty-container'>
+                <div className='detail-clinic-container'>
                     <HomeHeader
                         isShowBanner={false}
                     />
-                    <div className='detail-specialty-body'>
-                        <div className='specialty-content-top'>
-                            <div className='specialty-description container'>
-                                <div className='row'>
+                    <div className='detail-clinic-body'>
+                        <div className='clinic-content-top'>
+                            <div className='container'>
+                                <div className='description-image row'
+                                    style={
+                                        { backgroundImage: `url(${detailClinic.image})` }
+                                    }
+                                >
+                                </div>
+                                <div className='clinic-description row'>
                                     {
-                                        detailSpecialty && detailSpecialty.descriptionHTML &&
-                                        <div dangerouslySetInnerHTML={{ __html: detailSpecialty.descriptionHTML }}></div>
+                                        detailClinic && detailClinic.descriptionHTML &&
+                                        <div dangerouslySetInnerHTML={{ __html: detailClinic.descriptionHTML }}></div>
                                     }
                                 </div>
                             </div>
                         </div>
-                        <div className='specialty-content-bottom container'>
+                        <div className='clinic-content-bottom container'>
                             <div className='location row'>
                                 <select
                                     className='form-control select-province'
@@ -109,8 +116,8 @@ class DetailSpecialty extends Component {
                             </div>
                             <div className='list-doctor row'>
                                 {
-                                    detailSpecialty && detailSpecialty.specialtyData && detailSpecialty.specialtyData.length > 0
-                                    && detailSpecialty.specialtyData.map((item, index) => {
+                                    detailClinic && detailClinic.clinicData && detailClinic.clinicData.length > 0
+                                    && detailClinic.clinicData.map((item, index) => {
                                         return (
                                             <div className='each-doctor' key={index}>
                                                 <div className='doctor-content-left'>
@@ -159,4 +166,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailSpecialty);
+export default connect(mapStateToProps, mapDispatchToProps)(DetailClinic);
