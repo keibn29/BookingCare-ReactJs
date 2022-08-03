@@ -92,7 +92,8 @@
             }
         },
         "doctor": {
-            "manage-schedule": "Quản lí kế hoạch khám bệnh"
+            "manage-schedule": "Quản lí kế hoạch khám bệnh",
+            "manage-patient": "Quản lí bệnh nhân khám bệnh"
         }
     },
     "manage-user-redux": {

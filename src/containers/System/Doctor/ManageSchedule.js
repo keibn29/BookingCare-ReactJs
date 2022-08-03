@@ -17,7 +17,7 @@ class ManageSchedule extends Component {
         this.state = {
             allDoctors: [],
             selectedDoctor: '',
-            currentDate: '',
+            currentDate: moment(new Date()).startOf('day').valueOf(), //startOf('day): 00:00:00,
             arrTime: [],
             // scheduleTime: ''
         }

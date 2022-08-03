@@ -96,7 +96,7 @@ class BookingModal extends Component {
             //     selectedGender: arrGenderRedux && arrGenderRedux.length > 0 ? arrGenderRedux[0].keyMap : ''
             // })
         } else {
-            toast.error('Booking error!')
+            toast.error(res.errMessage)
         }
     }
 

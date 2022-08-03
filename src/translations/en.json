@@ -92,7 +92,8 @@
             }
         },
         "doctor": {
-            "manage-schedule": "Manage Doctor's schedule"
+            "manage-schedule": "Manage Doctor's schedule",
+            "manage-patient": "Manage patient"
         }
     },
     "manage-user-redux": {
