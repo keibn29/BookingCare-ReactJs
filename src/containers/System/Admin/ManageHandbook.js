@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
-import './ManageCSH.scss'; //Clinic-Specialty-Handbook
+import './ManageCSH.scss';
 import * as actions from '../../../store/actions';
 import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
 import MarkdownIt from 'markdown-it';
@@ -10,11 +10,11 @@ import 'react-markdown-editor-lite/lib/index.css';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { toast } from 'react-toastify';
-import { createClinic, editClinic } from '../../../services/userService';
+import { createHandbook, editHandbook } from '../../../services/userService';
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-class ManageClinic extends Component {
+class ManageHandbook extends Component {
 
     constructor(props) {
         super(props);
@@ -24,34 +24,33 @@ class ManageClinic extends Component {
             previewImgURL: '',
             isOpenLightbox: false,
             image: '',
-            nameVi: '',
-            nameEn: '',
-            address: '',
+            titleVi: '',
+            titleEn: '',
 
-            allClinic: [],
-            clinicEditId: '',
+            allHandbook: [],
+            handbookEditId: '',
             action: CRUD_ACTIONS.CREATE
         }
     }
 
     componentDidMount() {
-        this.props.fetchAllClinicStart();
+        this.props.fetchAllHandbookStart('ALL');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.allClinicRedux !== this.props.allClinicRedux) {
+        if (prevProps.allHandbookRedux !== this.props.allHandbookRedux) {
             this.setState({
-                allClinic: this.props.allClinicRedux,
+                allHandbook: this.props.allHandbookRedux,
                 contentMarkdown: '',
                 previewImgURL: '',
                 image: '',
-                nameVi: '',
-                nameEn: '',
-                address: '',
+                titleVi: '',
+                titleEn: '',
                 action: CRUD_ACTIONS.CREATE
             })
         }
     }
+
 
     handleOnChangeInput = (event, id) => {
         //good code
@@ -96,106 +95,92 @@ class ManageClinic extends Component {
     handleSaveClinic = async () => {
         let { action } = this.state;
         if (action === CRUD_ACTIONS.CREATE) {
-            let res = await createClinic({
+            let res = await createHandbook({
                 contentMarkdown: this.state.contentMarkdown,
                 contentHTML: this.state.contentHTML,
                 image: this.state.image,
-                nameVi: this.state.nameVi,
-                nameEn: this.state.nameEn,
-                address: this.state.address
+                titleVi: this.state.titleVi,
+                titleEn: this.state.titleEn
             })
             if (res && res.errCode === 0) {
-                toast.success('Add new clinic succeed!')
-                this.props.fetchAllClinicStart();
+                toast.success('Add new handbook succeed!')
+                // this.props.fetchAllClinicStart();
             } else {
-                toast.error('Add new clinic failed!')
+                toast.error('Add new handbook failed!')
                 console.log('check res failed: ', res)
             }
         }
         if (action === CRUD_ACTIONS.EDIT) {
-            let res = await editClinic({
-                clinicId: this.state.clinicEditId,
+            let res = await editHandbook({
+                handbookId: this.state.handbookEditId,
                 contentMarkdown: this.state.contentMarkdown,
                 contentHTML: this.state.contentHTML,
                 image: this.state.image,
-                nameVi: this.state.nameVi,
-                nameEn: this.state.nameEn,
-                address: this.state.address
+                titleVi: this.state.titleVi,
+                titleEn: this.state.titleEn
             })
             if (res && res.errCode === 0) {
-                toast.success('Edit clinic succeed!')
-                this.props.fetchAllClinicStart();
+                toast.success('Edit handbook succeed!')
+                this.props.fetchAllHandbookStart('ALL');
             } else {
-                toast.error('Edit clinic failed!')
-                console.log('check res failed: ', res)
+                toast.error('Edit handbook failed!')
+                console.log(res.errMessage)
             }
         }
     }
 
-    handleEditClinic = (clinic) => {
+    handleEditHandbook = (handbook) => {
 
         this.setState({
-            nameVi: clinic.nameVi,
-            nameEn: clinic.nameEn,
-            address: clinic.address,
-            contentMarkdown: clinic.descriptionMarkdown,
-            contentHTML: clinic.descriptionHTML,
+            titleVi: handbook.titleVi,
+            titleEn: handbook.titleEn,
+            contentMarkdown: handbook.descriptionMarkdown,
+            contentHTML: handbook.descriptionHTML,
             image: '',
-            previewImgURL: clinic.image,
+            previewImgURL: handbook.image,
             action: CRUD_ACTIONS.EDIT,
-            clinicEditId: clinic.id
+            handbookEditId: handbook.id
         })
     }
 
-    handleDeleteClinic = () => {
+    handleDeleteHandbook = () => {
         alert('click me?')
     }
 
     render() {
-        let { allClinic } = this.state;
+        let { allHandbook } = this.state;
 
         return (
             <>
                 <div className='manage-CSH-container container'>
-                    <div className='title'>Manage Clinic</div>
+                    <div className='title'>Manage Handbook</div>
                     <div className='add-new-CSH row mt-2'>
-                        <div className='col-6 input-clinic'>
+                        <div className='col-6 input-handbook'>
                             <div className='form-group col-12 row'>
-                                <label>Clinic Vietnamese Name</label>
+                                <label>Handbook Vietnamese Title</label>
                                 <input
                                     className='form-control'
                                     type='text'
-                                    value={this.state.nameVi}
+                                    value={this.state.titleVi}
                                     onChange={(event) => {
-                                        this.handleOnChangeInput(event, 'nameVi')
+                                        this.handleOnChangeInput(event, 'titleVi')
                                     }}
                                 />
                             </div>
                             <div className='form-group col-12 row'>
-                                <label>Clinic English Name</label>
+                                <label>Handbook English Title</label>
                                 <input
                                     className='form-control'
                                     type='text'
-                                    value={this.state.nameEn}
+                                    value={this.state.titleEn}
                                     onChange={(event) => {
-                                        this.handleOnChangeInput(event, 'nameEn')
-                                    }}
-                                />
-                            </div>
-                            <div className='form-group col-12 row'>
-                                <label>Clinic Address</label>
-                                <input
-                                    className='form-control'
-                                    type='text'
-                                    value={this.state.address}
-                                    onChange={(event) => {
-                                        this.handleOnChangeInput(event, 'address')
+                                        this.handleOnChangeInput(event, 'titleEn')
                                     }}
                                 />
                             </div>
                         </div>
                         <div className='form-group col-6'>
-                            <label>Clinic Image</label>
+                            <label>Handbook Image</label>
                             <div className='upload-image-container'>
                                 <div>
                                     <input
@@ -247,28 +232,26 @@ class ManageClinic extends Component {
                         </div>
                     </div>
                     <div className='all-CSH'>
-                        <div className='list-CSH-title mt-3'>List Clinics</div>
+                        <div className='list-CSH-title mt-3'>List Handbooks</div>
                         <table id='table-manage-CSH' className='mb-5'>
                             <tr>
-                                <th>Clinic Id</th>
-                                <th>Clinic Name (Vietnamese)</th>
-                                <th>Clinic Name (English)</th>
-                                <th>Clinic Address</th>
+                                <th>STT</th>
+                                <th>Handbook title (Vietnamese)</th>
+                                <th>Handbook title (English)</th>
                                 <th className='action-CH'>Action</th>
                             </tr>
                             {
-                                allClinic && allClinic.length > 0 && allClinic.map((item, index) => {
+                                allHandbook && allHandbook.length > 0 && allHandbook.map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{item.id}</td>
-                                            <td>{item.nameVi}</td>
-                                            <td>{item.nameEn}</td>
-                                            <td>{item.address}</td>
+                                            <td>{index + 1}</td>
+                                            <td>{item.titleVi}</td>
+                                            <td>{item.titleEn}</td>
                                             <td>
                                                 <button
                                                     className='btn-edit mr-2'
                                                     onClick={() => {
-                                                        this.handleEditClinic(item)
+                                                        this.handleEditHandbook(item)
                                                     }}
                                                 >
                                                     <i className="fas fa-user-edit"></i>
@@ -276,7 +259,7 @@ class ManageClinic extends Component {
                                                 <button
                                                     className='btn-delete'
                                                     onClick={() => {
-                                                        this.handleDeleteClinic(item)
+                                                        this.handleDeleteHandbook(item)
                                                     }}
                                                 >
                                                     <i className="fas fa-trash-alt"></i>
@@ -304,14 +287,14 @@ class ManageClinic extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        allClinicRedux: state.admin.allClinic
+        allHandbookRedux: state.admin.handbooks
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllClinicStart: () => dispatch(actions.fetchAllClinicStart())
+        fetchAllHandbookStart: (limit) => dispatch(actions.fetchAllHandbookStart(limit))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageClinic);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageHandbook);

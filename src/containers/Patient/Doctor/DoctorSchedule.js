@@ -18,7 +18,7 @@ class DoctorSchedule extends Component {
             allDays: [],
             arrDoctorSchedule: [],
             isOpenBookingModal: false,
-            scheduleTimeModal: {}
+            scheduleTimeModal: {},
         }
     }
 

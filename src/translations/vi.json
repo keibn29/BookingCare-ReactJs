@@ -67,6 +67,18 @@
             "doctor-details": "Chi tiết bác sĩ",
             "choose-doctor": "Chọn bác sĩ",
             "introduction": "Giới thiệu"
+        },
+        "doctor": {
+            "done": "Đã khám",
+            "manage-patient": "Quản lí bệnh nhân",
+            "choose-date": "Chọn ngày",
+            "list-patient": "Danh sách bệnh nhân",
+            "time": "Khung giờ",
+            "name": "Họ tên",
+            "phone": "Số điện thoại",
+            "address": "Địa chỉ",
+            "gender": "Giới tính",
+            "reason": "Lý do khám"
         }
     },
     "menu": {

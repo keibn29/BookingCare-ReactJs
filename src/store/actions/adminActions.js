@@ -7,7 +7,7 @@ import {
     getMarkdownService, editDoctorInfoService,
     bulkCreateSchedule, getScheduleByDate,
     getDoctorInfoExtra, getAllSpecialty,
-    getAllClinic
+    getAllClinic, getAllHandbook
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -347,9 +347,8 @@ export const editDoctorInfoStart = (inputData) => {
     }
 }
 
-export const editDoctorInfoSuccess = (inputData) => ({
-    type: actionTypes.EDIT_DOCTOR_INFO_SUCCESS,
-    data: inputData
+export const editDoctorInfoSuccess = () => ({
+    type: actionTypes.EDIT_DOCTOR_INFO_SUCCESS
 })
 
 export const editDoctorInfoFailed = () => ({
@@ -600,4 +599,32 @@ export const fetchAllClinicSuccess = (allClinic) => ({
 
 export const fetchAllClinicFailed = () => ({
     type: actionTypes.FETCH_ALL_CLINIC_FAILED
+})
+
+//fetch-all-handbook
+export const fetchAllHandbookStart = (limit) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllHandbook(limit);
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllHandbookSuccess(res.hanbooks));
+            } else {
+                dispatch(fetchAllHandbookFailed());
+                toast.error('fetch Handbooks failed!');
+            }
+        } catch (e) {
+            dispatch(fetchAllHandbookFailed());
+            toast.error('fetch Handbooks failed!');
+            console.log('fetch Handbooks Error: ', e)
+        }
+    }
+}
+
+export const fetchAllHandbookSuccess = (hanbooks) => ({
+    type: actionTypes.FETCH_ALL_HANDBOOK_SUCCESS,
+    data: hanbooks
+})
+
+export const fetchAllHandbookFailed = () => ({
+    type: actionTypes.FETCH_ALL_HANDBOOK_FAILED
 })

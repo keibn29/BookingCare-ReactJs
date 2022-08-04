@@ -2,9 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
+import * as actions from '../../../store/actions';
+import { LANGUAGES } from '../../../utils';
 
 class HandBook extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            topHandbook: [],
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchAllHandbookStart('TOP')
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.topHandbookRedux !== this.props.topHandbookRedux) {
+            this.setState({
+                topHandbook: this.props.topHandbookRedux
+            })
+        }
+    }
 
 
     render() {
@@ -15,6 +35,8 @@ class HandBook extends Component {
             slidesToShow: 2,
             slidesToScroll: 1
         };
+        let { topHandbook } = this.state;
+        let { language } = this.props;
 
         return (
             <div className='section-share section-handbook'>
@@ -25,48 +47,25 @@ class HandBook extends Component {
                     </div>
                     <div className='section-body'>
                         <Slider {...settings}>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>1 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>2 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>3 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>4 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>5 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>6 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
-                            <div className='section-custom section-handbook'>
-                                <div className='outer-bg'>
-                                    <div className='bg-img'></div>
-                                </div>
-                                <div className='bg-text'>7 Review Top 7 Nha khoa Quận 3: Chi tiết ưu, nhược điểm</div>
-                            </div>
+                            {
+                                topHandbook && topHandbook.length > 0 && topHandbook.map((item, index) => {
+                                    return (
+                                        <div className='section-custom section-handbook'>
+                                            <div className='outer-bg'>
+                                                <div
+                                                    className='bg-img'
+                                                    style={
+                                                        { backgroundImage: `url(${item.image})` }
+                                                    }
+                                                ></div>
+                                            </div>
+                                            <div className='bg-text'>
+                                                {language === LANGUAGES.VI ? item.titleVi : item.titleEn}
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </Slider>
                     </div>
                 </div>
@@ -78,13 +77,14 @@ class HandBook extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language
+        language: state.app.language,
+        topHandbookRedux: state.admin.handbooks
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        fetchAllHandbookStart: (limit) => dispatch(actions.fetchAllHandbookStart(limit))
     };
 };
 

@@ -37,6 +37,8 @@ class OutStandingDoctor extends Component {
         let topDoctors = this.state.topDoctors;
         let { language } = this.props;
 
+        console.log('check topDoctor: ', topDoctors)
+
         return (
             <div className='section-share section-outstanding-doctor'>
                 <div className='section-container'>
@@ -78,7 +80,18 @@ class OutStandingDoctor extends Component {
                                                     <div>
                                                         {language === LANGUAGES.VI ? nameVi : nameEn}
                                                     </div>
-                                                    <div>Tai Mũi Họng 1</div>
+                                                    <div>
+                                                        {
+                                                            item.Doctor && item.Doctor.specialtyData && language === LANGUAGES.VI
+                                                            &&
+                                                            item.Doctor.specialtyData.nameVi
+                                                        }
+                                                        {
+                                                            item.Doctor && item.Doctor.specialtyData && language === LANGUAGES.EN
+                                                            &&
+                                                            item.Doctor.specialtyData.nameEn
+                                                        }
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -16,7 +16,8 @@ const initialState = {
     allPayment: [],
     arrDoctorInfoExtra: [],
     allSpecialty: [],
-    allClinic: []
+    allClinic: [],
+    handbooks: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -149,21 +150,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state
             }
 
-        //edit-doctor-info
-        case actionTypes.EDIT_DOCTOR_INFO_SUCCESS:
-            state.arrdoctorInfo = action.data;
-
-            return {
-                ...state
-            }
-
-        case actionTypes.EDIT_DOCTOR_INFO_FAILED:
-            state.arrdoctorInfo = [];
-
-            return {
-                ...state
-            }
-
         //fetch-allcode-time
         case actionTypes.FETCH_TIME_SUCCESS:
             state.arrTime = action.data;
@@ -279,6 +265,21 @@ const adminReducer = (state = initialState, action) => {
 
         case actionTypes.FETCH_ALL_CLINIC_FAILED:
             state.allClinic = [];
+
+            return {
+                ...state
+            }
+
+        //fetch-all-handbook
+        case actionTypes.FETCH_ALL_HANDBOOK_SUCCESS:
+            state.handbooks = action.data;
+
+            return {
+                ...state
+            }
+
+        case actionTypes.FETCH_ALL_HANDBOOK_FAILED:
+            state.handbooks = [];
 
             return {
                 ...state

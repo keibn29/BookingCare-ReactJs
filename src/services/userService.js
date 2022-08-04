@@ -120,6 +120,22 @@ const getAllPatientByDate = (doctorId, date) => {
     return axios.get(`/api/get-all-patient-by-date?doctorId=${doctorId}&date=${date}`)
 }
 
+const sendRemedy = (data) => {
+    return axios.put(`/api/send-remedy`, data)
+}
+
+const createHandbook = (handbookData) => {
+    return axios.post(`/api/create-new-handbook`, handbookData)
+}
+
+const getAllHandbook = (limit) => {
+    return axios.get(`/api/get-all-handbook?limit=${limit}`)
+}
+
+const editHandbook = (data) => {
+    return axios.put(`/api/edit-handbook`, data)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -149,5 +165,9 @@ export {
     getTopClinicHomepage,
     getSpecialtyById,
     getClinicById,
-    getAllPatientByDate
+    getAllPatientByDate,
+    sendRemedy,
+    createHandbook,
+    getAllHandbook,
+    editHandbook
 };

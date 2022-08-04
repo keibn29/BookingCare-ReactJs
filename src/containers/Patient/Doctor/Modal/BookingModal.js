@@ -9,7 +9,8 @@ import DoctorInfoGeneral from '../DoctorInfoGeneral';
 import _ from 'lodash';
 import { createBookAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
-import moment, { lang } from 'moment';
+import moment from 'moment';
+import LoadingOverlay from 'react-loading-overlay';
 
 class BookingModal extends Component {
 
@@ -26,7 +27,9 @@ class BookingModal extends Component {
             address: '',
             reason: '',
             selectedGender: '',
-            allGender: []
+            allGender: [],
+
+            isShowLoading: false
         }
     }
 
@@ -66,6 +69,9 @@ class BookingModal extends Component {
     handleConfirmBooking = async () => {
         let timeString = this.buildTimeBooking();
         let doctorName = this.buildDoctorName();
+        this.setState({
+            isShowLoading: true
+        })
 
         let res = await createBookAppointment({
             doctorId: this.state.doctorId,
@@ -84,6 +90,9 @@ class BookingModal extends Component {
             doctorName: doctorName
         })
         if (res && res.errCode === 0) {
+            this.setState({
+                isShowLoading: false
+            })
             toast.success('Booking a new appointment succeed!')
             this.props.toggle();
             // let arrGenderRedux = this.props.arrGenderRedux;
@@ -96,6 +105,9 @@ class BookingModal extends Component {
             //     selectedGender: arrGenderRedux && arrGenderRedux.length > 0 ? arrGenderRedux[0].keyMap : ''
             // })
         } else {
+            this.setState({
+                isShowLoading: false
+            })
             toast.error(res.errMessage)
         }
     }
@@ -134,7 +146,7 @@ class BookingModal extends Component {
 
     render() {
         let { language, isOpen, dataTime } = this.props;
-        let { allGender } = this.state;
+        let { allGender, isShowLoading } = this.state;
         let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
 
 
@@ -271,6 +283,13 @@ class BookingModal extends Component {
                         </div>
                     </div>
                 </Modal>
+
+                <LoadingOverlay
+                    active={isShowLoading}
+                    spinner
+                    text='Loading...'
+                >
+                </LoadingOverlay>
             </>
         );
     }

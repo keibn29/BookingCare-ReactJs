@@ -67,6 +67,18 @@
             "doctor-details": "Doctor Details",
             "choose-doctor": "Choose Doctor",
             "introduction": "Introduction"
+        },
+        "doctor": {
+            "done": "Done",
+            "manage-patient": "Manage patient",
+            "choose-date": "Choose date",
+            "list-patient": "List patien",
+            "time": "Time",
+            "name": "Fullname",
+            "phone": "PhoneNumber",
+            "address": "Address",
+            "gender": "Gender",
+            "reason": "Reason"
         }
     },
     "menu": {
