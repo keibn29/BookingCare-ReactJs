@@ -39,6 +39,12 @@ class MedicalFacility extends Component {
         }
     }
 
+    handleViewMoreClinic = () => {
+        if (this.props.history) {
+            this.props.history.push(`/more/clinic`)
+        }
+    }
+
 
     render() {
         let { topClinic } = this.state;
@@ -49,7 +55,13 @@ class MedicalFacility extends Component {
                 <div className='section-container'>
                     <div className='section-header'>
                         <span className='title-header'><FormattedMessage id='homepage.medical-facility' /></span>
-                        <button className='btn-header'><FormattedMessage id='homepage.more' /></button>
+                        <button
+                            className='btn-header'
+                            onClick={() => {
+                                this.handleViewMoreClinic()
+                            }}>
+                            <FormattedMessage id='homepage.more' />
+                        </button>
                     </div>
                     <div className='section-body'>
                         <Slider {...this.props.settings}>

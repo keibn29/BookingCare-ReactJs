@@ -9,6 +9,8 @@ export const path = {
     VERIFY_EMAIL_BOOKING: '/verify-booking',
     DETAIL_SPECIALTY: '/detail-specialty/:id',
     DETAIL_CLINIC: '/detail-clinic/:id',
+    DETAIL_HANDBOOK: '/detail-handbook/:id',
+    MORE_INFOR: '/more'
 };
 
 export const LANGUAGES = {

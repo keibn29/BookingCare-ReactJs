@@ -136,6 +136,10 @@ const editHandbook = (data) => {
     return axios.put(`/api/edit-handbook`, data)
 }
 
+const getDetailHandbook = (handbookId) => {
+    return axios.get(`/api/get-detail-handbook-by-id?handbookId=${handbookId}`)
+}
+
 export {
     handleLoginApi,
     getAllUsers,
@@ -169,5 +173,6 @@ export {
     sendRemedy,
     createHandbook,
     getAllHandbook,
-    editHandbook
+    editHandbook,
+    getDetailHandbook
 };

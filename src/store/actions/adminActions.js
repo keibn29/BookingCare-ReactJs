@@ -243,7 +243,7 @@ export const fetchTopDoctorsFailed = () => ({
     type: actionTypes.FETCH_TOP_DOCTORS_FAILED
 })
 
-//
+//fetch-all-doctor
 export const fetchAllDoctorsStart = () => {
     return async (dispatch, getState) => {
         try {

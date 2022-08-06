@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
+import { withRouter } from 'react-router';
 
 class HandBook extends Component {
 
@@ -23,6 +24,12 @@ class HandBook extends Component {
             this.setState({
                 topHandbook: this.props.topHandbookRedux
             })
+        }
+    }
+
+    handleViewDetailHandbook = (handbook) => {
+        if (this.props.history) {
+            this.props.history.push(`/detail-handbook/${handbook.id}`)
         }
     }
 
@@ -50,7 +57,13 @@ class HandBook extends Component {
                             {
                                 topHandbook && topHandbook.length > 0 && topHandbook.map((item, index) => {
                                     return (
-                                        <div className='section-custom section-handbook'>
+                                        <div
+                                            className='section-custom section-handbook'
+                                            key={index}
+                                            onClick={() => {
+                                                this.handleViewDetailHandbook(item)
+                                            }}
+                                        >
                                             <div className='outer-bg'>
                                                 <div
                                                     className='bg-img'
@@ -88,4 +101,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HandBook);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HandBook));
