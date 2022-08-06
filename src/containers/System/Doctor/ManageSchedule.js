@@ -19,13 +19,19 @@ class ManageSchedule extends Component {
             selectedDoctor: '',
             currentDate: moment(new Date()).startOf('day').valueOf(), //startOf('day): 00:00:00,
             arrTime: [],
-            // scheduleTime: ''
         }
     }
 
     componentDidMount() {
         this.props.fetchAllDoctorsStart();
         this.props.fetchTimeStart();
+        let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
+        let { userInfo } = this.props;
+        if (userInfo && userInfo.roleId === 'R2') {
+            this.setState({
+                selectedDoctor: dataSelect[0]
+            })
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -40,6 +46,15 @@ class ManageSchedule extends Component {
             this.setState({
                 allDoctors: dataSelect
             })
+        }
+        if (prevProps.language !== this.props.language) {
+            let { userInfo } = this.props;
+            let dataSelect = this.buildDataInputSelect(this.props.AllDoctorsRedux);
+            if (userInfo && userInfo.roleId === 'R2') {
+                this.setState({
+                    selectedDoctor: dataSelect[0]
+                })
+            }
         }
         if (prevProps.arrTimeRedux !== this.props.arrTimeRedux) {
             let arrTimeRedux = this.props.arrTimeRedux
@@ -57,19 +72,32 @@ class ManageSchedule extends Component {
 
     buildDataInputSelect = (inputData) => {
         let result = [];
-        let { language } = this.props
-        if (inputData && inputData.length > 0) {
+        let { language, userInfo } = this.props
 
-            inputData.map((item, index) => {
-                let obj = {};
-                let labelVi = `${item.lastName} ${item.firstName}`;
-                let labelEn = `${item.firstName} ${item.lastName} `;
+        if (userInfo.roleId === 'R1') {
+            if (inputData && inputData.length > 0) {
 
-                obj.label = language === LANGUAGES.VI ? labelVi : labelEn;
-                obj.value = item.id;
-                result.push(obj);
-            })
+                inputData.map((item, index) => {
+                    let obj = {};
+                    let labelVi = `${item.lastName} ${item.firstName}`;
+                    let labelEn = `${item.firstName} ${item.lastName} `;
+
+                    obj.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                    obj.value = item.id;
+                    result.push(obj);
+                })
+            }
         }
+        if (userInfo.roleId === 'R2') {
+            let obj = {};
+            let labelVi = `${userInfo.lastName} ${userInfo.firstName}`;
+            let labelEn = `${userInfo.firstName} ${userInfo.lastName} `;
+
+            obj.label = language === LANGUAGES.VI ? labelVi : labelEn;
+            obj.value = userInfo.id;
+            result.push(obj);
+        }
+
         return result;
     }
 
@@ -144,9 +172,10 @@ class ManageSchedule extends Component {
 
     render() {
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
-        const { isLoggedIn, language } = this.props;
+        const { isLoggedIn, language, userInfo } = this.props;
         let { allDoctors, selectedDoctor, currentDate, arrTime } = this.state;
-        console.log('check arrTime: ', arrTime)
+
+        console.log('check selectedDoctor: ', selectedDoctor)
 
         return (
             <>
@@ -209,7 +238,8 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
         AllDoctorsRedux: state.admin.allDoctors,
-        arrTimeRedux: state.admin.arrTime
+        arrTimeRedux: state.admin.arrTime,
+        userInfo: state.user.userInfo,
     };
 };
 

@@ -51,49 +51,53 @@ class DoctorInfo extends Component {
                 />
                 <div className='doctor-info-container'>
                     <div className='content-top'>
-                        <div className='doctor-description'>
-                            <div
-                                className='content-left'
-                                style={{ backgroundImage: `url(${arrdoctorInfo && arrdoctorInfo.image ? arrdoctorInfo.image : ''})` }}
-                            >
-                            </div>
-                            <div className='content-right'>
-                                <div className='up'>
-                                    {language === LANGUAGES.VI ? nameVi : nameEn}
+                        <div className='container px-0'>
+                            <div className='doctor-description'>
+                                <div
+                                    className='content-left'
+                                    style={{ backgroundImage: `url(${arrdoctorInfo && arrdoctorInfo.image ? arrdoctorInfo.image : ''})` }}
+                                >
                                 </div>
-                                <div className='down'>
-                                    {
-                                        arrdoctorInfo && arrdoctorInfo.Markdown && arrdoctorInfo.Markdown.description &&
-                                        <span>
-                                            {arrdoctorInfo.Markdown.description}
-                                        </span>
-                                    }
+                                <div className='content-right'>
+                                    <div className='up'>
+                                        {language === LANGUAGES.VI ? nameVi : nameEn}
+                                    </div>
+                                    <div className='down'>
+                                        {
+                                            arrdoctorInfo && arrdoctorInfo.Markdown && arrdoctorInfo.Markdown.description &&
+                                            <span>
+                                                {arrdoctorInfo.Markdown.description}
+                                            </span>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className='doctor-schedule'>
-                            <div className='content-left'>
-                                <DoctorSchedule
-                                    doctorId={currentDoctorId}
-                                />
-                            </div>
-                            <div className='content-right'>
-                                <DoctorInfoExtra
-                                    doctorId={currentDoctorId}
-                                />
+                            <div className='doctor-schedule'>
+                                <div className='content-left'>
+                                    <DoctorSchedule
+                                        doctorId={currentDoctorId}
+                                    />
+                                </div>
+                                <div className='content-right'>
+                                    <DoctorInfoExtra
+                                        doctorId={currentDoctorId}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className='content-bottom'>
-                        <div className='doctor-detail-info'>
-                            {
-                                arrdoctorInfo && arrdoctorInfo.Markdown && arrdoctorInfo.Markdown.contentHTML &&
-                                <div dangerouslySetInnerHTML={{ __html: arrdoctorInfo.Markdown.contentHTML }}></div>
-                            }
-                        </div>
-                        <div className='doctor-comment'>
+                        <div className='container px-1'>
+                            <div className='doctor-detail-info'>
+                                {
+                                    arrdoctorInfo && arrdoctorInfo.Markdown && arrdoctorInfo.Markdown.contentHTML &&
+                                    <div dangerouslySetInnerHTML={{ __html: arrdoctorInfo.Markdown.contentHTML }}></div>
+                                }
+                            </div>
+                            <div className='doctor-comment'>
 
+                            </div>
                         </div>
                     </div>
                 </div>

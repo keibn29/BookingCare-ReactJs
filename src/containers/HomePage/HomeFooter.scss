@@ -2,14 +2,16 @@
     padding: 10px;
 
     .home-footer-content {
-        border    : 1px solid red;
-        text-align: center;
+        text-align : center;
+        padding-top: 10px;
+        border-top : 1px solid #ddd;
 
         p {
             margin: auto;
 
             a {
                 text-decoration: unset;
+                color          : #49bce2;
             }
         }
     }

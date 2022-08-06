@@ -33,6 +33,12 @@ class HandBook extends Component {
         }
     }
 
+    handleViewMoreHandbook = () => {
+        if (this.props.history) {
+            this.props.history.push(`/more/handbook`)
+        }
+    }
+
 
     render() {
         let settings = {
@@ -47,10 +53,15 @@ class HandBook extends Component {
 
         return (
             <div className='section-share section-handbook'>
-                <div className='section-container'>
+                <div className='section-container container px-0'>
                     <div className='section-header'>
                         <span className='title-header'><FormattedMessage id='homepage.handbook' /></span>
-                        <button className='btn-header'><FormattedMessage id='homepage.more' /></button>
+                        <button
+                            className='btn-header'
+                            onClick={() => {
+                                this.handleViewMoreHandbook()
+                            }}
+                        ><FormattedMessage id='homepage.more' /></button>
                     </div>
                     <div className='section-body'>
                         <Slider {...settings}>

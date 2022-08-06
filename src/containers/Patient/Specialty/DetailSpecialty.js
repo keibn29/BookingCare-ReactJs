@@ -75,7 +75,13 @@ class DetailSpecialty extends Component {
                         isShowBanner={false}
                     />
                     <div className='detail-specialty-body'>
-                        <div className='specialty-content-top'>
+                        <div
+                            className='specialty-content-top'
+                        // style={
+                        //     detailSpecialty && detailSpecialty.image &&
+                        //     { backgroundImage: `url(${detailSpecialty.image})` }
+                        // }
+                        >
                             <div className='specialty-description container'>
                                 <div className='row'>
                                     {

@@ -12,27 +12,27 @@ class AllHandbook extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allClinic: []
+            allHandbook: []
         }
     }
 
     componentDidMount() {
-        this.props.fetchAllClinicStart();
+        this.props.fetchAllHandbookStart('ALL');
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.allClinicRedux !== this.props.allClinicRedux) {
+        if (prevProps.allHandbookRedux !== this.props.allHandbookRedux) {
             this.setState({
-                allClinic: this.props.allClinicRedux
+                allHandbook: this.props.allHandbookRedux
             })
         }
     }
 
     render() {
-        let { allClinic } = this.state;
+        let { allHandbook } = this.state;
         let { language } = this.props;
 
-        console.log('check allclinic: ', allClinic)
+        console.log('check allHandbook: ', allHandbook)
 
         return (
             <>
@@ -43,9 +43,9 @@ class AllHandbook extends Component {
                     <div className='more-infor-body container px-0'>
                         <div className='more-infor-title'>Tất cả bệnh viện, phòng khám</div>
                         {
-                            allClinic && allClinic.length > 0 && allClinic.map((item, index) => {
+                            allHandbook && allHandbook.length > 0 && allHandbook.map((item, index) => {
                                 return (
-                                    <Link to={`/detail-clinic/${item.id}`}>
+                                    <Link to={`/detail-hanbook/${item.id}`}>
                                         <div className='more-infor-content py-2' key={index}>
                                             <div
                                                 className='mi-content-left'
@@ -54,11 +54,8 @@ class AllHandbook extends Component {
                                                 }
                                             ></div>
                                             <div className='mi-content-right'>
-                                                <div>
-                                                    {language === LANGUAGES.VI ? item.nameVi : item.nameEn}
-                                                </div>
-                                                <div>
-                                                    {item.address}
+                                                <div className='name-item handbook-name'>
+                                                    {language === LANGUAGES.VI ? item.titleVi : item.titleEn}
                                                 </div>
                                             </div>
                                         </div>
@@ -76,13 +73,13 @@ class AllHandbook extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        allClinicRedux: state.admin.allClinic
+        allHandbookRedux: state.admin.handbooks
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllClinicStart: () => dispatch(actions.fetchAllClinicStart())
+        fetchAllHandbookStart: (limit) => dispatch(actions.fetchAllHandbookStart(limit))
     };
 };
 

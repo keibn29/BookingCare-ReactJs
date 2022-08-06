@@ -10,7 +10,7 @@ class About extends Component {
 
         return (
             <div className='section-share section-about'>
-                <div className='section-container'>
+                <div className='section-container container px-0'>
                     <div className='section-about-header'>
                         <FormattedMessage id='homepage.media' />
                     </div>
