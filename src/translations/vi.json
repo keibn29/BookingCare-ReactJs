@@ -50,6 +50,7 @@
                 "phonenumber": "Số điện thoại",
                 "address": "Địa chỉ",
                 "reason": "Lý do khám",
+                "note": "Lưu ý: Với mỗi bác sĩ, một bệnh nhân chỉ đặt được một lịch khám trong cùng một ngày",
                 "confirm": "Xác nhận",
                 "cancel": "Quay lại"
             },

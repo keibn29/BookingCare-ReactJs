@@ -50,6 +50,7 @@
                 "phonenumber": "Phonenumber",
                 "address": "Address",
                 "reason": "Reason for examination",
+                "note": "Note: For each doctor, the patient can only book one appointment on the same day",
                 "confirm": "Confirm",
                 "cancel": "Cancel"
             },

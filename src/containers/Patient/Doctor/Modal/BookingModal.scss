@@ -14,32 +14,31 @@ div._loading_overlay_wrapper {
 
         .booking-modal-header {
             border-bottom: 1px solid #ddd;
-            padding      : 10px;
+            padding      : 10px 15px;
 
             .left {
-                font-size  : 15px;
+                font-size  : 18px;
                 font-weight: 600;
             }
 
             .right {
-                float : right;
-                cursor: pointer;
+                float    : right;
+                cursor   : pointer;
+                font-size: 18px;
             }
         }
 
         .booking-modal-body {
-            height: 100%;
+            padding-top: 10px;
+            height     : 100%;
         }
 
         .booking-modal-footer {
             display        : flex;
             justify-content: end;
             gap            : 10px;
-            padding        : 10px;
-
-            button {
-                border: 1px solid #ddd;
-            }
+            padding        : 10px 15px;
+            border-top     : 1px solid #ddd;
         }
     }
 }

@@ -93,17 +93,26 @@ class BookingModal extends Component {
             this.setState({
                 isShowLoading: false
             })
-            toast.success('Booking a new appointment succeed!')
+            toast.info('Vui lòng kiểm tra email để xác nhận lịch hẹn', {
+                autoClose: 6000,
+                hideProgressBar: false
+            })
             this.props.toggle();
-            // let arrGenderRedux = this.props.arrGenderRedux;
-            // this.setState({
-            //     fullName: '',
-            //     phoneNumber: '',
-            //     email: '',
-            //     address: '',
-            //     reason: '',
-            //     selectedGender: arrGenderRedux && arrGenderRedux.length > 0 ? arrGenderRedux[0].keyMap : ''
-            // })
+            let { allGender } = this.state;
+            let sex = [];
+            if (allGender && allGender.length > 0) {
+                sex = allGender.map((item) => {
+                    return item.keyMap
+                })
+            }
+            this.setState({
+                fullName: '',
+                phoneNumber: '',
+                email: '',
+                address: '',
+                reason: '',
+                selectedGender: sex[0]
+            })
         } else {
             this.setState({
                 isShowLoading: false
@@ -148,7 +157,6 @@ class BookingModal extends Component {
         let { language, isOpen, dataTime } = this.props;
         let { allGender, isShowLoading } = this.state;
         let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
-
 
         return (
             <>
@@ -262,6 +270,9 @@ class BookingModal extends Component {
                                     />
                                 </div>
                             </div>
+                        </div>
+                        <div className='booking-modal-note container mb-2'>
+                            <span><FormattedMessage id='patient.doctor.modal.note' /></span>
                         </div>
                         <div className='booking-modal-footer'>
                             <button
