@@ -72,84 +72,88 @@ class DetailSpecialty extends Component {
         return (
             <>
                 <div className='detail-specialty-container'>
-                    <HomeHeader
-                        isShowBanner={false}
-                    />
-                    <div className='detail-specialty-body'>
-                        <div
-                            className='specialty-content-top'
-                        // style={
-                        //     detailSpecialty && detailSpecialty.image &&
-                        //     { backgroundImage: `url(${detailSpecialty.image})` }
-                        // }
-                        >
-                            <div className='specialty-description container'>
-                                <div className='row'>
+                    <div>
+                        <HomeHeader
+                            isShowBanner={false}
+                        />
+                        <div className='detail-specialty-body'>
+                            <div
+                                className='specialty-content-top'
+                            // style={
+                            //     detailSpecialty && detailSpecialty.image &&
+                            //     { backgroundImage: `url(${detailSpecialty.image})` }
+                            // }
+                            >
+                                <div className='specialty-description container'>
+                                    <div className='row'>
+                                        {
+                                            detailSpecialty && detailSpecialty.descriptionHTML &&
+                                            <div dangerouslySetInnerHTML={{ __html: detailSpecialty.descriptionHTML }}></div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='specialty-content-bottom container'>
+                                <div className='location row'>
+                                    <select
+                                        className='form-control select-province'
+                                        onChange={(event) => {
+                                            this.handleChangeSelectedProvince(event);
+                                        }}
+                                    >
+                                        {
+                                            allProvince && allProvince.length > 0 && allProvince.map((item, index) => {
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={item.keyMap}
+                                                    >
+                                                        {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                                    </option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                                <div className='list-doctor row'>
                                     {
-                                        detailSpecialty && detailSpecialty.descriptionHTML &&
-                                        <div dangerouslySetInnerHTML={{ __html: detailSpecialty.descriptionHTML }}></div>
+                                        detailSpecialty && detailSpecialty.specialtyData && detailSpecialty.specialtyData.length > 0
+                                        && detailSpecialty.specialtyData.map((item, index) => {
+                                            return (
+                                                <div className='each-doctor' key={index}>
+                                                    <div className='doctor-content-left'>
+                                                        <div className='doctor-info'>
+                                                            <DoctorInfoGeneral
+                                                                doctorId={item.doctorId}
+                                                                isShowDescription={true}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className='doctor-content-right'>
+                                                        <div className='doctor-schedule'>
+                                                            <DoctorSchedule
+                                                                doctorId={item.doctorId}
+                                                            />
+                                                        </div>
+                                                        <div className='doctor-info-extra'>
+                                                            <DoctorInfoExtra
+                                                                doctorId={item.doctorId}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
                                     }
                                 </div>
                             </div>
                         </div>
-                        <div className='specialty-content-bottom container'>
-                            <div className='location row'>
-                                <select
-                                    className='form-control select-province'
-                                    onChange={(event) => {
-                                        this.handleChangeSelectedProvince(event);
-                                    }}
-                                >
-                                    {
-                                        allProvince && allProvince.length > 0 && allProvince.map((item, index) => {
-                                            return (
-                                                <option
-                                                    key={index}
-                                                    value={item.keyMap}
-                                                >
-                                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div className='list-doctor row'>
-                                {
-                                    detailSpecialty && detailSpecialty.specialtyData && detailSpecialty.specialtyData.length > 0
-                                    && detailSpecialty.specialtyData.map((item, index) => {
-                                        return (
-                                            <div className='each-doctor' key={index}>
-                                                <div className='doctor-content-left'>
-                                                    <div className='doctor-info'>
-                                                        <DoctorInfoGeneral
-                                                            doctorId={item.doctorId}
-                                                            isShowDescription={true}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className='doctor-content-right'>
-                                                    <div className='doctor-schedule'>
-                                                        <DoctorSchedule
-                                                            doctorId={item.doctorId}
-                                                        />
-                                                    </div>
-                                                    <div className='doctor-info-extra'>
-                                                        <DoctorInfoExtra
-                                                            doctorId={item.doctorId}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </div>
                     </div>
-                    <HomeFooter
-                        isShowFanpage={false}
-                    />
+                    <div>
+                        <HomeFooter
+                            isShowFanpage={false}
+                        />
+                    </div>
                 </div>
             </>
         );

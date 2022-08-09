@@ -41,7 +41,7 @@ class AllClinic extends Component {
                         isShowBanner={false}
                     />
                     <div className='more-infor-body container px-0'>
-                        <div className='more-infor-title'>Tất cả bệnh viện, phòng khám</div>
+                        <div className='more-infor-title'><FormattedMessage id='patient.more-infor.all-clinic' /></div>
                         {
                             allClinic && allClinic.length > 0 && allClinic.map((item, index) => {
                                 return (

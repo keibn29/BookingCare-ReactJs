@@ -1,6 +1,9 @@
 .detail-specialty-container {
     background-color: #EEEEEE;
     min-height      : 100vh;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : space-between;
 
     .specialty-content-top {
         padding-top     : 20px;

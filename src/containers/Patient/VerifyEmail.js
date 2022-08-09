@@ -54,33 +54,39 @@ class VerifyEmail extends Component {
         return (
             <>
                 <div className='status-verify-container'>
-                    <HomeHeader
-                        isShowBanner={false}
-                    />
-                    <div className='status-verify-body container'>
-                        {
-                            statusVerify === false
-                                ?
-                                <div className='status-verify-false row'><FormattedMessage id='patient.loading' /></div>
-                                :
-                                <div className='status-verify-true row'>
-                                    {
-                                        errCode === 0
-                                            ?
-                                            <>
-                                                <div className='icon icon-success'></div>
-                                                <div className='text'><FormattedMessage id='patient.success' /></div>
-                                            </>
-                                            :
-                                            <>
-                                                <div className='icon icon-failed'></div>
-                                                <div className='text'><FormattedMessage id='patient.failed' /></div>
-                                            </>
-                                    }
-                                </div>
-                        }
+                    <div>
+                        <HomeHeader
+                            isShowBanner={false}
+                        />
+                        <div className='status-verify-body container'>
+                            {
+                                statusVerify === false
+                                    ?
+                                    <div className='status-verify-false row'><FormattedMessage id='patient.loading' /></div>
+                                    :
+                                    <div className='status-verify-true row'>
+                                        {
+                                            errCode === 0
+                                                ?
+                                                <>
+                                                    <div className='icon icon-success'></div>
+                                                    <div className='text'><FormattedMessage id='patient.success' /></div>
+                                                </>
+                                                :
+                                                <>
+                                                    <div className='icon icon-failed'></div>
+                                                    <div className='text'><FormattedMessage id='patient.failed' /></div>
+                                                </>
+                                        }
+                                    </div>
+                            }
+                        </div>
                     </div>
-                    <HomeFooter />
+                    <div>
+                        <HomeFooter
+                            isShowFanpage={false}
+                        />
+                    </div>
                 </div>
             </>
         );

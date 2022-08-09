@@ -41,7 +41,7 @@ class AllDoctor extends Component {
                         isShowBanner={false}
                     />
                     <div className='more-infor-body container px-0'>
-                        <div className='more-infor-title'>Tất cả bác sĩ</div>
+                        <div className='more-infor-title'><FormattedMessage id='patient.more-infor.all-doctor' /></div>
                         {
                             allDoctor && allDoctor.length > 0 && allDoctor.map((item, index) => {
                                 let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`;

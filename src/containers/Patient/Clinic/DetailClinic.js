@@ -73,84 +73,88 @@ class DetailClinic extends Component {
         return (
             <>
                 <div className='detail-clinic-container'>
-                    <HomeHeader
-                        isShowBanner={false}
-                    />
-                    <div className='detail-clinic-body'>
-                        <div className='clinic-content-top'>
-                            <div className='container'>
-                                <div className='description-image row'
-                                    style={
-                                        { backgroundImage: `url(${detailClinic.image})` }
-                                    }
-                                >
-                                </div>
-                                <div className='clinic-description row'>
-                                    {
-                                        detailClinic && detailClinic.descriptionHTML &&
-                                        <div dangerouslySetInnerHTML={{ __html: detailClinic.descriptionHTML }}></div>
-                                    }
+                    <div>
+                        <HomeHeader
+                            isShowBanner={false}
+                        />
+                        <div className='detail-clinic-body'>
+                            <div className='clinic-content-top'>
+                                <div className='container'>
+                                    <div className='description-image row'
+                                        style={
+                                            { backgroundImage: `url(${detailClinic.image})` }
+                                        }
+                                    >
+                                    </div>
+                                    <div className='clinic-description row'>
+                                        {
+                                            detailClinic && detailClinic.descriptionHTML &&
+                                            <div dangerouslySetInnerHTML={{ __html: detailClinic.descriptionHTML }}></div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className='clinic-content-bottom container'>
-                            <div className='location row'>
-                                <select
-                                    className='form-control select-province'
-                                    onChange={(event) => {
-                                        this.handleChangeSelectedProvince(event);
-                                    }}
-                                >
+                            <div className='clinic-content-bottom container'>
+                                <div className='location row'>
+                                    <select
+                                        className='form-control select-province'
+                                        onChange={(event) => {
+                                            this.handleChangeSelectedProvince(event);
+                                        }}
+                                    >
+                                        {
+                                            allProvince && allProvince.length > 0 && allProvince.map((item, index) => {
+                                                return (
+                                                    <option
+                                                        key={index}
+                                                        value={item.keyMap}
+                                                    >
+                                                        {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
+                                                    </option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                                <div className='list-doctor row'>
                                     {
-                                        allProvince && allProvince.length > 0 && allProvince.map((item, index) => {
+                                        detailClinic && detailClinic.clinicData && detailClinic.clinicData.length > 0
+                                        && detailClinic.clinicData.map((item, index) => {
                                             return (
-                                                <option
-                                                    key={index}
-                                                    value={item.keyMap}
-                                                >
-                                                    {language === LANGUAGES.VI ? item.valueVi : item.valueEn}
-                                                </option>
+                                                <div className='each-doctor' key={index}>
+                                                    <div className='doctor-content-left'>
+                                                        <div className='doctor-info'>
+                                                            <DoctorInfoGeneral
+                                                                doctorId={item.doctorId}
+                                                                isShowDescription={true}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className='doctor-content-right'>
+                                                        <div className='doctor-schedule'>
+                                                            <DoctorSchedule
+                                                                doctorId={item.doctorId}
+                                                            />
+                                                        </div>
+                                                        <div className='doctor-info-extra'>
+                                                            <DoctorInfoExtra
+                                                                doctorId={item.doctorId}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             )
                                         })
                                     }
-                                </select>
-                            </div>
-                            <div className='list-doctor row'>
-                                {
-                                    detailClinic && detailClinic.clinicData && detailClinic.clinicData.length > 0
-                                    && detailClinic.clinicData.map((item, index) => {
-                                        return (
-                                            <div className='each-doctor' key={index}>
-                                                <div className='doctor-content-left'>
-                                                    <div className='doctor-info'>
-                                                        <DoctorInfoGeneral
-                                                            doctorId={item.doctorId}
-                                                            isShowDescription={true}
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className='doctor-content-right'>
-                                                    <div className='doctor-schedule'>
-                                                        <DoctorSchedule
-                                                            doctorId={item.doctorId}
-                                                        />
-                                                    </div>
-                                                    <div className='doctor-info-extra'>
-                                                        <DoctorInfoExtra
-                                                            doctorId={item.doctorId}
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <HomeFooter
-                        isShowFanpage={false}
-                    />
+                    <div>
+                        <HomeFooter
+                            isShowFanpage={false}
+                        />
+                    </div>
                 </div>
             </>
         );

@@ -26,19 +26,19 @@ class HomeFooter extends Component {
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td className='td-left'>Sinh viên</td>
-                                                <td>Nguyễn Đức Long</td>
+                                                <td className='td-left'><FormattedMessage id='homepage.student' /></td>
+                                                <td><FormattedMessage id='homepage.name' /></td>
                                             </tr>
                                             <tr>
-                                                <td className='td-left'>Chuyên ngành</td>
-                                                <td>Khoa học máy tính</td>
+                                                <td className='td-left'><FormattedMessage id='homepage.specialization' /></td>
+                                                <td><FormattedMessage id='homepage.computer-science' /></td>
                                             </tr>
                                             <tr>
-                                                <td className='td-left'>Trường</td>
-                                                <td>Đại học Kinh tế Quốc dân</td>
+                                                <td className='td-left'><FormattedMessage id='homepage.school' /></td>
+                                                <td><FormattedMessage id='homepage.neu' /></td>
                                             </tr>
                                             <tr>
-                                                <td className='td-left'>Địa chỉ</td>
+                                                <td className='td-left'><FormattedMessage id='homepage.address' /></td>
                                                 <td>207 - Giải Phóng - Hà Nội</td>
                                             </tr>
                                         </tbody>
@@ -52,12 +52,12 @@ class HomeFooter extends Component {
                                 </div>
                             </div>
                             <div className='ft-content-bottom py-2'>
-                                <p>&copy; 2022 Nguyễn Đức Long. Ghé thăm <a href='https://www.facebook.com/keibn29/' target='_blank'>Facebook</a> của tôi để nhận thêm thông tin.</p>
+                                <p>&copy; 2022 <FormattedMessage id='homepage.name' />. <FormattedMessage id='homepage.note-left' /> <a href='https://www.facebook.com/keibn29/' target='_blank'>Facebook</a> <FormattedMessage id='homepage.note-right' />.</p>
                             </div>
                         </>
                         :
                         <div className='ft-content-bottom py-2'>
-                            <p>&copy; 2022 Nguyễn Đức Long. Ghé thăm <a href='https://www.facebook.com/keibn29/' target='_blank'>Facebook</a> của tôi để nhận thêm thông tin.</p>
+                            <p>&copy; 2022 <FormattedMessage id='homepage.name' />. <FormattedMessage id='homepage.note-left' /> <a href='https://www.facebook.com/keibn29/' target='_blank'>Facebook</a> <FormattedMessage id='homepage.note-right' />.</p>
                         </div>
                 }
             </div>

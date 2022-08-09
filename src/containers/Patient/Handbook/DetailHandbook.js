@@ -51,39 +51,43 @@ class DetailHandbook extends Component {
         return (
             <>
                 <div className='detail-handbook-container'>
-                    <HomeHeader
-                        isShowBanner={false}
-                    />
-                    <div className='detail-handbook-body container'>
-                        <div className='handbook-title row'>
-                            {
-                                detailHandbook && !_.isEmpty(detailHandbook) &&
-                                <>
-                                    {language === LANGUAGES.VI ? detailHandbook.titleVi : detailHandbook.titleEn}
-                                </>
-                            }
-                        </div>
-                        {
-                            detailHandbook && detailHandbook.image &&
-                            <div
-                                className='handbook-image row'
-                                style={
-                                    { backgroundImage: `url(${detailHandbook.image})` }
-                                }
-                            ></div>
-                        }
-                        <div className='handbook-desciption row'>
-                            <div className='description-content'>
+                    <div>
+                        <HomeHeader
+                            isShowBanner={false}
+                        />
+                        <div className='detail-handbook-body container'>
+                            <div className='handbook-title row'>
                                 {
-                                    detailHandbook && detailHandbook.descriptionHTML &&
-                                    <div dangerouslySetInnerHTML={{ __html: detailHandbook.descriptionHTML }}></div>
+                                    detailHandbook && !_.isEmpty(detailHandbook) &&
+                                    <>
+                                        {language === LANGUAGES.VI ? detailHandbook.titleVi : detailHandbook.titleEn}
+                                    </>
                                 }
+                            </div>
+                            {
+                                detailHandbook && detailHandbook.image &&
+                                <div
+                                    className='handbook-image row'
+                                    style={
+                                        { backgroundImage: `url(${detailHandbook.image})` }
+                                    }
+                                ></div>
+                            }
+                            <div className='handbook-desciption row'>
+                                <div className='description-content'>
+                                    {
+                                        detailHandbook && detailHandbook.descriptionHTML &&
+                                        <div dangerouslySetInnerHTML={{ __html: detailHandbook.descriptionHTML }}></div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <HomeFooter
-                        isShowFanpage={false}
-                    />
+                    <div>
+                        <HomeFooter
+                            isShowFanpage={false}
+                        />
+                    </div>
                 </div>
             </>
         );

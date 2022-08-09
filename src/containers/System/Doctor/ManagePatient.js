@@ -147,7 +147,7 @@ class ManagePatient extends Component {
                                 <table id='table-manage-patient' className='mb-5'>
                                     <tbody>
                                         <tr>
-                                            <th>STT</th>
+                                            <th><FormattedMessage id='system.doctor.stt' /></th>
                                             <th><FormattedMessage id='system.doctor.time' /></th>
                                             <th><FormattedMessage id='system.doctor.name' /></th>
                                             <th><FormattedMessage id='system.doctor.phone' /></th>

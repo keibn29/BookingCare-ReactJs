@@ -1,6 +1,9 @@
 .detail-clinic-container {
     background-color: #EEEEEE;
     min-height      : 100vh;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : space-between;
 
     .clinic-content-top {
         background-color: #fff;

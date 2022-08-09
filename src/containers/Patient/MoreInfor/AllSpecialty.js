@@ -41,7 +41,7 @@ class AllSpecialty extends Component {
                         isShowBanner={false}
                     />
                     <div className='more-infor-body container px-0'>
-                        <div className='more-infor-title'>Tất cả chuyên khoa</div>
+                        <div className='more-infor-title'><FormattedMessage id='patient.more-infor.all-specialty' /></div>
                         {
                             allSpecialty && allSpecialty.length > 0 && allSpecialty.map((item, index) => {
                                 return (

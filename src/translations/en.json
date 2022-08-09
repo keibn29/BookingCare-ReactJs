@@ -29,7 +29,16 @@
         "specialty-popular": "Popular specialties",
         "medical-facility": "Outstanding medical facility",
         "handbook": "Handbook",
-        "media": "Media talk about BookingCare"
+        "media": "Media talk about BookingCare",
+        "student": "Student",
+        "name": "Long Nguyễn Đức",
+        "specialization": "Specialization",
+        "computer-science": "Computer science",
+        "school": "University",
+        "neu": "National Economics University",
+        "address": "Address",
+        "note-left": "Visit my",
+        "note-right": "to get more information"
     },
     "patient": {
         "doctor": {
@@ -59,6 +68,12 @@
             "and-book-free": "and book (free)",
             "see-more": "See more"
         },
+        "more-infor": {
+            "all-clinic": "All Clinics",
+            "all-doctor": "All Doctors",
+            "all-handbook": "All Handbooks",
+            "all-specialty": "All Specialties"
+        },
         "loading": "Loading...",
         "success": "Appointment confirmed successfully!",
         "failed": "Appointment has been activated or doesn't exist"
@@ -79,7 +94,8 @@
             "phone": "PhoneNumber",
             "address": "Address",
             "gender": "Gender",
-            "reason": "Reason"
+            "reason": "Reason",
+            "stt": "NO"
         }
     },
     "menu": {

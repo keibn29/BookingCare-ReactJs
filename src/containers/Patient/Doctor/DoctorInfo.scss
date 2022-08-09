@@ -1,6 +1,13 @@
 .doctor-info-container {
+    background-color: rgb(248, 249, 248);
+    min-height      : 100vh;
+    display         : flex;
+    flex-direction  : column;
+    justify-content : space-between;
 
     .content-top {
+        background-color: white;
+        border-bottom   : 1px solid #ddd;
 
         .doctor-description {
             display: flex;
@@ -55,12 +62,9 @@
     }
 
     .content-bottom {
-        border-top      : 1px solid #ddd;
-        background-color: rgb(248, 249, 248);
 
         .doctor-detail-info {
-            padding   : 20px 10px 0px 10px;
-            min-height: 50vh;
+            padding: 20px 10px 0px 10px;
 
             h3 {
                 font-size: 17px;

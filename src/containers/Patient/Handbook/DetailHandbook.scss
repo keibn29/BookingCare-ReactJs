@@ -1,4 +1,8 @@
 .detail-handbook-container {
+    min-height     : 100vh;
+    display        : flex;
+    flex-direction : column;
+    justify-content: space-between;
 
     .detail-handbook-body {
         padding-top: 10px;

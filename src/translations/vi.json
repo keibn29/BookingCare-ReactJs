@@ -29,7 +29,16 @@
         "specialty-popular": "Chuyên khoa phổ biến",
         "medical-facility": "Cơ sở y tế nổi bật",
         "handbook": "Cẩm nang",
-        "media": "Truyền thông nói về BookingCare"
+        "media": "Truyền thông nói về BookingCare",
+        "student": "Sinh viên",
+        "name": "Nguyễn Đức Long",
+        "specialization": "Chuyên ngành",
+        "computer-science": "Khoa học máy tính",
+        "school": "Trường",
+        "neu": "Đại học Kinh tế Quốc dân",
+        "address": "Địa chỉ",
+        "note-left": "Ghé thăm",
+        "note-right": "của tôi để nhận thêm thông tin"
     },
     "patient": {
         "doctor": {
@@ -59,6 +68,12 @@
             "and-book-free": "và đặt lịch (miễn phí)",
             "see-more": "Xem thêm"
         },
+        "more-infor": {
+            "all-clinic": "Tất cả bệnh viện, phòng khám",
+            "all-doctor": "Tất cả bác sĩ",
+            "all-handbook": "Tất cả cẩm nang",
+            "all-specialty": "Tất cả chuyên khoa"
+        },
         "loading": "Đang tải...",
         "success": "Xác nhận lịch hẹn thành công!",
         "failed": "Lịch hẹn đã được xác nhận hoặc không tồn tại!"
@@ -79,7 +94,8 @@
             "phone": "Số điện thoại",
             "address": "Địa chỉ",
             "gender": "Giới tính",
-            "reason": "Lý do khám"
+            "reason": "Lý do khám",
+            "stt": "STT"
         }
     },
     "menu": {
