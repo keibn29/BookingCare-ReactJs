@@ -6,6 +6,8 @@ import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorInfoExtra from './DoctorInfoExtra';
+import LikeShare from '../SocialPlugin/LikeShare';
+import Comment from '../SocialPlugin/Comment';
 
 class DoctorInfo extends Component {
 
@@ -44,6 +46,9 @@ class DoctorInfo extends Component {
             nameVi = `${arrdoctorInfo.positionData.valueVi}, ${arrdoctorInfo.lastName} ${arrdoctorInfo.firstName}`;
             nameEn = `${arrdoctorInfo.positionData.valueEn}, ${arrdoctorInfo.firstName} ${arrdoctorInfo.lastName}`;
         }
+
+        let currentURL = process.env.REACT_APP_IS_LOCALHOST === 1 ? "https://neu.edu.vn" : window.location.href;
+
         return (
             <>
                 <HomeHeader
@@ -69,6 +74,11 @@ class DoctorInfo extends Component {
                                                 {arrdoctorInfo.Markdown.description}
                                             </span>
                                         }
+                                        <div className='like-share-plugin'>
+                                            <LikeShare
+                                                dataHref={currentURL}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +106,10 @@ class DoctorInfo extends Component {
                                 }
                             </div>
                             <div className='doctor-comment'>
-
+                                <Comment
+                                    dataHref={currentURL}
+                                    width={"100%"}
+                                />
                             </div>
                         </div>
                     </div>

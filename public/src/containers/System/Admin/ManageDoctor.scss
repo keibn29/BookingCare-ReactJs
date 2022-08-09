@@ -1,0 +1,15 @@
+.manage-doctor-container {
+
+    .doctor-general-info {
+        display: flex;
+        gap    : 15px;
+
+        .content-left {
+            width: 40%;
+        }
+
+        .content-right {
+            width: 60%;
+        }
+    }
+}
