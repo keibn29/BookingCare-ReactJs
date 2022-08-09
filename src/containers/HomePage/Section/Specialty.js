@@ -20,7 +20,7 @@ class Specialty extends Component {
     }
 
     fetchTopSpecialty = async () => {
-        let res = await getTopSpecialty(10);
+        let res = await getTopSpecialty();
         if (res && res.errCode === 0) {
             this.setState({
                 topSpecialty: res.topSpecialty

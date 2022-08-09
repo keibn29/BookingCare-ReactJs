@@ -25,7 +25,7 @@ class MedicalFacility extends Component {
     }
 
     fetchTopClinicHomepage = async () => {
-        let res = await getTopClinicHomepage(10);
+        let res = await getTopClinicHomepage();
         if (res && res.errCode === 0) {
             this.setState({
                 topClinic: res.topClinic

@@ -45,7 +45,7 @@ class AllHandbook extends Component {
                         {
                             allHandbook && allHandbook.length > 0 && allHandbook.map((item, index) => {
                                 return (
-                                    <Link to={`/detail-hanbook/${item.id}`}>
+                                    <Link to={`/detail-handbook/${item.id}`}>
                                         <div className='more-infor-content py-2' key={index}>
                                             <div
                                                 className='mi-content-left'

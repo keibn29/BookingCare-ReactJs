@@ -104,28 +104,29 @@ class ManageHandbook extends Component {
             })
             if (res && res.errCode === 0) {
                 toast.success('Add new handbook succeed!')
-                // this.props.fetchAllClinicStart();
+                this.props.fetchAllHandbookStart('ALL');
             } else {
                 toast.error('Add new handbook failed!')
                 console.log('check res failed: ', res)
             }
         }
         if (action === CRUD_ACTIONS.EDIT) {
-            let res = await editHandbook({
-                handbookId: this.state.handbookEditId,
-                contentMarkdown: this.state.contentMarkdown,
-                contentHTML: this.state.contentHTML,
-                image: this.state.image,
-                titleVi: this.state.titleVi,
-                titleEn: this.state.titleEn
-            })
-            if (res && res.errCode === 0) {
-                toast.success('Edit handbook succeed!')
-                this.props.fetchAllHandbookStart('ALL');
-            } else {
-                toast.error('Edit handbook failed!')
-                console.log(res.errMessage)
-            }
+            alert('Edit is locked!')
+            // let res = await editHandbook({
+            //     handbookId: this.state.handbookEditId,
+            //     contentMarkdown: this.state.contentMarkdown,
+            //     contentHTML: this.state.contentHTML,
+            //     image: this.state.image,
+            //     titleVi: this.state.titleVi,
+            //     titleEn: this.state.titleEn
+            // })
+            // if (res && res.errCode === 0) {
+            //     toast.success('Edit handbook succeed!')
+            //     this.props.fetchAllHandbookStart('ALL');
+            // } else {
+            //     toast.error('Edit handbook failed!')
+            //     console.log(res.errMessage)
+            // }
         }
     }
 
@@ -144,7 +145,7 @@ class ManageHandbook extends Component {
     }
 
     handleDeleteHandbook = () => {
-        alert('click me?')
+        alert('Delete is locked!')
     }
 
     render() {

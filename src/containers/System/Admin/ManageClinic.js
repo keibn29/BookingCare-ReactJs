@@ -148,7 +148,7 @@ class ManageClinic extends Component {
     }
 
     handleDeleteClinic = () => {
-        alert('click me?')
+        alert('Delete is locked!')
     }
 
     render() {

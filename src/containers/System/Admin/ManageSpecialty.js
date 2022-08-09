@@ -149,7 +149,7 @@ class ManageSpecialty extends Component {
     }
 
     handleDeleteSpecialty = () => {
-        alert('click me?')
+        alert('Delete is locked!')
     }
 
     render() {
