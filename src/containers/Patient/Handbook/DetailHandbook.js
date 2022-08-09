@@ -5,6 +5,7 @@ import './DetailHandbook.scss';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import HomeHeader from '../../HomePage/HomeHeader';
+import HomeFooter from '../../HomePage/HomeFooter';
 import { toast } from 'react-toastify';
 import { getDetailHandbook } from '../../../services/userService';
 import _ from 'lodash';
@@ -80,6 +81,9 @@ class DetailHandbook extends Component {
                             </div>
                         </div>
                     </div>
+                    <HomeFooter
+                        isShowFanpage={false}
+                    />
                 </div>
             </>
         );

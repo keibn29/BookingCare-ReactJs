@@ -26,7 +26,7 @@ class HomeFooter extends Component {
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td>Sinh viên</td>
+                                                <td className='td-left'>Sinh viên</td>
                                                 <td>Nguyễn Đức Long</td>
                                             </tr>
                                             <tr>
@@ -34,11 +34,11 @@ class HomeFooter extends Component {
                                                 <td>Khoa học máy tính</td>
                                             </tr>
                                             <tr>
-                                                <td>Trường</td>
+                                                <td className='td-left'>Trường</td>
                                                 <td>Đại học Kinh tế Quốc dân</td>
                                             </tr>
                                             <tr>
-                                                <td>Địa chỉ</td>
+                                                <td className='td-left'>Địa chỉ</td>
                                                 <td>207 - Giải Phóng - Hà Nội</td>
                                             </tr>
                                         </tbody>

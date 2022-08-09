@@ -5,6 +5,7 @@ import './DetailSpecialty.scss';
 import * as actions from '../../../store/actions';
 import { LANGUAGES } from '../../../utils';
 import HomeHeader from '../../HomePage/HomeHeader';
+import HomeFooter from '../../HomePage/HomeFooter';
 import DoctorSchedule from '../Doctor/DoctorSchedule';
 import DoctorInfoExtra from '../Doctor/DoctorInfoExtra';
 import DoctorInfoGeneral from '../Doctor/DoctorInfoGeneral';
@@ -146,6 +147,9 @@ class DetailSpecialty extends Component {
                             </div>
                         </div>
                     </div>
+                    <HomeFooter
+                        isShowFanpage={false}
+                    />
                 </div>
             </>
         );

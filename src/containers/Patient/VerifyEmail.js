@@ -6,6 +6,7 @@ import * as actions from '../../store/actions';
 import { LANGUAGES } from '../../utils';
 import { verifyBookAppointment } from '../../services/userService';
 import HomeHeader from '../HomePage/HomeHeader';
+import HomeFooter from '../HomePage/HomeFooter';
 
 class VerifyEmail extends Component {
 
@@ -52,31 +53,34 @@ class VerifyEmail extends Component {
 
         return (
             <>
-                <HomeHeader
-                    isShowBanner={false}
-                />
-                <div className='status-verify-container container'>
-                    {
-                        statusVerify === false
-                            ?
-                            <div className='status-verify-false row'><FormattedMessage id='patient.loading' /></div>
-                            :
-                            <div className='status-verify-true row'>
-                                {
-                                    errCode === 0
-                                        ?
-                                        <>
-                                            <div className='icon icon-success'></div>
-                                            <div className='text'><FormattedMessage id='patient.success' /></div>
-                                        </>
-                                        :
-                                        <>
-                                            <div className='icon icon-failed'></div>
-                                            <div className='text'><FormattedMessage id='patient.failed' /></div>
-                                        </>
-                                }
-                            </div>
-                    }
+                <div className='status-verify-container'>
+                    <HomeHeader
+                        isShowBanner={false}
+                    />
+                    <div className='status-verify-body container'>
+                        {
+                            statusVerify === false
+                                ?
+                                <div className='status-verify-false row'><FormattedMessage id='patient.loading' /></div>
+                                :
+                                <div className='status-verify-true row'>
+                                    {
+                                        errCode === 0
+                                            ?
+                                            <>
+                                                <div className='icon icon-success'></div>
+                                                <div className='text'><FormattedMessage id='patient.success' /></div>
+                                            </>
+                                            :
+                                            <>
+                                                <div className='icon icon-failed'></div>
+                                                <div className='text'><FormattedMessage id='patient.failed' /></div>
+                                            </>
+                                    }
+                                </div>
+                        }
+                    </div>
+                    <HomeFooter />
                 </div>
             </>
         );

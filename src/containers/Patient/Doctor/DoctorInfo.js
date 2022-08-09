@@ -8,6 +8,7 @@ import DoctorSchedule from './DoctorSchedule';
 import DoctorInfoExtra from './DoctorInfoExtra';
 import LikeShare from '../SocialPlugin/LikeShare';
 import Comment from '../SocialPlugin/Comment';
+import HomeFooter from '../../HomePage/HomeFooter';
 
 class DoctorInfo extends Component {
 
@@ -47,14 +48,14 @@ class DoctorInfo extends Component {
             nameEn = `${arrdoctorInfo.positionData.valueEn}, ${arrdoctorInfo.firstName} ${arrdoctorInfo.lastName}`;
         }
 
-        let currentURL = process.env.REACT_APP_IS_LOCALHOST === 1 ? "https://neu.edu.vn" : window.location.href;
+        let currentURL = window.location.href;
 
         return (
             <>
-                <HomeHeader
-                    isShowBanner={false}
-                />
                 <div className='doctor-info-container'>
+                    <HomeHeader
+                        isShowBanner={false}
+                    />
                     <div className='content-top'>
                         <div className='container px-0'>
                             <div className='doctor-description'>
@@ -108,11 +109,14 @@ class DoctorInfo extends Component {
                             <div className='doctor-comment'>
                                 <Comment
                                     dataHref={currentURL}
-                                    width={"100%"}
+                                    width={'100%'}
                                 />
                             </div>
                         </div>
                     </div>
+                    <HomeFooter
+                        isShowFanpage={false}
+                    />
                 </div>
             </>
         );
