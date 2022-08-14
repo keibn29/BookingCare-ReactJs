@@ -272,13 +272,14 @@
                 flex-wrap: wrap;
                 gap      : 0 20px;
                 height   : 90%;
+                border   : 1px solid red;
 
                 .hide-child {
                     display: none;
                 }
 
                 .option-child {
-                    width: 25%;
+                    width: 26%;
 
                     .text-child {
                         font-size  : 15px;
