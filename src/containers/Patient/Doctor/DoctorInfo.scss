@@ -80,3 +80,61 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .doctor-info-container {
+
+        .content-top {
+
+            .doctor-description {
+                display: flex;
+
+                .content-left {
+                    width : 80px;
+                    height: 80px;
+                    margin: 10px;
+                }
+
+                .content-right {
+                    padding: 10px 0px 0 5px;
+
+                    .up {
+                        font-size: 20px;
+                    }
+
+                    .down {
+                        margin-top: 5px;
+
+                        .like-share-plugin {
+                            margin-top: 5px;
+                        }
+                    }
+                }
+            }
+
+            .doctor-schedule {
+                display       : flex;
+                flex-direction: column;
+
+                .content-left {
+                    width         : 100%;
+                    padding-bottom: 20px;
+                }
+
+                .content-right {
+                    width      : 100%;
+                    margin-top : 0px;
+                    border-top : 1px solid #ddd;
+                    border-left: none;
+                }
+            }
+        }
+
+        .content-bottom {
+
+            .doctor-detail-info {
+                padding: 20px 10px 0px 5px;
+            }
+        }
+    }
+}

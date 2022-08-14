@@ -66,3 +66,33 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .doctor-schedule-container {
+        padding: 20px 10px 0 10px;
+
+        .all-time {
+
+            .time-content {
+                .available-time {
+
+                    button {
+
+                        &.btn-timeVi {
+                            width: 30%;
+                        }
+
+                        &.btn-timeEn {
+                            width: 45%;
+                        }
+                    }
+                }
+
+                .no-schedule {
+                    text-align   : justify;
+                    padding-right: 10px;
+                }
+            }
+        }
+    }
+}

@@ -62,3 +62,54 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .detail-clinic-container {
+
+        .clinic-content-top {
+
+            .description-image {
+                height: 200px;
+            }
+
+            .clinic-description {
+                padding   : 10px 15px 0px 10px;
+                text-align: justify;
+
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        .clinic-content-bottom {
+
+            .location {
+                margin-left: -5px;
+            }
+
+            .list-doctor {
+                padding: 0 10px;
+
+                .each-doctor {
+                    display       : flex;
+                    flex-direction: column;
+
+                    .doctor-content-left {
+                        width: 100%;
+
+                        .profile-doctor-container {
+                            border-right: 1px solid #ddd !important;
+                            padding     : 15px 20px 15px 10px !important;
+                        }
+                    }
+
+                    .doctor-content-right {
+                        width         : 100%;
+                        padding-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

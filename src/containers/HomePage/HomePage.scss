@@ -60,6 +60,7 @@
                 font-size    : 22px;
                 font-weight  : 600;
                 margin-bottom: 25px;
+                padding-left : 5px;
             }
 
             .section-about-content {
@@ -83,16 +84,6 @@
     .section-body {
 
         .section-custom {
-
-            .bg-img {
-                // &.section-specialty {
-                //     background-image: url(../../assets/specialty/co-xuong-khop.jpg);
-                // }
-
-                &.section-medical-facility {
-                    background-image: url(../../assets/medical-facility/bv-viet-duc.jpg);
-                }
-            }
 
             &.section-outstanding-doctor {
                 padding: 5px;
@@ -202,6 +193,81 @@
                 .name {
                     margin-top: 10px;
                     font-size : 15px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .section-share {
+        .section-container {
+            .section-header {
+                .title-header {
+                    font-size   : 20px;
+                    font-weight : 600;
+                    padding-left: 5px;
+                }
+
+                .btn-header {
+                    padding-right   : 20px;
+                    font-size       : 14px;
+                    color           : #49bce2;
+                    background-color: white;
+
+                    &.btn-clinic,
+                    &.btn-handbook {
+                        background-color: #f5f5f5;
+                    }
+                }
+            }
+
+            .section-body {
+                .section-custom {
+
+                    &.section-handbook {
+                        flex-direction : column !important;
+                        justify-content: center;
+                        gap            : 5px;
+
+                        .outer-bg {
+
+                            .bg-img {
+                                width : 100%;
+                                height: 155px;
+                            }
+                        }
+
+                        .bg-text {
+                            padding  : 5px 5px 5px 0;
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.section-about {
+            height: 370px;
+
+            .section-container {
+
+                .section-about-content {
+
+                    .content-left {
+                        width        : 100%;
+                        padding-left : 5px;
+                        padding-right: 5px;
+
+                        iframe {
+                            height: 220px;
+                        }
+                    }
+
+                    .content-right {
+                        display: none;
+                    }
                 }
             }
         }

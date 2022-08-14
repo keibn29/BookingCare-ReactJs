@@ -90,8 +90,21 @@ class DoctorInfoGeneral extends Component {
                     <div className='doctor-description'>
                         <div
                             className='content-left'
-                            style={{ backgroundImage: `url(${generalInfo && generalInfo.image ? generalInfo.image : ''})` }}
                         >
+                            <div
+                                className='avatar'
+                                style={{ backgroundImage: `url(${generalInfo && generalInfo.image ? generalInfo.image : ''})` }}
+                            >
+                            </div>
+                            {
+                                isShowDescription === true
+                                &&
+                                <div className='more-info-doctor'>
+                                    <Link to={`/doctor-info/${doctorId}`} >
+                                        <span><FormattedMessage id='patient.doctor.see-more' /></span>
+                                    </Link>
+                                </div>
+                            }
                         </div>
                         <div className='content-right'>
                             <div className='up'>
@@ -118,37 +131,31 @@ class DoctorInfoGeneral extends Component {
                         </div>
                     </div>
                     {
-                        isShowDescription === true
-                            ?
-                            <div className='more-info-doctor'>
-                                <Link to={`/doctor-info/${doctorId}`} >
-                                    <span><FormattedMessage id='patient.doctor.see-more' /></span>
-                                </Link>
-                            </div>
-                            :
-                            <div className='price'>
-                                <span><FormattedMessage id='patient.doctor.price' />:</span>
-                                {
-                                    generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.VI
-                                    &&
-                                    <NumberFormat
-                                        value={generalInfo.Doctor.priceData.valueVi}
-                                        displayType={'text'}
-                                        thousandSeparator={true}
-                                        suffix={'đ'}
-                                    />
-                                }
-                                {
-                                    generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.EN
-                                    &&
-                                    <NumberFormat
-                                        value={generalInfo.Doctor.priceData.valueEn}
-                                        displayType={'text'}
-                                        thousandSeparator={true}
-                                        suffix={'$'}
-                                    />
-                                }
-                            </div>
+                        isShowDescription === false
+                        &&
+                        <div className='price'>
+                            <span><FormattedMessage id='patient.doctor.price' />:</span>
+                            {
+                                generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.VI
+                                &&
+                                <NumberFormat
+                                    value={generalInfo.Doctor.priceData.valueVi}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    suffix={'đ'}
+                                />
+                            }
+                            {
+                                generalInfo && generalInfo.Doctor && generalInfo.Doctor.priceData && language === LANGUAGES.EN
+                                &&
+                                <NumberFormat
+                                    value={generalInfo.Doctor.priceData.valueEn}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    suffix={'$'}
+                                />
+                            }
+                        </div>
                     }
                 </div>
             </>

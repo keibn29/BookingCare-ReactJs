@@ -38,3 +38,25 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .detail-handbook-container {
+        padding: 0 10px;
+
+        .detail-handbook-body {
+
+            .handbook-title {
+                font-size: 22px;
+            }
+
+            .handbook-image {
+                height: 250px;
+                width : 100%;
+            }
+
+            .handbook-desciption {
+                padding: 20px 15px;
+            }
+        }
+    }
+}

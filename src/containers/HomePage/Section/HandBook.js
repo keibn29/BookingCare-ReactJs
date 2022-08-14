@@ -41,13 +41,31 @@ class HandBook extends Component {
 
 
     render() {
-        let settings = {
+        let settingsPhone = {
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 1.5,
+            slidesToScroll: 1,
+            arrows: false
+        };
+        let settingsDesktop = {
             dots: false,
             infinite: false,
             speed: 500,
             slidesToShow: 2,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            arrows: true
         };
+        let settings = {}
+        if (window.matchMedia("(max-width: 576px)").matches) {
+            // Viewport is less or equal to 576 pixels wide
+            settings = settingsPhone
+        } else {
+            // Viewport is greater than 576 pixels wide
+            settings = settingsDesktop
+        }
+
         let { topHandbook } = this.state;
         let { language } = this.props;
 
@@ -57,7 +75,7 @@ class HandBook extends Component {
                     <div className='section-header'>
                         <span className='title-header'><FormattedMessage id='homepage.handbook' /></span>
                         <button
-                            className='btn-header'
+                            className='btn-header btn-handbook'
                             onClick={() => {
                                 this.handleViewMoreHandbook()
                             }}

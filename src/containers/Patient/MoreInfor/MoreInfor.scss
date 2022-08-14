@@ -34,7 +34,6 @@
 
             .mi-content-right {
                 padding-left: 10px;
-                font-size   : 15px;
 
                 .name-item {
                     font-size  : 16px;
@@ -62,4 +61,56 @@
 a:-webkit-any-link {
     text-decoration: none;
     color          : black;
+}
+
+@media screen and (max-width: 576px) {
+    .more-infor-container {
+
+        .more-infor-body {
+
+            .more-infor-title {
+                font-size   : 20px;
+                padding-left: 5px;
+            }
+
+            .more-infor-content {
+                padding-left: 5px;
+
+                .mi-content-left {
+                    height: 80px;
+                    width : 150px;
+
+                    &.avatar-doctor {
+                        width : 70px;
+                        height: 70px;
+                    }
+                }
+
+                .mi-content-right {
+                    padding-right: 10px;
+                    padding-left : 10px;
+                    max-width    : calc(100% - 150px);
+
+                    .name-item {
+                        font-size: 15px;
+
+                        &.doctor-name {
+                            margin-top   : 0px;
+                            margin-bottom: 0px;
+                        }
+
+                        &.handbook-name {
+                            font-size  : 16px;
+                            text-align : justify;
+                            font-weight: 500;
+                        }
+                    }
+
+                    .description {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
 }

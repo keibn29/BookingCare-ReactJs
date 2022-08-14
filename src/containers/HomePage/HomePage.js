@@ -7,7 +7,6 @@ import OutStandingDoctor from './Section/OutStandingDoctor';
 import HandBook from './Section/HandBook';
 import About from './Section/About';
 import HomeFooter from './HomeFooter';
-
 import './HomePage.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,13 +14,32 @@ import "slick-carousel/slick/slick-theme.css";
 class HomePage extends Component {
 
     render() {
-        let settings = {
+        let settingsPhone = {
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 1.5,
+            slidesToScroll: 1,
+            arrows: false
+        };
+
+        let settingsDesktop = {
             dots: false,
             infinite: false,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            arrows: true
         };
+
+        let settings = {}
+        if (window.matchMedia("(max-width: 576px)").matches) {
+            // Viewport is less or equal to 576 pixels wide
+            settings = settingsPhone
+        } else {
+            // Viewport is greater than 576 pixels wide
+            settings = settingsDesktop
+        }
 
         return (
             <div>

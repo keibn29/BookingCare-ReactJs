@@ -22,11 +22,15 @@
             }
 
             .header-logo {
-                cursor     : pointer;
-                height     : 100%;
-                width      : 100%;
-                transform  : scale(0.5, 0.5);
-                margin-left: -70px;
+                cursor             : pointer;
+                height             : 100%;
+                width              : 100%;
+                transform          : scale(0.5, 0.5);
+                margin-left        : -70px;
+                background-image   : url(../../assets/logo.svg);
+                background-position: center;
+                background-size    : contain;
+                background-repeat  : no-repeat;
             }
         }
 
@@ -189,6 +193,97 @@
                 .text-child {
                     font-size  : 17px;
                     font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home-header-container {
+
+        .home-header-content {
+            justify-content: space-between;
+
+            .left-content {
+                padding-left: 10px;
+                width       : fit-content;
+
+                .header-logo {
+                    width       : 300px;
+                    margin-right: -70px;
+                }
+            }
+
+            .center-content {
+                display: none;
+            }
+
+            .right-content {
+                width        : fit-content;
+                padding-right: 10px;
+
+                .support {
+                    margin-right: 10px;
+                    font-size   : 15px;
+                }
+
+                .language-vi {
+                    font-size   : 15px;
+                    margin-right: 5px;
+                }
+
+                .language-en {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+
+    .home-header-banner {
+
+        .content-top {
+            padding-top: 0px;
+            height     : 60%;
+
+            .title1 {
+                font-size : 19px;
+                margin-top: 60px;
+            }
+
+            .title2 {
+                margin-bottom: 25px;
+                font-size    : 20px;
+            }
+
+            .search {
+
+                input {
+                    width: 300px;
+                }
+            }
+        }
+
+        .content-bottom {
+            height        : 40%;
+            padding-bottom: 0px;
+
+            .options {
+                flex-wrap: wrap;
+                gap      : 0 20px;
+                height   : 90%;
+
+                .hide-child {
+                    display: none;
+                }
+
+                .option-child {
+                    width: 25%;
+
+                    .text-child {
+                        font-size  : 15px;
+                        font-weight: 500;
+                    }
                 }
             }
         }

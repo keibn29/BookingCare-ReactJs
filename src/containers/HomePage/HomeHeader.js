@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './HomeHeader.scss';
-import logo from '../../assets/logo.svg';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../utils';
 import { changeLanguageApp } from '../../store/actions';
@@ -28,13 +27,12 @@ class HomeHeader extends Component {
                     <div className='home-header-content container px-0'>
                         <div className='left-content'>
                             <i className="fas fa-bars"></i>
-                            <img
+                            <div
                                 className='header-logo'
-                                src={logo}
                                 onClick={() => {
                                     this.handleReturnHomepage();
                                 }}
-                            />
+                            ></div>
                         </div>
                         <div className='center-content'>
                             <div className='child-content'>
@@ -102,11 +100,11 @@ class HomeHeader extends Component {
                                     <div className='icon-child'><i className="fas fa-smile"></i></div>
                                     <div className='text-child'><FormattedMessage id='banner.option6' /></div>
                                 </div>
-                                <div className='option-child'>
+                                <div className='option-child hide-child'>
                                     <div className='icon-child'><i className="fas fa-archive"></i></div>
                                     <div className='text-child'><FormattedMessage id='banner.option7' /></div>
                                 </div>
-                                <div className='option-child'>
+                                <div className='option-child hide-child'>
                                     <div className='icon-child'><i className="fas fa-ambulance"></i></div>
                                     <div className='text-child'><FormattedMessage id='banner.option8' /></div>
                                 </div>
